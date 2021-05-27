@@ -17,7 +17,6 @@
 </head>
 <body>
 <?php
-include "navbar.php";
 include "connect_db.php";
 ?>
 <div class="container d-flex align-items-center justify-content-center">
@@ -26,12 +25,22 @@ include "connect_db.php";
     <form action="" method="POST" class="needs-validation" novalidate style="max-height:500px;">
       <div class="form-group">
         <label for="uname">Nama Lengkap : </label>
-        <input type="text" class="form-control" id="uname" placeholder="Masukkan Nama Lengkap" name="nama" required>
+        <input type="text" class="form-control" id="name" placeholder="Masukkan Nama Lengkap" name="name" required>
+        <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
+      </div>
+      <div class="form-group">
+        <label for="uname">NIK : </label>
+        <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK" name="nik" required>
         <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
       </div>
       <div class="form-group">
         <label for="email">Email : </label>
-        <input type="text" class="form-control" id="uname" placeholder="Masukkan Email" name="email" required>
+        <input type="text" class="form-control" id="email" placeholder="Masukkan Email" name="email" required>
+        <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Username : </label>
+        <input type="text" class="form-control" id="uname" placeholder="Masukkan Username" name="uname" required>
         <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
       </div>
       <div class="form-group">
@@ -44,16 +53,21 @@ include "connect_db.php";
       <?php
       include "connect_db.php";
       if($_SERVER["REQUEST_METHOD"] == "POST"){
-          $nama =$_POST["nama"];
+          $nama =$_POST["name"];
+          $nik =$_POST["nik"];
           $email =$_POST["email"];
+          $username =$_POST["uname"];
           $password =$_POST["password"];
-          $cek_email = mysqli_query($koneksi,"SELECT * FROM user WHERE email_user = '$email' ");
-          $cek_row = mysqli_num_rows($cek_email);
-          if (mysqli_num_rows($cek_email) > 0){
-              echo "email telah digunakan, silakan gunakan email lain";
-
+          $cek_email = mysqli_query($koneksi,"SELECT * FROM user WHERE email = '$email' OR username = '$username' ");
+          $res_email = mysqli_num_rows($cek_email);
+          $cek_nik = mysqli_query($koneksi,"SELECT * FROM user WHERE nik = '$nik' ");
+          $res_nik = mysqli_num_rows($cek_nik);
+          if ($res_email > 0){
+              echo "email atau username telah digunakan, silakan gunakan email lain";
+          }else if ($res_nik > 0){
+            echo "nik telah digunakan, silakan gunakan nik lain";
           }else{
-              $sql = mysqli_query($koneksi,"INSERT INTO user(nama_user, email_user, password_user, poin) VALUES ('$nama','$email','$password','10')");
+              $sql = mysqli_query($koneksi,"INSERT INTO user(nama_lengkap, nik, email, username, password) VALUES ('$nama','$nik','$email','$username','$password')");
               if ($sql){
                   echo "Berhasil mendaftar, silakan <a href='login_form.php'>login</a>";
               }else {

@@ -21,7 +21,7 @@ session_start();
 if(isset($_SESSION["id"])) {
   header("Location:index.php");
 }else{
-  include "navbar.php";
+  
 }
 include "connect_db.php";
 ?>
@@ -45,18 +45,17 @@ include "connect_db.php";
       if($_SERVER["REQUEST_METHOD"] == "POST"){
           $email =$_POST["email"];
           $password =$_POST["password"];
-          $cek_login = mysqli_query($koneksi,"SELECT * FROM user WHERE email_user = '$email' AND password_user = '$password' ");
+          $cek_login = mysqli_query($koneksi,"SELECT * FROM user WHERE email = '$email' AND password = '$password' ");
           $cek_login_admin = mysqli_query($koneksi,"SELECT * FROM admins WHERE email_admin = '$email' AND password_admin = '$password' ");
           if (mysqli_num_rows($cek_login) ==  1){
               $row = mysqli_fetch_array($cek_login);
               unset($_SESSION["id_admin"]);
-              $_SESSION["id"] = $row['id_user'];
-              $_SESSION["name"] = $row['nama_user'];
-              $_SESSION["email"] = $row['email_user'];
-              $_SESSION["poin"] = $row['poin'];
+              $_SESSION["id"] = $row['id'];
+              $_SESSION["name"] = $row['nama_lengkap'];
+              $_SESSION["email"] = $row['email'];
               ?>
               <script type='text/javascript'> 
-              document.location = 'index.php';
+              document.location = '/user';
               </script>;<?php
           }if (mysqli_num_rows($cek_login_admin) ==  1){
               $row = mysqli_fetch_array($cek_login_admin);

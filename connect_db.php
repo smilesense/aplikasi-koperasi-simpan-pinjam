@@ -6,7 +6,7 @@ $koneksi = mysqli_connect("localhost","sbd","123ss");
         echo "</script>";
         die;
     }else{
-        $select = mysqli_select_db($koneksi, "db_futsal2");
+        $select = mysqli_select_db($koneksi, "project_pemdesk");
         //echo "Sukses";
     }
 ?>
