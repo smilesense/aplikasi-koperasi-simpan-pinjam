@@ -81,11 +81,6 @@ session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
-    $id_user = $_SESSION["id"];
-    $sql = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman WHERE id_user = $id_user");
-    $nominal_pinjaman = mysqli_fetch_array( $sql );
-    $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM tabungan WHERE id_user = $id_user ");
-    $saldo_simpanan = mysqli_fetch_array( $sql1 );
 }else{
     header("Location:/");
 }
@@ -93,23 +88,60 @@ if(isset($_SESSION["id"])) {
     <div class="col p-4">
         <h1 class="display-4" align="center">Selamat Datang di Koperasi Sejahtera Bersama</h1><br>
             <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card bg-info">
-                            <div class="card-body text-white">
-                                <h2 class="card-title">Simpanan Saya</h2>
-                                <h5 class="card-text">Rp. <?php echo $saldo_simpanan[0]; ?></h5>
-                                <a href="#" class="btn btn-primary">Lihat Detail</a>
+                    <div class="col-sm-3">
+                        <div class="card border-success mb-4">
+                            <div class="card-header bg-success border-success text-white"><h5>Anggota</h5></div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">10 Anggota</h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-success">
+                                <a href="#" class="btn btn-outline-success">Lihat Detail</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card bg-info">
-                            <div class="card-body text-white">
-                                <h2 class="card-title">Pinjaman Saya</h2>
-                                <h5 class="card-text">Rp. <?php echo $nominal_pinjaman[0]; ?></h5>
-                                <a href="/user/list_pinjaman.php" class="btn btn-primary">Lihat Detail</a>
+                    <div class="col-sm-3">
+                        <div class="card border-danger mb-4">
+                            <div class="card-header bg-danger border-danger text-white"><h5>Iuran Wajib</h5></div>
+                                <div class="card-body text-danger">
+                                    <h5 class="card-title">Rp. 1,000,000</h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-danger">
+                                <a href="#" class="btn btn-outline-danger">Lihat Detail</a>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card border-info mb-4">
+                            <div class="card-header bg-info border-info text-white"><h5>Tabungan</h5></div>
+                                <div class="card-body text-info">
+                                    <h5 class="card-title">Rp. 500,000,000</h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-info">
+                                <a href="#" class="btn btn-outline-info">Lihat Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card border-warning mb-4">
+                            <div class="card-header bg-warning border-warning text-white"><h5>Pinjaman</h5></div>
+                                <div class="card-body text-warning">
+                                    <h5 class="card-title">Rp. 100,000,000</h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-warning">
+                                <a href="#" class="btn btn-outline-warning">Lihat Detail</a>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="col-sm-3">
+                        <div class="card border-primary mb-4">
+                            <div class="card-header bg-primary border-primary text-white"><h5>SHU</h5></div>
+                                <div class="card-body text-primary">
+                                    <h5 class="card-title">Rp. 100,000,000,000</h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-primary">
+                                <a href="#" class="btn btn-outline-primary">Lihat Detail</a>
+                            </div>
+                        </div>  
                     </div>
             </div>
             </div>
