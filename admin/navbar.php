@@ -13,7 +13,7 @@
                 <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
             </li> -->
             <li class="nav-item">
-            <a href="#" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true"><i class="fa fa-sign-out-alt fa-fw mr-2" aria-hidden="true"></i>Logout</a>
+            <a href="../logout.php" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true"><i class="fa fa-sign-out-alt fa-fw mr-2" aria-hidden="true"></i>Logout</a>
             </li>
             <!-- This menu is hidden in bigger devices with d-sm-none. 
            The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->

@@ -93,28 +93,40 @@ if(isset($_SESSION["id"])) {
     <div class="col p-4">
         <h1 class="display-4" align="center">Selamat Datang di Koperasi Sejahtera Bersama</h1><br>
             <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card bg-info">
-                            <div class="card-body text-white">
-                                <h2 class="card-title">Simpanan Saya</h2>
-                                <h5 class="card-text">Rp. <?php echo $saldo_simpanan[0]; ?></h5>
-                                <a href="#" class="btn btn-primary">Lihat Detail</a>
+                    <div class="col-sm-4">
+                        <div class="card border-info mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+                            <div class="card-header bg-info text-white"><h5>Simpanan Saya</h5></div>
+                                <div class="card-body text-info">
+                                    <h5 class="card-title">Rp. <?php echo $saldo_simpanan[0]?></h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-info">
+                                <a href="#" class="btn btn-outline-info">Lihat Detail</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card bg-info">
-                            <div class="card-body text-white">
-                                <h2 class="card-title">Pinjaman Saya</h2>
-                                <h5 class="card-text">Rp. <?php echo $nominal_pinjaman[0]; ?></h5>
-                                <a href="/user/list_pinjaman.php" class="btn btn-primary">Lihat Detail</a>
+                    <div class="col-sm-4">
+                        <div class="card border-danger mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+                            <div class="card-header bg-danger border-danger text-white"><h5>Pinjaman Saya</h5></div>
+                                <div class="card-body text-danger">
+                                    <h5 class="card-title">Rp. <?php echo $nominal_pinjaman[0]?></h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-danger">
+                                <a href="#" class="btn btn-outline-danger">Lihat Detail</a>
                             </div>
                         </div>
                     </div>
-            </div>
-            </div>
-            </div>
-    </div><!-- Main Col END -->
+                    <div class="col-sm-4">
+                        <div class="card border-success mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+                            <div class="card-header bg-success text-white"><h5>SHU Saya</h5></div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Rp. 1,000,000</h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-success">
+                                <a href="#" class="btn btn-outline-success">Lihat Detail</a>
+                            </div>
+                        </div>
+                    </div>
+        </div><!-- Main Col END -->
 </div><!-- body-row END --> 
 
 <script>

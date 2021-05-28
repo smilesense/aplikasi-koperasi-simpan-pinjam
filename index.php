@@ -34,6 +34,7 @@ body {
   /* Link to your background image using in the property below! */
   background: scroll center url('http://wtk.tayo.my.id/assets/logokop.jpg');
   background-size: cover;
+  position: relative;
 }
 
 .card-signin .card-body {
@@ -155,7 +156,7 @@ include "connect_db.php";
                           $email =$_POST["email"];
                           $password =$_POST["password"];
                           $cek_login = mysqli_query($koneksi,"SELECT * FROM user WHERE email = '$email' AND password = '$password' ");
-                          $cek_login_admin = mysqli_query($koneksi,"SELECT * FROM admins WHERE email_admin = '$email' AND password_admin = '$password' ");
+                          $cek_login_admin = mysqli_query($koneksi,"SELECT * FROM admin WHERE email = '$email' AND password = '$password' ");
                           if (mysqli_num_rows($cek_login) ==  1){
                               $row = mysqli_fetch_array($cek_login);
                               unset($_SESSION["id_admin"]);
@@ -169,9 +170,9 @@ include "connect_db.php";
                           }if (mysqli_num_rows($cek_login_admin) ==  1){
                               $row = mysqli_fetch_array($cek_login_admin);
                               unset($_SESSION["id"]);
-                              $_SESSION["id_admin"] = $row['id_admin'];
-                              $_SESSION["name"] = $row['nama_admin'];
-                              $_SESSION["email"] = $row['email_admin'];
+                              $_SESSION["id_admin"] = $row['id'];
+                              $_SESSION["username"] = $row['username'];
+                              $_SESSION["email"] = $row['email'];
                               ?>
                               <script type='text/javascript'> 
                               document.location = 'admin/index.php';

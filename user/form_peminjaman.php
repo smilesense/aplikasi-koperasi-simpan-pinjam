@@ -86,20 +86,21 @@ if(isset($_SESSION["id"])) {
 ?>
 
     <div class="col p-4">
-    <h2 align="center">Form Peminjaman</h2>
-    <div class="container bg-info" style="max-width: 500px;">
-            <div class="form-group">
-                <label for="name">Nama Lengkap : </label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION["name"];?>" required readonly>
-            </div>
-
-            <div class="form-group">
-            <label for="nominal">Nominal Pinjaman : </label>
+    <h1 class="display-4" align="center">Form Peminjaman</h1><br>
+    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <form class="row g-3" action="" method="POST">
+        <div class="col-md-12">
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" id="name" value="<?php echo $_SESSION["name"];?>" required readonly>
+            <br>
+        </div>
+        <div class="col-md-12">
+            <label for="nominal" class="form-label">Nominal Pinjaman</label>
             <input type="number" class="form-control" id="nominal" name="nominal" value="" min="500000" max="10000000" step="100000" onchange="return get_bunga()" placeholder="Masukkan Nominal"required>
-            </div>
-
-            <div class="form-group">
-            <label for="durasi">Durasi Pinjaman (bulan) : </label>
+            <br>
+        </div>
+        <div class="col-12">
+            <label for="durasi" class="form-label">Durasi Pinjaman (bulan)</label>
             <select class="form-control" id="durasi" name="durasi" value="" onchange="return cek_return()" placeholder="Durasi Pinjaman"required>
                 <option value="">Silakan Pilih Durasi Pinjaman</option>
                 <option value="3">3 Bulan</option>
@@ -111,7 +112,6 @@ if(isset($_SESSION["id"])) {
                 <option value="21">21 Bulan</option>
                 <option value="24">24 Bulan</option>
             </select>
-            </div>
             <script type="text/javascript">
 
                 function get_bunga(){
@@ -130,23 +130,27 @@ if(isset($_SESSION["id"])) {
                     document.getElementById("total").value = (nominal*1+((nominal*2.5)/100)*durasi);
                 }
             </script>
-
-            <div class="form-group">
-            <label for="tanggal_return">Tanggal Pengembalian : </label>
-            <input type="text" class="form-control" id="tanggal_return" name="tanggal_return" value="" required readonly>
-            </div>
-
-            <div class="form-group">
-            <label for="total">Total yang harus dikembalkan (termasuk bunga):</label>
+            <br>
+        </div>
+        <div class="col-md-12">
+            <label for="tanggal_return" class="form-label">Tanggal Pengembalian</label>
+            <input type="text" class="form-control" id="tanggal_return" value="" required readonly>
+            <br>
+        </div>
+        <div class="col-md-12">
+        <label for="total">Total yang harus dikembalkan (termasuk bunga):</label>
             <input type="text" class="form-control" id="total" name="total" value="<?php echo $r['total_harga']?>" readonly>
-            </div>
-
-            <div class="form-group">
+            <br>
+        </div>
+        <div class="col-md-12">
             <label for="confirm_password">Konfirmasi Password:</label>
             <input type="text" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda" readonly>
-            </div>
-            
-            <button type="submit" class="btn btn-primary"><i class="fas fa-money-check-alt"></i> Pinjam}</button>
+            <br>
+        </div>
+        <div class="col-12">
+            <br>
+            <button type="submit" class="btn btn-danger"><i class="fas fa-money-check-alt"></i> Pinjam</button>
+        </div>
         </form>
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -156,8 +160,6 @@ if(isset($_SESSION["id"])) {
             $poin_lapangan = $_POST["poin"];
             $bonus=$_SESSION["poin"]+$_POST["poin"];
             $bayar = $_POST["wallet"];
-            $sql_update = mysqli_query($koneksi,"UPDATE user SET poin= $bonus WHERE id_user=$id");
-            $update = mysqli_query($koneksi, $sql_update);
             if ($sql = mysqli_query($koneksi,"INSERT INTO bayar(id_pesanan, id_user, rekening, total_harga,  bayar, status_pesanan,total_poin) VALUES ($id_pesanan, $id, $rekening, $total_harga, '$bayar','pending', '$total_poin')")){
                 unset($_SESSION["tgl_main"]);
                 unset($_SESSION["jam_main"]);

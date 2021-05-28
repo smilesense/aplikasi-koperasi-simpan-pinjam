@@ -13,7 +13,7 @@
                 <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
             </li> -->
             <li class="nav-item" style="padding-right:10px; padding-top:5px;">
-              <h5 style="color:white;">Selamat Datang <?php echo $_SESSION["name"]; ?> </h5>
+              <h5 style="color:white;">Selamat Datang, <?php echo $_SESSION["name"]; ?> </h5>
             </li>
             <li class="nav-item">
             <a href="../logout.php" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true"><i class="fa fa-sign-out-alt fa-fw mr-2" aria-hidden="true"></i>Logout</a>
@@ -84,7 +84,7 @@
             </a>
             <!-- Submenu content -->
             <div id='submenu2' class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="/user/profile.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Profil Pengguna</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
