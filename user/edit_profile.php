@@ -218,15 +218,21 @@ if(isset($_SESSION["id"])) {
                         <td>
                         <button type="submit" class="btn btn-lg btn-primary  text-uppercase" style="width:100px;">Save</button>
                         <button type="button" class="btn btn-lg btn-primary text-uppercase" onclick="window.location.href='../user/profile.php'" style="width:100px;">Cancel</button>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td></td>
+                        <td>
                         <?php
                             $nomor_rekening = $_POST["norek"];
                             $name1 = $_POST["name"];
                             if($_SERVER["REQUEST_METHOD"] == "POST"){
-                                $update_view = mysqli_query($koneksi,"CREATE VIEW '$id_user' AS SELECT * FROM user WHERE email != '$email' OR username != '$username' ");
-                                $res_view = mysqli_num_rows($update_view);
                                 $username1 = $profile["username"];
                                 $nik1 = $profile["nik"];
-                                $email1 = $profile["email"]; 
+                                $email1 = $profile["email"];
+                                $view_name = $username1; 
+                                $update_view = mysqli_query($koneksi,"CREATE VIEW $view_name AS SELECT * FROM user WHERE email != '$email1' OR username != '$username1' ");
+                                $res_view = mysqli_num_rows($update_view);
                                 if($profile["username"] != $_POST["username"]){
                                     $username1 = $_POST["username"]; 
                                     
@@ -236,18 +242,18 @@ if(isset($_SESSION["id"])) {
                                 }else if($profile["email"] != $_POST["email"]){ 
                                     $email1 = $_POST["email"]; 
                                     
-                                }else{}
-                                $cek_username = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE username = '$username1' ");
+                                }
+                                $cek_username = mysqli_query($koneksi,"SELECT * FROM $view_name WHERE username = '$username1' ");
                                 $res_username = mysqli_num_rows($cek_username);
                                 if($res_username > 0){
                                     echo "username telah digunakan";
                                 }
-                                $cek_nik = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE nik = '$nik1' ");
+                                $cek_nik = mysqli_query($koneksi,"SELECT * FROM $view_name WHERE nik = '$nik1' ");
                                 $res_nik = mysqli_num_rows($cek_nik);
                                 if($res_nik > 0){
                                     echo "NIK telah digunakan";
                                 }
-                                $cek_email = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE email = '$email1' ");
+                                $cek_email = mysqli_query($koneksi,"SELECT * FROM $view_name WHERE email = '$email1' ");
                                 $res_email = mysqli_num_rows($cek_email);
                                 if($res_email > 0){
                                     echo "Email telah digunakan";
@@ -255,17 +261,19 @@ if(isset($_SESSION["id"])) {
                                 
                                 if($res_username == 0 && $res_nik == 0 && $res_email == 0){
                                     mysqli_query($koneksi,"UPDATE user SET nama_lengkap = '$name1', nik = '$nik1', email = '$email1' , username = '$username1', no_rekening = '$nomor_rekening'  WHERE id = '$id_user' ");
-                                    mysqli_query($koneksi,"DROP VIEW '$id_user' ");
+                                    mysqli_query($koneksi,"DROP VIEW $view_name");
                                     $_SESSION["name"] = $name1;
-                                    
-                                }else{
-                                    echo "apa ini";
+                                    ?>
+                                    <script type='text/javascript'>
+                                    alert("berhasil"); 
+                                    document.location = '/user/profile.php';
+                                    </script>;<?php
                                 }
                             }
                             
                         ?>
                         </td>
-                    </tr>                     
+                    </tr>                    
                 </tbody>
             </table>
             </form>

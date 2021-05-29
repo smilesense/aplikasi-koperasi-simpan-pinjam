@@ -162,31 +162,31 @@ include "connect_db.php";
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button><br>
               <p align="center">Sudah punya akun? Silahkan <a href="index.php"> Login</a></p>
               <?php
-      include "connect_db.php";
-      if($_SERVER["REQUEST_METHOD"] == "POST"){
-          $nama =$_POST["name"];
-          $nik =$_POST["nik"];
-          $email =$_POST["email"];
-          $username =$_POST["uname"];
-          $password =$_POST["password"];
-          $cek_email = mysqli_query($koneksi,"SELECT * FROM user WHERE email = '$email' OR username = '$username' ");
-          $res_email = mysqli_num_rows($cek_email);
-          $cek_nik = mysqli_query($koneksi,"SELECT * FROM user WHERE nik = '$nik' ");
-          $res_nik = mysqli_num_rows($cek_nik);
-          if ($res_email > 0){
-              echo "email atau username telah digunakan, silakan gunakan email lain";
-          }else if ($res_nik > 0){
-            echo "nik telah digunakan, silakan gunakan nik lain";
-          }else{
-              $sql = mysqli_query($koneksi,"INSERT INTO user(nama_lengkap, nik, email, username, password) VALUES ('$nama','$nik','$email','$username','$password')");
-              if ($sql){
-                  echo "Berhasil mendaftar, silakan <a href='index.php'>login</a>";
-              }else {
-                  echo "error";
+              include "connect_db.php";
+              if($_SERVER["REQUEST_METHOD"] == "POST"){
+                  $nama =$_POST["name"];
+                  $nik =$_POST["nik"];
+                  $email =$_POST["email"];
+                  $username =$_POST["uname"];
+                  $password =$_POST["password"];
+                  $cek_email = mysqli_query($koneksi,"SELECT * FROM user WHERE email = '$email' OR username = '$username' ");
+                  $res_email = mysqli_num_rows($cek_email);
+                  $cek_nik = mysqli_query($koneksi,"SELECT * FROM user WHERE nik = '$nik' ");
+                  $res_nik = mysqli_num_rows($cek_nik);
+                  if ($res_email > 0){
+                      echo "email atau username telah digunakan, silakan gunakan email lain";
+                  }else if ($res_nik > 0){
+                    echo "nik telah digunakan, silakan gunakan nik lain";
+                  }else{
+                      $sql = mysqli_query($koneksi,"INSERT INTO user(nama_lengkap, nik, email, username, password) VALUES ('$nama','$nik','$email','$username','$password')");
+                      if ($sql){
+                          echo "Berhasil mendaftar, silakan <a href='index.php'>login</a>";
+                      }else {
+                          echo "error";
+                      }
+                  }
               }
-          }
-      }
-      ?>
+              ?>
             </form>
           </div>
         </div>

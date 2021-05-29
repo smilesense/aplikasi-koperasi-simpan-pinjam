@@ -184,8 +184,21 @@ if(isset($_SESSION["id"])) {
                     </tr>
                     <tr>
                         <td>
+                            <strong>
+                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                Nomor Rekening                                                
+                            </strong>
                         </td>
+                        <td class="text-white">
+                            <b><?php if ($profile["no_rekening"] == 0){
+                                echo "-";
+                            }?>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
                         <td>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='../user/edit_profile.php'" style="width:100px;">Edit</button><br>
                         </td>
                     </tr>                     
                 </tbody>

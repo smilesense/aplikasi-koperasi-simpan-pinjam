@@ -153,6 +153,16 @@ if(isset($_SESSION["id"])) {
                             <div class="form-label-group">
                                 <input type="text" id="username" name="username" value="<?php echo $profile["username"]?>" class="form-control" required autofocus>
                                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
+                                <?php
+                                $username1 = $profile["username"]; 
+                                if($profile["username"] != $_POST["username"]){
+                                    $username1 = $_POST["username"]; 
+                                    $cek_username = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE username = '$username1' ");
+                                    $res_username = mysqli_num_rows($cek_username);
+                                    if($res_username > 0){
+                                        echo "username telah digunakan";
+                                    }  
+                                ?>
                             </div>
                         </td>
                     </tr>
@@ -167,6 +177,16 @@ if(isset($_SESSION["id"])) {
                             <div class="form-label-group">
                                 <input type="text" id="nik" name="nik" value="<?php echo $profile["nik"]?>" class="form-control" required autofocus>
                                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
+                                <?php
+                                $nik1 = $profile["nik"]; 
+                                }else if($profile["nik"] != $_POST["nik"]){
+                                    $nik1 = $_POST["nik"];
+                                    $cek_nik = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE nik = '$nik1' ");
+                                    $res_nik = mysqli_num_rows($cek_nik);
+                                    if($res_nik > 0){
+                                        echo "NIK telah digunakan";
+                                    }  
+                                ?>
                             </div> 
                         </td>
                     </tr>
@@ -192,6 +212,16 @@ if(isset($_SESSION["id"])) {
                             <div class="form-label-group">
                                 <input type="text" id="email" name="email" value="<?php echo $profile["email"]?>" class="form-control" required autofocus>
                                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
+                                <?php 
+                                $email1 = $profile["email"];
+                                }else if($profile["email"] != $_POST["email"]){ 
+                                    $email1 = $_POST["email"]; 
+                                    $cek_email = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE email = '$email1' ");
+                                    $res_email = mysqli_num_rows($cek_email);
+                                    if($res_email > 0){
+                                        echo "Email telah digunakan";
+                                    }  
+                                }?>
                             </div>  
                         </td>
                     </tr>
@@ -221,48 +251,20 @@ if(isset($_SESSION["id"])) {
                         <?php
                             $nomor_rekening = $_POST["norek"];
                             $name1 = $_POST["name"];
-                            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                                $update_view = mysqli_query($koneksi,"CREATE VIEW '$id_user' AS SELECT * FROM user WHERE email != '$email' OR username != '$username' ");
-                                $res_view = mysqli_num_rows($update_view);
-                                $username1 = $profile["username"];
-                                $nik1 = $profile["nik"];
-                                $email1 = $profile["email"]; 
-                                if($profile["username"] != $_POST["username"]){
-                                    $username1 = $_POST["username"]; 
-                                    
-                                }else if($profile["nik"] != $_POST["nik"]){
-                                    $nik1 = $_POST["nik"];
-            
-                                }else if($profile["email"] != $_POST["email"]){ 
-                                    $email1 = $_POST["email"]; 
-                                    
-                                }else{}
-                                $cek_username = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE username = '$username1' ");
-                                $res_username = mysqli_num_rows($cek_username);
-                                if($res_username > 0){
-                                    echo "username telah digunakan";
-                                }
-                                $cek_nik = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE nik = '$nik1' ");
-                                $res_nik = mysqli_num_rows($cek_nik);
-                                if($res_nik > 0){
-                                    echo "NIK telah digunakan";
-                                }
-                                $cek_email = mysqli_query($koneksi,"SELECT * FROM '$id_user' WHERE email = '$email1' ");
-                                $res_email = mysqli_num_rows($cek_email);
-                                if($res_email > 0){
-                                    echo "Email telah digunakan";
-                                }  
+                            if($res_username == 0 && $res_nik == 0 && $res_email == 0){
+                                mysqli_query($koneksi,"UPDATE user SET nama_lengkap = '$name1', nik = '$nik1', email = '$email1' , username = '$username1', no_rekening = '$nomor_rekening'  WHERE id = '$id_user' ");
+                                mysqli_query($koneksi,"DROP VIEW $id_user ");
+                                $_SESSION["name"] = $name1;
                                 
-                                if($res_username == 0 && $res_nik == 0 && $res_email == 0){
-                                    mysqli_query($koneksi,"UPDATE user SET nama_lengkap = '$name1', nik = '$nik1', email = '$email1' , username = '$username1', no_rekening = '$nomor_rekening'  WHERE id = '$id_user' ");
-                                    mysqli_query($koneksi,"DROP VIEW '$id_user' ");
-                                    $_SESSION["name"] = $name1;
-                                    
-                                }else{
-                                    echo "apa ini";
-                                }
+                            }else{
+                                echo "apa ini";
                             }
-                            
+                        ?>
+                        <?php
+                            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                                $update_view = mysqli_query($koneksi,"CREATE VIEW '$id_user' SELECT * FROM user WHERE email != '$email' OR username != '$username' ");
+                                $res_view = mysqli_num_rows($update_view);
+                            }
                         ?>
                         </td>
                     </tr>                     
