@@ -53,39 +53,42 @@
             <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-bars fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Menu</span>
+                    <span class="menu-collapsed">Data Koperasi</span>
                     <span class="submenu-icon ml-auto"></span>
                 </div>
             </a>
             <!-- Submenu content -->
             <div id='submenu1' class="collapse sidebar-submenu">
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Simpan Uang</span>
-                </a>
-                <a href="/user/form_peminjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Pinjam Uang</span>
+                    <span class="menu-collapsed">Data Admin</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Iuran Wajib</span>
+                    <span class="menu-collapsed">Data User</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Pembagian SHU</span>
+                    <span class="menu-collapsed">Data Simpanan</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Data Pinjaman</span>
                 </a>
             </div>
             <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-user fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Profile</span>
+                    <span class="menu-collapsed">Pengaturan</span>
                     <span class="submenu-icon ml-auto"></span>
                 </div>
             </a>
             <!-- Submenu content -->
             <div id='submenu2' class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Profil Pengguna</span>
+                <a href="konfirmasi_simpanan.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Konfirmasi Simpanan</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Simpanan Saya</span>
+                <a href="konfirmasi_pinjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Konfirmasi Pinjaman</span>
+                </a>
+                <a href="konfirmasi_iuran.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Konfirmasi Iuran Wajib</span>
                 </a>
             </div>
             <!-- Separator with title -->

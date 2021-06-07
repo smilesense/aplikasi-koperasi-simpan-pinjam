@@ -82,7 +82,7 @@ include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
     $id_user = $_SESSION["id"];
-    $sql = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman WHERE id_user = $id_user");
+    $sql = mysqli_query($koneksi,"SELECT SUM(nominal+bunga) FROM pinjaman WHERE id_user = $id_user AND status = 'Terkonfirmasi' ");
     $nominal_pinjaman = mysqli_fetch_array( $sql );
     $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM tabungan WHERE id_user = $id_user ");
     $saldo_simpanan = mysqli_fetch_array( $sql1 );
@@ -100,7 +100,7 @@ if(isset($_SESSION["id"])) {
                                     <h5 class="card-title">Rp. <?php echo $saldo_simpanan[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-info">
-                                <a href="#" class="btn btn-outline-info">Lihat Detail</a>
+                                <a href="#" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ if(isset($_SESSION["id"])) {
                                     <h5 class="card-title">Rp. <?php echo $nominal_pinjaman[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-danger">
-                                <a href="#" class="btn btn-outline-danger">Lihat Detail</a>
+                                <a href="/user/list_pinjaman.php" class="btn btn-outline-danger"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@ if(isset($_SESSION["id"])) {
                                     <h5 class="card-title">Rp. 1,000,000</h5>
                                 </div>
                             <div class="card-footer bg-transparent border-success">
-                                <a href="#" class="btn btn-outline-success">Lihat Detail</a>
+                                <a href="#" class="btn btn-outline-success"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>

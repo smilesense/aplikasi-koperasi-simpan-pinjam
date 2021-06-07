@@ -86,91 +86,62 @@ if(isset($_SESSION["id"])) {
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Form Peminjaman</h1><br>
-    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <h1 class="display-4" align="center">Form Simpanan</h1><br>
+    <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     <form class="row g-3" action="" method="POST">
         <div class="col-md-12">
-            <label for="name" class="form-label">Nama Lengkap</label>
+            <label for="name" class="form-label text-white">Nama Lengkap</label>
             <input type="text" class="form-control" id="name" value="<?php echo $_SESSION["name"];?>" required readonly>
             <br>
         </div>
         <div class="col-md-12">
-            <label for="nominal" class="form-label">Nominal Pinjaman</label>
-            <input type="number" class="form-control" id="nominal" name="nominal" value="" min="500000" max="10000000" step="100000" onchange="return get_bunga()" placeholder="Masukkan Nominal"required>
-            <br>
-        </div>
-        <div class="col-12">
-            <label for="durasi" class="form-label">Durasi Pinjaman (bulan)</label>
-            <select class="form-control" id="durasi" name="durasi" value="" onchange="return cek_return()" placeholder="Durasi Pinjaman"required>
-                <option value="">Silakan Pilih Durasi Pinjaman</option>
-                <option value="3">3 Bulan</option>
-                <option value="6">6 Bulan</option>
-                <option value="9">9 Bulan</option>
-                <option value="12">12 Bulan</option>
-                <option value="15">15 Bulan</option>
-                <option value="18">18 Bulan</option>
-                <option value="21">21 Bulan</option>
-                <option value="24">24 Bulan</option>
-            </select>
-            <script type="text/javascript">
-
-                function get_bunga(){
-                    durasi = document.getElementById("durasi").value;
-                    nominal = document.getElementById("nominal").value;
-
-                    document.getElementById("total").value = (nominal*1+((nominal*2.5)/100)*durasi);
-                }
-                function cek_return(){
-                    durasi = document.getElementById("durasi").value;
-                    nominal = document.getElementById("nominal").value;
-
-                    var myDate = new Date(new Date().getTime()+((durasi*30)*24*60*60*1000)).toLocaleDateString();
-
-                    document.getElementById("tanggal_return").value = myDate;
-                    document.getElementById("total").value = (nominal*1+((nominal*2.5)/100)*durasi);
-                }
-            </script>
+            <label for="nominal" class="form-label text-white">Nominal Simpanan</label>
+            <input type="number" class="form-control" id="nominal" name="nominal" value="" min="500000" max="10000000" step="100000" onchange="return get_kodeunik()" placeholder="Masukkan Nominal"required>
             <br>
         </div>
         <div class="col-md-12">
-            <label for="tanggal_return" class="form-label">Tanggal Pengembalian</label>
-            <input type="text" class="form-control" id="tanggal_return" name="tanggal_return" value="" required readonly>
+            <label for="nominal" class="form-label text-white">Nominal + Kode Unik (yang harus dibayar)</label>
+            <input type="number" class="form-control" id="kodeunik" name="kodeunik" value="" min="500000" max="10000000" step="100000" placeholder="Masukkan Kode Unik" required readonly>
             <br>
         </div>
+        <script type="text/javascript">
+
+            function get_kodeunik(){
+                nominal = document.getElementById("nominal").value;
+
+                kodeunik = nominal*1+(Math.floor(Math.random() * 1000) + 100);
+
+                document.getElementById("kodeunik").value = kodeunik;
+            }
+        </script>
         <div class="col-md-12">
-        <label for="total">Total yang harus dikembalkan (termasuk bunga):</label>
-            <input type="text" class="form-control" id="total" name="total" value="<?php echo $r['total_harga']?>" readonly>
-            <br>
-        </div>
-        <div class="col-md-12">
-            <label for="confirm_password">Konfirmasi Password:</label>
-            <input type="text" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda">
+            <label for="confirm_password" class="text-white">Konfirmasi Password:</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda">
             <br>
         </div>
         <div class="col-12">
             <br>
-            <button type="submit" class="btn btn-danger"><i class="fas fa-money-check-alt"></i> Pinjam</button>
+            <button type="submit" class="btn btn-success text-white"><i class="fas fa-money-check-alt"></i> Ajukan Simpanan</button>
         </div>
         </form>
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
             $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
             $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
+            $kodeunik = $_POST["kodeunik"];
+            $id = $_SESSION["id"];
             $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
             $res_password = mysqli_num_rows($cek_password);
             if ($res_password == 0){
                 echo "Password yang Anda Masukkan Salah";
             }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
+                $sql = mysqli_query($koneksi,"INSERT INTO tabungan_unconfirm(id_user, nominal, kode_unik, status) VALUES ('$id','$nominal','$kodeunik','Menunggu Konfirmasi')");
                 if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
+                    echo "Berhasil Berhasil Mengajukan simpanan";
                 }else {
                     echo "error";
                 }
-            }  
+            } 
         }
         ?>
     </div>

@@ -104,7 +104,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title"><?php echo $anggota[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-success">
-                                <a href="#" class="btn btn-outline-success">Lihat Detail</a>
+                                <a href="#" class="btn btn-outline-success"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title">Rp. 1,000,000</h5>
                                 </div>
                             <div class="card-footer bg-transparent border-danger">
-                                <a href="#" class="btn btn-outline-danger">Lihat Detail</a>
+                                <a href="#" class="btn btn-outline-danger"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -126,18 +126,18 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title">Rp. <?php echo $saldo_simpanan[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-info">
-                                <a href="#" class="btn btn-outline-info">Lihat Detail</a>
+                                <a href="#" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="card border-warning mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
-                            <div class="card-header bg-warning border-warning text-white"><h5>Pinjaman</h5></div>
-                                <div class="card-body text-warning">
+                        <div class="card border-secondary mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+                            <div class="card-header bg-secondary border-secondary text-white"><h5>Pinjaman</h5></div>
+                                <div class="card-body text-secondary">
                                     <h5 class="card-title">Rp. <?php echo $pinjaman[0]?></h5>
                                 </div>
-                            <div class="card-footer bg-transparent border-warning">
-                                <a href="#" class="btn btn-outline-warning">Lihat Detail</a>
+                            <div class="card-footer bg-transparent border-secondary">
+                                <a href="#" class="btn btn-outline-secondary"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div><br>
@@ -148,7 +148,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title">Rp. 100,000,000,000</h5>
                                 </div>
                             <div class="card-footer bg-transparent border-primary">
-                                <a href="#" class="btn btn-outline-primary">Lihat Detail</a>
+                                <a href="#" class="btn btn-outline-primary"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>  
                     </div>

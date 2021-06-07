@@ -190,9 +190,13 @@ if(isset($_SESSION["id"])) {
                             </strong>
                         </td>
                         <td class="text-white">
-                            <b><?php if ($profile["no_rekening"] == 0){
-                                echo "-";
-                            }?>  
+                            <b><?php 
+                                if ($profile["no_rekening"] == 0){
+                                    echo "-";
+                                }else{
+                                    echo $profile["no_rekening"];
+                                }
+                            ?>  
                         </td>
                     </tr>
                     <tr>

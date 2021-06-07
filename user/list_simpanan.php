@@ -111,7 +111,7 @@ if(isset($_SESSION["id"])) {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Pinjaman Saya</h3>
+						<h3 class="panel-title">Simpanan Saya</h3>
 						<div class="pull-right">
 							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
 								<i class="glyphicon glyphicon-filter"></i>
@@ -133,9 +133,9 @@ if(isset($_SESSION["id"])) {
 					<table class="table table-hover" id="dev-table">
 						<thead>
 							<tr>
-								<th>Id Pinjaman</th>
-								<th>Nominal Pinjaman</th>
-								<th>Jatuh Tempo Pinjaman</th>
+								<th>Id Simpanan</th>
+								<th>Id User</th>
+								<th>Nominal Simpanan</th>
 								<th>Status Pinjaman</th>
 							</tr>
 						</thead>

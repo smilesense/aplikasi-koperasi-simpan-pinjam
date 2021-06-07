@@ -62,13 +62,13 @@
             </a>
             <!-- Submenu content -->
             <div id='submenu1' class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="form_simpanan.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Simpan Uang</span>
                 </a>
                 <a href="/user/form_peminjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Pinjam Uang</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="form_iuran.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Iuran Wajib</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
@@ -87,8 +87,11 @@
                 <a href="/user/profile.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Profil Pengguna</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="/user/list_pinjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Simpanan Saya</span>
+                </a>
+                <a href="/user/list_simpanan.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Pinjaman Saya</span>
                 </a>
             </div>
             <!-- Separator with title -->

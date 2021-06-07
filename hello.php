@@ -328,3 +328,19 @@ function SidebarCollapse () {
 </script>
 </body>
 </html>
+
+
+<!-- List Pinjaman -->
+<?php
+            $id = $_SESSION["id"];
+            $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_user = $id ");
+            while ( $r = mysqli_fetch_array( $sql ) ) {
+        ?>
+            <tr>
+            <td><?php echo $r['id_pinjaman']?></td>
+            <td><?php echo $r['nominal']?></td>
+            <td><?php echo $r['jatuh_tempo']?></td>
+            <td><?php echo $r['status']?></td>
+            </tr>
+        <?php
+        }?>
