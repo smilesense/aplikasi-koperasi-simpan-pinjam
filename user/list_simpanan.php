@@ -80,13 +80,14 @@ session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
+    include "footer.php";
 }else{
     header("Location:/");
 }
 ?>
     <div class="col p-4">
-    <h2 align="center">Data Pinjaman Saya</h2><br>
-    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <h1 class="display-4" align="center">Data Simpanan Saya</h1><br>
+    <div class="container bg-info" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     	<div class="row" 
         style=
         "    	.row{
@@ -134,23 +135,21 @@ if(isset($_SESSION["id"])) {
 						<thead>
 							<tr>
 								<th>Id Simpanan</th>
-								<th>Id User</th>
 								<th>Nominal Simpanan</th>
-								<th>Status Pinjaman</th>
+                                <th>Status Simpanan</th>
 							</tr>
 						</thead>
 						<tbody>
                         <?php
                             $id = $_SESSION["id"];
                             $search = $_POST["search"];
-                            $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_user = $id AND (nominal like '%".$search."%' OR jatuh_tempo like '%".$search."%' OR status like '%".$search."%' OR id_pinjaman like '%".$search."%') ");
+                            $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
                             while ( $r = mysqli_fetch_array( $sql ) ) {
                         ?>
                             <tr>
-                            <td><?php echo $r['id_pinjaman']?></td>
-                            <td><?php echo ($r['nominal']+$r['bunga']);?></td>
-                            <td><?php echo $r['jatuh_tempo']?></td>
-                            <td><?php echo $r['status']?></td>
+                            <td><?php echo $r['id_tabungan']?></td>
+                            <td><?php echo $r['nominal'];?></td>
+                            <td><?php echo $r['status'];?></td>
                             </tr>
                         <?php
                         }?>

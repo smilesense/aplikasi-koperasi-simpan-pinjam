@@ -79,6 +79,7 @@
 session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
+    include "footer.php";
     include "navbar.php";
 }else{
     header("Location:/");

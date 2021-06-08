@@ -80,11 +80,12 @@
 session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
+    include "footer.php";
     include "navbar.php";
     $id_user = $_SESSION["id"];
     $sql = mysqli_query($koneksi,"SELECT SUM(nominal+bunga) FROM pinjaman WHERE id_user = $id_user AND status = 'Terkonfirmasi' ");
     $nominal_pinjaman = mysqli_fetch_array( $sql );
-    $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM tabungan WHERE id_user = $id_user ");
+    $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM simpanan WHERE id_user = $id_user AND status = 'Terkonfirmasi' ");
     $saldo_simpanan = mysqli_fetch_array( $sql1 );
 }else{
     header("Location:/");
@@ -100,7 +101,8 @@ if(isset($_SESSION["id"])) {
                                     <h5 class="card-title">Rp. <?php echo $saldo_simpanan[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-info">
-                                <a href="#" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/user/list_simpanan.php" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/user/form_tariktunai.php" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Tarik Tunai</a>
                             </div>
                         </div>
                     </div>

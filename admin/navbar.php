@@ -1,5 +1,5 @@
 <!-- Bootstrap NavBar -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-secondary bg-secondary">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,12 +20,14 @@
            <li class="nav-item dropdown d-sm-block d-md-none">
                 <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu </a>
                 <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                    <a class="dropdown-item" href="#top"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Simpan Uang</a>
-                    <a class="dropdown-item" href="/user/form_peminjaman.php"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Pinjam Uang</a>
-                    <a class="dropdown-item" href="#top"><i class="fas fa-money-check-alt fa-fw mr-2" aria-hidden="true"></i>Iuran Wajib</a>
-                    <a class="dropdown-item" href="#top"><i class="fa fa-tags fa-fw mr-2" aria-hidden="true"></i>Pembagian SHU</a>
-                    <a class="dropdown-item" href="#top"><i class="fa fa-user fa-fw mr-2" aria-hidden="true"></i>Profil</a>
-                    <a class="dropdown-item" href="#top"><i class="fa fa-info-circle fa-fw mr-2" aria-hidden="true"></i>Tentang</a>
+                    <a class="dropdown-item" href="/admin/index.php"><i class="fas fa-home fa-fw mr-2" aria-hidden="true"></i>Beranda</a>
+                    <a class="dropdown-item" href="/admin/data_admin.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Admin</a>
+                    <a class="dropdown-item" href="/admin/data_user.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data User</a>
+                    <a class="dropdown-item" href="#top"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Simpanan</a>
+                    <a class="dropdown-item" href="#top"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Pinjaman</a>
+                    <a class="dropdown-item" href="/admin/konfirmasi_simpanan.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Simpanan</a>
+                    <a class="dropdown-item" href="/admin/konfirmasi_pinjaman.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Pinjaman</a>
+                    <a class="dropdown-item" href="/admin/konfirmasi_iuran.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Iuran Wajib</a>
                 </div>
             </li><!-- Smaller devices menu END -->
         </ul>
@@ -59,17 +61,11 @@
             </a>
             <!-- Submenu content -->
             <div id='submenu1' class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="/admin/data_admin.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Data Admin</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="/admin/data_user.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Data User</span>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Data Simpanan</span>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Data Pinjaman</span>
                 </a>
             </div>
             <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
@@ -92,16 +88,16 @@
                 </a>
             </div>
             <!-- Separator with title -->
-            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+            <!-- <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                 <large>ABOUT</large>
-            </li>
+            </li> -->
             <!-- /END Separator -->
-            <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <!-- <a href="#" class="bg-dark list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-info-circle fa-fw mr-3"></span>
                     <span class="menu-collapsed">Tentang</span>
                 </div>
-            </a>
+            </a> -->
             <!-- Separator without title -->
             <li class="list-group-item sidebar-separator menu-collapsed"></li>
             <!-- /END Separator -->

@@ -79,6 +79,7 @@
 session_start();
 include "../connect_db.php";
 include "navbar.php";
+include "footer.php";
 ?>
 
     <div class="col p-4">
@@ -86,34 +87,66 @@ include "navbar.php";
     <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
     <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
     <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+    <form action="" method="GET">
+    <input type="search" name="search" class="form-control form-control-sm" value="<?php echo $_GET["search"]?>" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+    </form>
         <thead>
             <tr>
-                <th>ID Simpanan</th>
+                <th>ID Pinjaman</th>
                 <th>ID User</th>
+                <th>Nama User</th>
                 <th>Nominal</th>
-                <th>Kode Unik</th>
+                <th>Bunga</th>
+                <th>Jatuh Tempo</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
+        <form action="" method="GET">
         <tbody>
+        <?php
+            if(isset($_GET["search"])){
+                $search = $_GET["search"];
+            }
+                $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_pinjaman like '%".$search."%' OR id_user like '%".$search."%' OR nominal like '%".$search."%' OR bunga like '%".$search."%' OR jatuh_tempo like '%".$search."%' OR status like '%".$search."%' ");
+                while ( $r = mysqli_fetch_array( $sql ) ) {
+        ?>
             <tr>
-                <td>1</td>
-                <td>11</td>
-                <td>100,000</td>
-                <td>61</td>
-                <td>Menunggu Konfirmasi</td>
-                <td><a href="#" class="btn btn-warning btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
+                <td><?php echo $r["id_pinjaman"];?></td>
+                <td><?php echo $r["id_user"];?></td>
+                <td><?php echo $r["nama_lengkap"];?></td>
+                <td><?php echo $r["nominal"];?></td>
+                <td><?php echo $r["bunga"];?></td>
+                <td><?php echo $r["jatuh_tempo"];?></td>
+                <td><?php echo $r["status"];?></td>
+                <td>
+                <?php
+                if($r["status"] == "Menunggu Persetujuan"){
+                    echo '<a href="/admin/konfirmasi_pinjaman.php?confirm_pinjaman=';
+                    echo $r["id_pinjaman"]; if(isset($_GET["search"])){echo "&search="; 
+                    echo $_GET["search"];}
+                    echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>';
+                }else{
+                    
+                }
+                ?>
+            <?php
+                }
+            if(isset($_GET["confirm_pinjaman"])){
+                $id_tabungan = $_GET["confirm_pinjaman"];
+                $id_user = $_GET["id_user"];
+                $nominal = $_GET["nominal"]; 
+                $update  = mysqli_query($koneksi,"UPDATE pinjaman SET status = 'Belum Lunas' WHERE id_pinjaman = '$id_tabungan' ");
+                ?>
+                        <script type='text/javascript'> 
+                        document.location = '/admin/konfirmasi_pinjaman.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';
+                        </script>;
+                <?php
+            }
+            ?>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>50,000</td>
-                <td>63</td>
-                <td>Menunggu Konfirmasi</td>
-                <td><a href="#" class="btn btn-warning btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-            </tr>
+        </tbody>
+        </form>
         </table>
     </div>
   </div>
@@ -122,27 +155,6 @@ include "navbar.php";
         $('#example').DataTable();
     } );
 </script>
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
-            $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
-            $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
-            $res_password = mysqli_num_rows($cek_password);
-            if ($res_password == 0){
-                echo "Password yang Anda Masukkan Salah";
-            }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
-            }  
-        }
-        ?>
     </div>
     </div><!-- Main Col END -->
 </div><!-- body-row END --> 

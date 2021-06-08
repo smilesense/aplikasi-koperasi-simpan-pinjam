@@ -81,6 +81,7 @@ session_start();
 include "../connect_db.php";
 if (isset($_SESSION["id_admin"])){
     include "navbar.php";
+    include "footer.php";
     $id_user = $_SESSION["id"];
     $sql = mysqli_query($koneksi,"SELECT COUNT(*) FROM user");
     $anggota = mysqli_fetch_array( $sql );
@@ -104,7 +105,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title"><?php echo $anggota[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-success">
-                                <a href="#" class="btn btn-outline-success"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/admin/data_user.php" class="btn btn-outline-success"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,7 @@
   <a href="#" class="navbar-brand mx-auto" style="display:flex; justify-content: space-around; border-radius:5px;">
         <img src="https://www.dictio.id/uploads/db3342/original/3X/3/3/330d8a032193a6f42725fac39e0b246a01abd521.jpg" height="100" align="center" alt="Logo-Koperasi">
   </a>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <?php
     include "../css.php";
     ?>
@@ -78,73 +79,34 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if(isset($_SESSION["id"])) {
+    include "navbar.php";
+    include "footer.php";
+    $id_user = $_SESSION["id"];
+    $role = "User";
+    $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id = $id_user");
+    $profile = mysqli_fetch_array( $sql );
+}else{
+    header("Location:/");
+}
 ?>
-
     <div class="col p-4">
-    <h1 class="display-4" align="center">Konfirmasi Iuran Wajib</h1><br>
-    <div class="container bg-primary" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
-    <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-        <thead>
-            <tr>
-                <th>ID Simpanan</th>
-                <th>ID User</th>
-                <th>Nominal</th>
-                <th>Kode Unik</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>11</td>
-                <td>100,000</td>
-                <td>61</td>
-                <td>Menunggu Konfirmasi</td>
-                <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>50,000</td>
-                <td>63</td>
-                <td>Menunggu Konfirmasi</td>
-                <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-            </tr>
-        </table>
-    </div>
-  </div>
-  <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-</script>
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
-            $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
-            $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
-            $res_password = mysqli_num_rows($cek_password);
-            if ($res_password == 0){
-                echo "Password yang Anda Masukkan Salah";
-            }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
-            }  
-        }
-        ?>
-    </div>
+        <h1 class="display-4" align="center">Tentang</h1><br>
+        <div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content bg-info text-white"
+    style="
+    border:1px solid #17A2B8;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <div class="row">
+        <h1 align="center">SELAMAT DATANG DI WEBSITE KOPERASIH SEJAHTERA BERSAMA</h1>
+        <br>
+        <br>
+        <h1 align="center">OM SWASTIASTU</h1>
+</div>
+</div>                                        
     </div><!-- Main Col END -->
 </div><!-- body-row END --> 
 

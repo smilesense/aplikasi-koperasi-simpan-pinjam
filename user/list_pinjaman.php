@@ -80,12 +80,13 @@ session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
+    include "footer.php";
 }else{
     header("Location:/");
 }
 ?>
     <div class="col p-4">
-    <h2 align="center">Data Pinjaman Saya</h2><br>
+    <h1 class="display-4" align="center">Data Pinjaman Saya</h1><br>
     <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     	<div class="row" 
         style=
@@ -137,6 +138,7 @@ if(isset($_SESSION["id"])) {
 								<th>Nominal Pinjaman</th>
 								<th>Jatuh Tempo Pinjaman</th>
 								<th>Status Pinjaman</th>
+                                <th>Tindakan</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -151,6 +153,21 @@ if(isset($_SESSION["id"])) {
                             <td><?php echo ($r['nominal']+$r['bunga']);?></td>
                             <td><?php echo $r['jatuh_tempo']?></td>
                             <td><?php echo $r['status']?></td>
+                            <td>
+                            <?php
+                                if($r["status"] == "Belum Lunas"){
+                                    echo '<a href="/admin/list_pinjaman.php?bayar_pinjaman=';
+                                    echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
+                                    echo $_GET["search"];}
+                                    echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Bayar</a></td>';
+                                }else if ($r["status"] == "Menunggu Persetujuan") {
+                                    echo '<a href="/admin/list_pinjaman.php?batalkan_pinjaman=';
+                                    echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
+                                    echo $_GET["search"];}
+                                    echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Batalkan</a></td>';
+                                }
+                                ?>
+                            </td>
                             </tr>
                         <?php
                         }?>

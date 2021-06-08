@@ -136,9 +136,7 @@ if(isset($_SESSION["id"])) {
                             </strong>
                         </td>
                         <td class="text-white">
-                            <div class="form-label-group">
-                                <input type="text" id="name" name="name" value="<?php echo $_SESSION["name"]?>" class="form-control" required autofocus>
-                                <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
+                            <b><?php echo $_SESSION["name"]?> 
                             </div>  
                         </td>
                     </tr>
@@ -216,7 +214,7 @@ if(isset($_SESSION["id"])) {
                     <tr>
                         <td></td>
                         <td>
-                        <button type="submit" class="btn btn-lg btn-primary  text-uppercase" style="width:100px;">Save</button>
+                        <button type="submit" class="btn btn-lg btn-primary text-uppercase" style="width:100px;">Save</button>
                         <button type="button" class="btn btn-lg btn-primary text-uppercase" onclick="window.location.href='../user/profile.php'" style="width:100px;">Cancel</button>
                         </td>
                     </tr> 

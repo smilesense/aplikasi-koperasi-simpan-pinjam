@@ -87,10 +87,10 @@
                 <a href="/user/profile.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Profil Pengguna</span>
                 </a>
-                <a href="/user/list_pinjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="/user/list_simpanan.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Simpanan Saya</span>
                 </a>
-                <a href="/user/list_simpanan.php" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="/user/list_pinjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Pinjaman Saya</span>
                 </a>
             </div>
@@ -99,7 +99,7 @@
                 <large>ABOUT</large>
             </li>
             <!-- /END Separator -->
-            <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <a href="/user/tentang.php" class="bg-dark list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-info-circle fa-fw mr-3"></span>
                     <span class="menu-collapsed">Tentang</span>

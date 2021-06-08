@@ -80,6 +80,7 @@ session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
+    include "footer.php";
 }else{
     header("Location:/");
 }
@@ -135,7 +136,9 @@ if(isset($_SESSION["id"])) {
             if ($res_password == 0){
                 echo "Password yang Anda Masukkan Salah";
             }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO tabungan_unconfirm(id_user, nominal, kode_unik, status) VALUES ('$id','$nominal','$kodeunik','Menunggu Konfirmasi')");
+                $r = mysqli_fetch_array( $cek_password );
+                $nama_user = $r["nama_lengkap"];
+                $sql = mysqli_query($koneksi,"INSERT INTO simpanan(id_user, nama_lengkap, nominal, kode_unik, status) VALUES ('$id','$nama_user','$nominal','$kodeunik','Menunggu Konfirmasi')");
                 if ($sql){
                     echo "Berhasil Berhasil Mengajukan simpanan";
                 }else {

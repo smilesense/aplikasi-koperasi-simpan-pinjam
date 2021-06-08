@@ -81,6 +81,7 @@ session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
+    include "footer.php";
     $id_user = $_SESSION["id"];
     $role = "User";
     $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id = $id_user");

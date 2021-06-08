@@ -80,6 +80,7 @@ session_start();
 include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
+    include "footer.php";
 }else{
     header("Location:/");
 }
