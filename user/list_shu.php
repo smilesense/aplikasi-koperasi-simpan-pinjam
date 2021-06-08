@@ -4,7 +4,6 @@
   <a href="#" class="navbar-brand mx-auto" style="display:flex; justify-content: space-around; border-radius:5px;">
         <img src="https://www.dictio.id/uploads/db3342/original/3X/3/3/330d8a032193a6f42725fac39e0b246a01abd521.jpg" height="100" align="center" alt="Logo-Koperasi">
   </a>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <?php
     include "../css.php";
     ?>
@@ -82,38 +81,86 @@ include "../connect_db.php";
 if(isset($_SESSION["id"])) {
     include "navbar.php";
     include "footer.php";
-    $id_user = $_SESSION["id"];
-    $role = "User";
-    $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id = $id_user");
-    $profile = mysqli_fetch_array( $sql );
 }else{
     header("Location:/");
 }
 ?>
     <div class="col p-4">
-        <h1 class="display-4" align="center">Tentang</h1><br>
-        <div class="container bootstrap snippets bootdey">
-    <!-- <div class="panel-body inf-content bg-info text-white text-center"
-    style="
-    align:center;
-    border:1px solid #17A2B8;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> -->
-    <div class="card mb-3" style="max-width: 1000px; margin-left:5%;">
-        <div class="card mb-3">
-            <img src="../assets/logokop.jpg" class="card-img-top" alt="logo-koperasi">
-            <div class="card-body bg-info text-white">
-                <h5 class="card-title text-center">Website Koperasi Sejahtera Bersama</h5>
-                <p class="card-text">Merupakan sarana untuk mempermudah anggota koperasi sejahtera bersama melakukan transaksi, baik itu simpan uang, pinjam uang, maupun iuran wajib anggota. dan diharapkan untuk kedepannya website ini akan terus berkembang sebagaimana mestinya.</p>
-            </div>
-        </div>
-    </div>
-</div>                                        
+    <h1 class="display-4" align="center">Data SHU Saya</h1><br>
+    <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    	<div class="row" 
+        style=
+        "    	.row{
+		    margin-top:40px;
+		    padding: 0 10px;
+		}
+		.clickable{
+		    cursor: pointer;   
+		}
+
+		.panel-heading div {
+			margin-top: -18px;
+			font-size: 15px;
+		}
+		.panel-heading div span{
+			margin-left:5px;
+		}
+		.panel-body{
+			display: none;
+		}
+        ">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">SHU Saya</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+						</div>
+					</div>
+					<div class="panel-body">
+                    <form id="search" action="" method="POST">
+                        <input type="search" name="search" onchange="return cari();" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Cari Data">
+                    </form>
+                    <script type="text/javascript">
+                        $(document).ready(
+                            function cari() {
+                                document.getElementById["search"].submit();
+                            }
+                        );
+                    </script>
+					</div>
+					<table class="table table-hover" id="dev-table">
+						<thead>
+							<tr>
+								<th>Id SHU</th>
+								<th>Nominal SHU</th>
+                                <th>Tanggal SHU</th>
+							</tr>
+						</thead>
+						<tbody>
+                        <?php
+                            $id = $_SESSION["id"];
+                            $search = $_POST["search"];
+                            $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
+                            while ( $r = mysqli_fetch_array( $sql ) ) {
+                        ?>
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                        <?php
+                        }?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
     </div><!-- Main Col END -->
 </div><!-- body-row END --> 
-
 <script>
 // Hide submenus
 $('#body-row .collapse').collapse('hide'); 

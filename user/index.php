@@ -83,9 +83,9 @@ if(isset($_SESSION["id"])) {
     include "footer.php";
     include "navbar.php";
     $id_user = $_SESSION["id"];
-    $sql = mysqli_query($koneksi,"SELECT SUM(nominal+bunga) FROM pinjaman WHERE id_user = $id_user AND status = 'Terkonfirmasi' ");
+    $sql = mysqli_query($koneksi,"SELECT SUM(nominal+bunga) FROM pinjaman WHERE id_user = $id_user AND status = 'Belum Lunas' ");
     $nominal_pinjaman = mysqli_fetch_array( $sql );
-    $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM simpanan WHERE id_user = $id_user AND status = 'Terkonfirmasi' ");
+    $sql1 = mysqli_query($koneksi,"SELECT simpanan_sukarela FROM user WHERE id = $id_user");
     $saldo_simpanan = mysqli_fetch_array( $sql1 );
 }else{
     header("Location:/");
@@ -98,7 +98,7 @@ if(isset($_SESSION["id"])) {
                         <div class="card border-info mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-info text-white"><h5>Simpanan Saya</h5></div>
                                 <div class="card-body text-info">
-                                    <h5 class="card-title">Rp. <?php echo $saldo_simpanan[0]?></h5>
+                                    <h5 class="card-title">Rp. <?php echo $saldo_simpanan["simpanan_sukarela"]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-info">
                                 <a href="/user/list_simpanan.php" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>

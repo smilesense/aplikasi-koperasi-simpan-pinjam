@@ -120,7 +120,7 @@ if(isset($_SESSION["id"])) {
                     <tr>        
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                <span class="glyphicon glyphicon-asterisk text-white"></span>
                                 ID User                                                
                             </strong>
                         </td>
@@ -131,7 +131,7 @@ if(isset($_SESSION["id"])) {
                     <tr>    
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-user  text-primary"></span>    
+                                <span class="glyphicon glyphicon-user  text-white"></span>    
                                 Name                                                
                             </strong>
                         </td>
@@ -142,7 +142,7 @@ if(isset($_SESSION["id"])) {
                     <tr>        
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                <span class="glyphicon glyphicon-bookmark text-white"></span> 
                                 Username                                                
                             </strong>
                         </td>
@@ -153,7 +153,7 @@ if(isset($_SESSION["id"])) {
                     <tr>        
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                <span class="glyphicon glyphicon-bookmark text-white"></span> 
                                 NIK                                                
                             </strong>
                         </td>
@@ -164,7 +164,7 @@ if(isset($_SESSION["id"])) {
                     <tr>        
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                <span class="glyphicon glyphicon-eye-open text-white"></span> 
                                 Role                                                
                             </strong>
                         </td>
@@ -175,7 +175,7 @@ if(isset($_SESSION["id"])) {
                     <tr>        
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                <span class="glyphicon glyphicon-envelope text-white"></span> 
                                 Email                                                
                             </strong>
                         </td>
@@ -186,7 +186,7 @@ if(isset($_SESSION["id"])) {
                     <tr>
                         <td>
                             <strong>
-                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                <span class="glyphicon glyphicon-envelope text-white"></span> 
                                 Nomor Rekening                                                
                             </strong>
                         </td>
@@ -203,7 +203,7 @@ if(isset($_SESSION["id"])) {
                     <tr>
                         <td></td>
                         <td>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='../user/edit_profile.php'" style="width:100px;">Edit</button><br>
+                        <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="window.location.href='../user/edit_profile.php'" style="width:100px;">Edit</button><br>
                         </td>
                     </tr>                     
                 </tbody>

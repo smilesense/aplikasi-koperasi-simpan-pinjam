@@ -214,8 +214,8 @@ if(isset($_SESSION["id"])) {
                     <tr>
                         <td></td>
                         <td>
-                        <button type="submit" class="btn btn-lg btn-primary text-uppercase" style="width:100px;">Save</button>
-                        <button type="button" class="btn btn-lg btn-primary text-uppercase" onclick="window.location.href='../user/profile.php'" style="width:100px;">Cancel</button>
+                        <button type="submit" class="btn btn-lg btn-secondary text-uppercase" style="width:100px;">Save</button>
+                        <button type="button" class="btn btn-lg btn-secondary text-uppercase" onclick="window.location.href='../user/profile.php'" style="width:100px;">Cancel</button>
                         </td>
                     </tr> 
                     <tr>
@@ -258,7 +258,7 @@ if(isset($_SESSION["id"])) {
                                 }  
                                 
                                 if($res_username == 0 && $res_nik == 0 && $res_email == 0){
-                                    mysqli_query($koneksi,"UPDATE user SET nama_lengkap = '$name1', nik = '$nik1', email = '$email1' , username = '$username1', no_rekening = '$nomor_rekening'  WHERE id = '$id_user' ");
+                                    mysqli_query($koneksi,"UPDATE user SET nik = '$nik1', email = '$email1' , username = '$username1', no_rekening = '$nomor_rekening'  WHERE id = '$id_user' ");
                                     mysqli_query($koneksi,"DROP VIEW $view_name");
                                     $_SESSION["name"] = $name1;
                                     ?>

@@ -23,12 +23,13 @@
            <li class="nav-item dropdown d-sm-block d-md-none">
                 <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu </a>
                 <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                    <a class="dropdown-item" href="#top"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Simpan Uang</a>
+                    <a class="dropdown-item" href="/user/index.php"><i class="fas fa-home fa-fw mr-2" aria-hidden="true"></i>Beranda</a>
+                    <a class="dropdown-item" href="/user/form_simpanan.php"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Simpan Uang</a>
                     <a class="dropdown-item" href="/user/form_peminjaman.php"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Pinjam Uang</a>
-                    <a class="dropdown-item" href="#top"><i class="fas fa-money-check-alt fa-fw mr-2" aria-hidden="true"></i>Iuran Wajib</a>
-                    <a class="dropdown-item" href="#top"><i class="fa fa-tags fa-fw mr-2" aria-hidden="true"></i>Pembagian SHU</a>
-                    <a class="dropdown-item" href="#top"><i class="fa fa-user fa-fw mr-2" aria-hidden="true"></i>Profil</a>
-                    <a class="dropdown-item" href="#top"><i class="fa fa-info-circle fa-fw mr-2" aria-hidden="true"></i>Tentang</a>
+                    <a class="dropdown-item" href="/user/form_iuran.php"><i class="fas fa-money-check-alt fa-fw mr-2" aria-hidden="true"></i>Iuran Wajib</a>
+                    <a class="dropdown-item" href=""><i class="fa fa-tags fa-fw mr-2" aria-hidden="true"></i>Pembagian SHU</a>
+                    <a class="dropdown-item" href="/user/profile.php"><i class="fa fa-user fa-fw mr-2" aria-hidden="true"></i>Profil</a>
+                    <a class="dropdown-item" href="/user/tentang.php"><i class="fa fa-info-circle fa-fw mr-2" aria-hidden="true"></i>Tentang</a>
                 </div>
             </li><!-- Smaller devices menu END -->
         </ul>
@@ -71,9 +72,6 @@
                 <a href="form_iuran.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Iuran Wajib</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Pembagian SHU</span>
-                </a>
             </div>
             <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
@@ -93,6 +91,12 @@
                 <a href="/user/list_pinjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Pinjaman Saya</span>
                 </a>
+                <a href="/user/list_shu.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">SHU Saya</span>
+                </a>
+                <a href="/user/list_tariktunai.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Tarik Tunai Saya</span>
+                </a>
             </div>
             <!-- Separator with title -->
             <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
@@ -106,14 +110,14 @@
                 </div>
             </a>
             <!-- Separator without title -->
-            <li class="list-group-item sidebar-separator menu-collapsed"></li>
-            <!-- /END Separator -->
+            <!-- <li class="list-group-item sidebar-separator menu-collapsed"></li> -->
+            <!-- /END Separator
             <a href="#top" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span id="collapse-icon" class="fa fa-2x mr-3"></span>
                     <span id="collapse-text" class="menu-collapsed">Collapse</span>
                 </div>
-            </a>
+            </a> -->
         </ul><!-- List Group END-->
     </div><!-- sidebar-container END -->
     <!-- MAIN -->

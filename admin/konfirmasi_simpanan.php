@@ -138,9 +138,12 @@ include "footer.php";
                 }
             if(isset($_GET["confirm_tabungan"])){
                 $id_tabungan = $_GET["confirm_tabungan"];
-                $id_user = $_GET["id_user"];
-                $nominal = $_GET["nominal"]; 
                 $update  = mysqli_query($koneksi,"UPDATE simpanan SET status = 'Terkonfirmasi' WHERE id_tabungan = '$id_tabungan' ");
+                $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_tabungan = '$id_tabungan' ");
+                $s = mysqli_fetch_array( $sql);
+                $nominal = $s["nominal"];
+                $id_user = $s["id_user"];
+                $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela+('$nominal')) WHERE id = '$id_user' ");
                 ?>
                         <script type='text/javascript'> 
                         document.location = '/admin/konfirmasi_simpanan.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';

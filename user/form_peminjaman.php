@@ -145,7 +145,7 @@ if(isset($_SESSION["id"])) {
         </div>
         <div class="col-md-12">
             <label for="confirm_password">Konfirmasi Password:</label>
-            <input type="text" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda">
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda">
             <br>
         </div>
         <div class="col-12">
@@ -165,7 +165,9 @@ if(isset($_SESSION["id"])) {
             if ($res_password == 0){
                 echo "Password yang Anda Masukkan Salah";
             }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
+                $r = mysqli_fetch_array( $cek_password );
+                $nama_user = $r["nama_lengkap"];
+                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nama_lengkap, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nama_user' ,'$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
                 if ($sql){
                     echo "Berhasil Berhasil Mengajukan Pinjaman";
                 }else {
