@@ -42,6 +42,33 @@ INSERT INTO `admin` VALUES (1,'bihubbilchoiraidifta@gmail.com','admin','admin');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `konfirmasi_pengembalian`
+--
+
+DROP TABLE IF EXISTS `konfirmasi_pengembalian`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `konfirmasi_pengembalian` (
+  `id_pinjaman` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `nama_lengkap` varchar(50) NOT NULL,
+  `nominal` int(11) NOT NULL,
+  `kode_unik` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `konfirmasi_pengembalian`
+--
+
+LOCK TABLES `konfirmasi_pengembalian` WRITE;
+/*!40000 ALTER TABLE `konfirmasi_pengembalian` DISABLE KEYS */;
+INSERT INTO `konfirmasi_pengembalian` VALUES (1,8,'Azriel Akbar ',800000,800107,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',201000,201963,'Terkonfirmasi'),(1,8,'Azriel Akbar ',60000,60549,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',779000,779579,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',578000,578626,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',50000,50392,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',50000,50686,'Terkonfirmasi'),(3,1,'Bihubbil Choir Aidifta',200000,201047,'Terkonfirmasi'),(3,1,'Bihubbil Choir Aidifta',535000,535269,'Terkonfirmasi'),(4,8,'Azriel Akbar ',860000,860401,'Terkonfirmasi');
+/*!40000 ALTER TABLE `konfirmasi_pengembalian` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pinjaman`
 --
 
@@ -54,10 +81,11 @@ CREATE TABLE `pinjaman` (
   `nama_lengkap` varchar(50) NOT NULL,
   `nominal` int(20) NOT NULL,
   `bunga` int(50) NOT NULL,
+  `total_pinjaman` int(50) NOT NULL,
   `jatuh_tempo` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id_pinjaman`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +94,7 @@ CREATE TABLE `pinjaman` (
 
 LOCK TABLES `pinjaman` WRITE;
 /*!40000 ALTER TABLE `pinjaman` DISABLE KEYS */;
-INSERT INTO `pinjaman` VALUES (1,1,'',700000,0,'7/15/2021','Terkonfirmasi'),(2,2,'',1000000,0,'13/04/2021','Terkonfirmasi'),(3,1,'',600000,90000,'','Belum Lunas'),(4,1,'',600000,90000,'12/1/2021','Belum Lunas'),(5,8,'',1000000,75000,'3/9/2021','Belum Lunas'),(6,1,'Bihubbil Choir Aidifta',600000,135000,'3/5/2022','Belum Lunas'),(7,8,'Azriel Akbar ',500000,37500,'6/9/2021','Belum Lunas');
+INSERT INTO `pinjaman` VALUES (2,1,'Bihubbil Choir Aidifta',800000,180000,-25000,'3/16/2022','Lunas'),(3,1,'Bihubbil Choir Aidifta',600000,135000,0,'3/16/2022','Lunas'),(4,8,'Azriel Akbar ',800000,60000,0,'17/9/2021','Lunas');
 /*!40000 ALTER TABLE `pinjaman` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +219,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Bihubbil Choir Aidifta','190411100121','bihubbilchoiraidifta@gmail.com','bihubbil','smile',9085330081927,0,3100000),(2,'keppin','192','keppin@gmail.com','keppin123','keppin123',0,0,0),(3,'Merry Stoner','213','edu@minisites.me','Merry Stoner','123',0,0,0),(8,'Azriel Akbar ','190411100192','azriel@gmail.com','azriel','azriel123',10212048,0,5000000),(9,'kappin','1904111','kappin@gmail.com','kappin','kappin123',6745328686,0,0);
+INSERT INTO `user` VALUES (1,'Bihubbil Choir Aidifta','190411100121','bihubbilchoiraidifta@gmail.com','bihubbil','smile',9085330081927,0,2900000),(2,'keppin','192','keppin@gmail.com','keppin123','keppin123',0,0,0),(3,'Merry Stoner','213','edu@minisites.me','Merry Stoner','123',0,0,0),(8,'Azriel Akbar ','190411100192','azriel@gmail.com','azriel','azriel123',10212048,0,5000000),(9,'kappin','1904111','kappin@gmail.com','kappin','kappin123',6745328686,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-09 14:47:48
+-- Dump completed on 2021-06-19 17:27:39
