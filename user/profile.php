@@ -102,7 +102,7 @@ if(isset($_SESSION["id"])) {
     box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     <div class="row">
         <div class="col-md-4">
-            <img alt="" style="width:600px;" title="" class="img-thumbnail rounded" src="../assets/keppin.png"> 
+            <img alt="" style="width:105%; align:center;" title="" class="rounded bg-transparent border-transparent" src="../assets/profile.png"> 
             <ul title="Ratings" class="list-inline ratings text-center">
                 <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
@@ -203,7 +203,7 @@ if(isset($_SESSION["id"])) {
                     <tr>
                         <td></td>
                         <td>
-                        <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="window.location.href='../user/edit_profile.php'" style="width:100px;">Edit</button><br>
+                        <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="window.location.href='../user/edit_profile.php'" style="width:100px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);">Edit</button><br>
                         </td>
                     </tr>                     
                 </tbody>

@@ -119,6 +119,7 @@ body {
 include "connect_db.php";
 ?>
 <div class="container">
+<h1 class="display-4 text-white" align="center" style="padding-top:5%; text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);">Selamat Datang di Koperasi Sejahtera Bersama<br> Silahkan Registrasi Untuk Masuk</h1>
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5">
@@ -126,7 +127,7 @@ include "connect_db.php";
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Login</h5>
+            <h5 class="card-title text-center font-weight-bold">Registrasi</h5>
             <form class="form-signin needs-validation" novalidate action="" method="POST">
               <div class="form-label-group">
                 <input type="text" id="name" name="name" class="form-control" placeholder="Nama Lengkap" required autofocus>
@@ -159,8 +160,8 @@ include "connect_db.php";
                 <label for="password">Password</label>
                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
               </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button><br>
-              <p align="center">Sudah punya akun? Silahkan <a href="index.php"> Login</a></p>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">Registrasi</button><br>
+              <p align="center">Sudah punya akun? Silahkan <a href="index.php"> Masuk</a></p>
               <?php
               include "connect_db.php";
               if($_SERVER["REQUEST_METHOD"] == "POST"){

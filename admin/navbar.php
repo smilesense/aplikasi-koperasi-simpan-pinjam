@@ -5,7 +5,7 @@
     </button>
     <a class="navbar-brand" href="#">
         <img src="https://www.jatikom.com/wp-content/uploads/2016/11/logo-koperasi.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span class="menu-collapsed text-white">Dashboard Admin Koperasi Sejahtera Bersama</span>
+        <span class="menu-collapsed text-white">Dashboard Admin</span>
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
@@ -13,7 +13,7 @@
                 <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
             </li> -->
             <li class="nav-item">
-            <a href="../logout.php" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true"><i class="fa fa-sign-out-alt fa-fw mr-2" aria-hidden="true"></i>Logout</a>
+            <a href="../logout.php" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fa fa-sign-out-alt fa-fw mr-2" aria-hidden="true"></i>Logout</a>
             </li>
             <!-- This menu is hidden in bigger devices with d-sm-none. 
            The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
@@ -65,13 +65,22 @@
                 <a href="/admin/data_user.php" class="list-group-item list-group-item-action bg-secondary text-white">
                     <span class="menu-collapsed">Data User</span>
                 </a>
+                <a href="/admin/data_simpanan.php" class="list-group-item list-group-item-action bg-secondary text-white">
+                    <span class="menu-collapsed">Data Simpanan</span>
+                </a>
+                <a href="/admin/data_pinjaman.php" class="list-group-item list-group-item-action bg-secondary text-white">
+                    <span class="menu-collapsed">Data Pinjaman</span>
+                </a>
+                <a href="/admin/data_iuran.php" class="list-group-item list-group-item-action bg-secondary text-white">
+                    <span class="menu-collapsed">Data Iuran Wajib</span>
+                </a>
                 <a href="/admin/data_shu.php" class="list-group-item list-group-item-action bg-secondary text-white">
                     <span class="menu-collapsed">Data SHU</span>
                 </a>
             </div>
             <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-secondary list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user fa-fw mr-3"></span>
+                    <span class="fa fa-user-cog fa-fw mr-3"></span>
                     <span class="menu-collapsed">Pengaturan</span>
                     <span class="submenu-icon ml-auto"></span>
                 </div>
@@ -89,6 +98,9 @@
                 </a>
                 <a href="konfirmasi_tariktunai.php" class="list-group-item list-group-item-action bg-secondary text-white">
                     <span class="menu-collapsed">Konfirmasi Tarik Tunai</span>
+                </a>
+                <a href="konfirmasi_pengembalian.php" class="list-group-item list-group-item-action bg-secondary text-white">
+                    <span class="menu-collapsed">Konfirmasi Pengembalian</span>
                 </a>
             </div>
             <!-- Separator with title -->

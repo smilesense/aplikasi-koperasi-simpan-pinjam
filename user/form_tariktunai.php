@@ -132,7 +132,7 @@ if(isset($_SESSION["id"])) {
         </div>
         <div class="col-12">
             <br>
-            <button type="submit" class="btn btn-success text-white"><i class="fas fa-money-check-alt"></i> Ajukan Simpanan</button>
+            <button type="submit" class="btn btn-success text-white" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-money-check-alt fa-fw mr-1"></i>Ajukan Tarik Tunai</button>
         </div>
         </form>
         <?php

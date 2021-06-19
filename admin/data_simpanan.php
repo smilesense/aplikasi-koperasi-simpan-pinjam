@@ -83,50 +83,23 @@ include "footer.php";
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Data SHU</h1><br>
-    <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
+    <h1 class="display-4" align="center">Data Simpanan</h1><br>
+    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
+    <table id="example" class="table table-striped table-bordered text-dark" style="width:100%;">
     <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
     <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
         <thead>
             <tr>
                 <th>ID User</th>
-                <th>Nama User</th>
-                <th>NIK User</th>
-                <th>Rekening User</th>
-                <th>Total SHU</th>
-                <th>Tindakan</th>
+                <th>Nama Lengkap User</th>
+                <th>Nominal Simpanan</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>2</td>
                 <td>12</td>
-                <td>190411100</td>
-                <td>21486178</td>
-                <td>63</td>
-                <td rowspan="5" style="vertical-align:middle;"><a href="#" class="btn btn-info btn-xs"><i class="fas fa-trash-alt fa-fw mr-1"></i>Bagi SHU</a></td> 
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>190411100</td>
-                <td>21486178</td>
-                <td>63</td> 
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>190411100</td>
-                <td>21486178</td>
-                <td>63</td> 
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>190411100</td>
-                <td>21486178</td>
-                <td>63</td> 
+                <td>50,000</td>
             </tr>
         </table>
     </div>

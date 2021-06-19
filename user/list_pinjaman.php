@@ -150,18 +150,18 @@ if(isset($_SESSION["id"])) {
                         ?>
                             <tr>
                             <td><?php echo $r['id_pinjaman']?></td>
-                            <td><?php echo ($r['nominal']+$r['bunga']);?></td>
+                            <td><?php echo $r['total_pinjaman'];?></td>
                             <td><?php echo $r['jatuh_tempo']?></td>
                             <td><?php echo $r['status']?></td>
                             <td>
                             <?php
                                 if($r["status"] == "Belum Lunas"){
-                                    echo '<a href="/admin/list_pinjaman.php?bayar_pinjaman=';
-                                    echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
+                                    echo '<a href="/user/form_pengembalian.php?bayar_pinjaman=';
+                                    echo $r["id_pinjaman"]; if(isset($_GET["search"])){echo "&search="; 
                                     echo $_GET["search"];}
                                     echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Bayar</a></td>';
                                 }else if ($r["status"] == "Menunggu Persetujuan") {
-                                    echo '<a href="/admin/list_pinjaman.php?batalkan_pinjaman=';
+                                    echo '<a href="/user/list_pinjaman.php?batalkan_pinjaman=';
                                     echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
                                     echo $_GET["search"];}
                                     echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Batalkan</a></td>';

@@ -87,79 +87,71 @@ if(isset($_SESSION["id"])) {
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Form Peminjaman</h1><br>
-    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <h1 class="display-4" align="center">Form Pengembalian Pinjaman</h1><br>
+    <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     <form class="row g-3" action="" method="POST">
+    <?php
+    $id_pinjaman = $_GET["bayar_pinjaman"];
+    $sql1 = mysqli_query($koneksi,"SELECT total_pinjaman FROM pinjaman WHERE id_pinjaman = $id_pinjaman");
+    $nominal_pinjaman = mysqli_fetch_array( $sql1 );
+    ?>
+    <div class="col-md-12">
+    <h5 id="id_pinjaman" style="Padding-left:18px; color:white;">ID Pinjaman : <?php echo $_GET["bayar_pinjaman"]; ?></h5>
+    </div>
+    <div class="col-md-12">
+    <h5 id="nominal_pinjaman" style="Padding-left:18px; color:white;">Nominal Pinjaman : <?php echo $nominal_pinjaman["total_pinjaman"]; ?></h5><br>
+    </div>
         <div class="col-md-12">
-            <label for="name" class="form-label">Nama Lengkap</label>
+            <label for="name" class="form-label text-white">Nama Lengkap</label>
             <input type="text" class="form-control" id="name" value="<?php echo $_SESSION["name"];?>" required readonly>
             <br>
         </div>
         <div class="col-md-12">
-            <label for="nominal" class="form-label">Nominal Pinjaman</label>
-            <input type="number" class="form-control" id="nominal" name="nominal" value="" min="500000" max="10000000" step="100000" onchange="return get_bunga()" placeholder="Masukkan Nominal"required>
+            <label for="nominal" class="form-label text-white">Nominal Pengembalian</label>
+            <input type="number" class="form-control" onchange="return get_sisa_pinjaman()" id="nominal" name="nominal" value="" onchange="return get_kodeunik()" placeholder="Masukkan Nominal"required>
             <br>
         </div>
-        <div class="col-12">
-            <label for="durasi" class="form-label">Durasi Pinjaman (bulan)</label>
-            <select class="form-control" id="durasi" name="durasi" value="" onchange="return cek_return()" placeholder="Durasi Pinjaman"required>
-                <option value="">Silakan Pilih Durasi Pinjaman</option>
-                <option value="3">3 Bulan</option>
-                <option value="6">6 Bulan</option>
-                <option value="9">9 Bulan</option>
-                <option value="12">12 Bulan</option>
-                <option value="15">15 Bulan</option>
-                <option value="18">18 Bulan</option>
-                <option value="21">21 Bulan</option>
-                <option value="24">24 Bulan</option>
-            </select>
-            <script type="text/javascript">
-
-                function get_bunga(){
-                    durasi = document.getElementById("durasi").value;
-                    nominal = document.getElementById("nominal").value;
-
-                    document.getElementById("total").value = (nominal*1+((nominal*2.5)/100)*durasi);
+        <div class="col-md-12 text-white">
+        <label for="sisa_saldo">Sisa Pinjaman : </label>
+            <input type="text" class="form-control" id="sisa_pinjaman" name="sisa_pinjaman" value="<?php echo $nominal_pinjaman["total_pinjaman"]; ?>" readonly>
+            <input type="hidden" class="form-control" id="sisa_pinjaman_awal" name="sisa_pinjaman_awal" value="<?php echo $nominal_pinjaman["total_pinjaman"]; ?>">
+            <br>
+        </div>
+        <div class="col-md-12 text-white">
+        <label for="sisa_saldo">Nominal + Kode Unik (yang harus dibayar) : </label>
+            <input type="text" class="form-control" id="kode_unik" name="kode_unik" value="" readonly>
+            <br>
+        </div>
+        <script type="text/javascript">
+            function get_sisa_pinjaman(){
+                nominal_bayar = document.getElementById("nominal").value;
+                nominal_awal = document.getElementById("sisa_pinjaman_awal").value;
+                nominal_akhir = nominal_awal-nominal_bayar;
+                document.getElementById("sisa_pinjaman").value = nominal_akhir;
+                document.getElementById("kode_unik").value = nominal_bayar*1+(Math.floor(Math.random() * 1000) + 100);;
+                if (nominal_akhir < 0) {
+                    alert("Maaf, Melebihi Nominal Pinjaman");
+                    document.getElementById("nominal").value = nominal_awal;
+                    document.getElementById("sisa_pinjaman").value = 0;
                 }
-                function cek_return(){
-                    durasi = document.getElementById("durasi").value;
-                    nominal = document.getElementById("nominal").value;
-
-                    var myDate = new Date(new Date().getTime()+((durasi*30)*24*60*60*1000)).toLocaleDateString();
-
-                    document.getElementById("tanggal_return").value = myDate;
-                    document.getElementById("total").value = (nominal*1+((nominal*2.5)/100)*durasi);
-                }
-            </script>
-            <br>
-        </div>
+            }
+        </script>
         <div class="col-md-12">
-            <label for="tanggal_return" class="form-label">Tanggal Pengembalian</label>
-            <input type="text" class="form-control" id="tanggal_return" name="tanggal_return" value="" required readonly>
-            <br>
-        </div>
-        <div class="col-md-12">
-        <label for="total">Total yang harus dikembalkan (termasuk bunga):</label>
-            <input type="text" class="form-control" id="total" name="total" value="<?php echo $r['total_harga']?>" readonly>
-            <br>
-        </div>
-        <div class="col-md-12">
-            <label for="confirm_password">Konfirmasi Password:</label>
+            <label for="confirm_password" class="text-white">Konfirmasi Password:</label>
             <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda">
             <br>
         </div>
         <div class="col-12">
             <br>
-            <button type="submit" class="btn btn-danger" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-money-check-alt fa-fw mr-1"></i>Ajukan Pinjaman</button>
+            <button type="submit" class="btn btn-success text-white" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-money-check-alt fa-fw mr-1"></i>Ajukan Pengembalian</button>
         </div>
         </form>
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
             $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
+            $kodeunik = $_POST["kode_unik"];
             $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
+            $id = $_SESSION["id"];
             $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
             $res_password = mysqli_num_rows($cek_password);
             if ($res_password == 0){
@@ -167,14 +159,17 @@ if(isset($_SESSION["id"])) {
             }else{
                 $r = mysqli_fetch_array( $cek_password );
                 $nama_user = $r["nama_lengkap"];
-                $total = ($nominal)+($bunga);
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nama_lengkap, nominal, bunga, total_pinjaman, jatuh_tempo, status) VALUES ('$id','$nama_user' ,'$nominal', '$bunga' , '$total', '$tanggal_return','Menunggu Persetujuan')");
+                $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_pengembalian(id_pinjaman, id_user, nama_lengkap, nominal, kode_unik, status) VALUES ('$id_pinjaman','$id','$nama_user','$nominal','$kodeunik','Menunggu Konfirmasi')");
                 if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
+                    ?>
+                    <script type='text/javascript'> 
+                    document.location = '/user/form_pengembalian.php';
+                    alert("Berhasil Mengajukan Penarikan Simpanan, Menunggu Konfirmasi");
+                    </script>;<?php
                 }else {
                     echo "error";
                 }
-            }  
+            } 
         }
         ?>
     </div>

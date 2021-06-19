@@ -141,7 +141,7 @@ if(isset($_SESSION["id"])) {
         </div>
         <div class="col-12">
             <br>
-            <button type="submit" class="btn btn-warning text-dark"><i class="fas fa-money-check-alt"></i>Ajukan Iuran</button>
+            <button type="submit" class="btn btn-warning text-dark" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-money-check-alt fa-fw mr-1"></i>Ajukan Iuran</button>
         </div>
         </form>
         <?php

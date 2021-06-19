@@ -22,10 +22,10 @@
 
         /* Sidebar sizes when expanded and expanded */
         .sidebar-expanded {
-            width: 230px;
+            width: 250px;
         }
         .sidebar-collapsed {
-            width: 60px;
+            width: 100px;
         }
 
         /* Menu item*/
@@ -96,7 +96,7 @@ if (isset($_SESSION["id_admin"])){
 
 ?>
     <div class="col p-4">
-        <h1 class="display-4" align="center">Selamat Datang di Koperasi Sejahtera Bersama</h1><br>
+        <h1 class="display-4" align="center">Selamat Datang di Dashboard Admin<br> Koperasi Sejahtera Bersama</h1><br>
             <div class="row">
                     <div class="col-sm-3">
                         <div class="card border-success mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
@@ -105,7 +105,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title"><?php echo $anggota[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-success">
-                                <a href="/admin/data_user.php" class="btn btn-outline-success"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/admin/data_user.php" class="btn btn-outline-success" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -116,18 +116,18 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title">Rp. 1,000,000</h5>
                                 </div>
                             <div class="card-footer bg-transparent border-danger">
-                                <a href="#" class="btn btn-outline-danger"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/admin/data_iuran.php" class="btn btn-outline-danger" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="card border-info mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
-                            <div class="card-header bg-info border-info text-white"><h5>Tabungan</h5></div>
+                            <div class="card-header bg-info border-info text-white"><h5>Simpanan</h5></div>
                                 <div class="card-body text-info">
                                     <h5 class="card-title">Rp. <?php echo $saldo_simpanan[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-info">
-                                <a href="#" class="btn btn-outline-info"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/admin/data_simpanan.php" class="btn btn-outline-info" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title">Rp. <?php echo $pinjaman[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-secondary">
-                                <a href="#" class="btn btn-outline-secondary"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/admin/data_pinjaman.php" class="btn btn-outline-secondary" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>
                     </div><br>
@@ -149,7 +149,7 @@ if (isset($_SESSION["id_admin"])){
                                     <h5 class="card-title">Rp. 100,000,000,000</h5>
                                 </div>
                             <div class="card-footer bg-transparent border-primary">
-                                <a href="#" class="btn btn-outline-primary"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/admin/data_shu.php" class="btn btn-outline-primary" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
                             </div>
                         </div>  
                     </div>

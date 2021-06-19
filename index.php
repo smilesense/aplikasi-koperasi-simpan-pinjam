@@ -126,14 +126,15 @@ if(isset($_SESSION["id"])) {
 include "connect_db.php";
 ?>
 <div class="container">
-    <div class="row">
+<h1 class="display-4 text-white" align="center" style="padding-top:10%; text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);">Selamat Datang di Koperasi Sejahtera Bersama<br> Silahkan Masuk Untuk Melanjutkan</h1>
+    <div class="row" >
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5">
           <div class="card-img-left d-none d-md-flex">
              <!-- Background image for card set in CSS! -->
           </div>
-          <div class="card-body">
-            <h5 class="card-title text-center">Login</h5>
+          <div class="card-body" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);">
+            <h5 class="card-title text-center font-weight-bold">Masuk</h5>
             <form class="form-signin needs-validation" novalidate action="" method="POST">
               <div class="form-label-group">
                 <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
@@ -148,8 +149,8 @@ include "connect_db.php";
                 <label for="inputPassword">Password</label>
                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
               </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button><br>
-              <p align="center">Belum punya akun? Silahkan <a href="register_1.php"> Register</a></p>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">Masuk</button><br>
+              <p align="center">Belum punya akun? Silahkan <a href="register_1.php"> Registrasi</a></p>
               <?php
                     include "connect_db.php";
                       if($_SERVER["REQUEST_METHOD"] == "POST"){
