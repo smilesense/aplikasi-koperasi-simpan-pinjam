@@ -78,8 +78,12 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">
@@ -144,6 +148,7 @@ include "footer.php";
                 $nominal = $s["nominal"];
                 $id_user = $s["id_user"];
                 $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela+('$nominal')) WHERE id = '$id_user' ");
+                $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal+('$nominal')) WHERE id = '1' AND keterangan = 'Saldo' ");
                 ?>
                         <script type='text/javascript'> 
                         document.location = '/admin/konfirmasi_simpanan.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';

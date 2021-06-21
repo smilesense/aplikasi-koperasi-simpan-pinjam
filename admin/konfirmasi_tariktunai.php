@@ -78,8 +78,12 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">

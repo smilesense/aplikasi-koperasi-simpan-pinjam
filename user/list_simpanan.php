@@ -87,7 +87,7 @@ if(isset($_SESSION["id"])) {
 ?>
     <div class="col p-4">
     <h1 class="display-4" align="center">Data Simpanan Saya</h1><br>
-    <div class="container bg-info" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     	<div class="row" 
         style=
         "    	.row{

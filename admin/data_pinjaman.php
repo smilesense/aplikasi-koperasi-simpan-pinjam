@@ -78,8 +78,12 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">
@@ -87,21 +91,32 @@ include "footer.php";
     <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
     <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
     <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+    <form action="" method="GET">
+    <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+    </form>
         <thead>
             <tr>
                 <th>ID User</th>
                 <th>Nama Lengkap User</th>
-                <th>Nominal Pinjaman</th>
+                <th>Pinjaman</th>
+                <th>Jatuh Tempo</th>
             </tr>
         </thead>
         <tbody>
+        <?php
+        $search = $_GET["search"];
+        $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE status = 'Belum Lunas' AND (id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%')");
+        while ( $r = mysqli_fetch_array( $sql ) ){?>
             <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>50,000</td>
+                <td><?php echo $r["id_user"];?></td>
+                <td><?php echo $r["nama_lengkap"];?></td>
+                <td><?php echo $r["total_pinjaman"];?></td>
+                <td><?php echo $r["jatuh_tempo"];?></td>
             </tr>
-        </table>
+        <?php
+        }?>
+        </tbody>    
+    </table>
     </div>
   </div>
   <script>
@@ -109,30 +124,6 @@ include "footer.php";
         $('#example').DataTable();
     } );
 </script>
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
-            $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
-            $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
-            $res_password = mysqli_num_rows($cek_password);
-            if ($res_password == 0){
-                echo "Password yang Anda Masukkan Salah";
-            }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
-            }  
-        }
-        ?>
-    </div>
-    </div><!-- Main Col END -->
-</div><!-- body-row END --> 
 
 <script>
 // Hide submenus

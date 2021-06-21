@@ -78,8 +78,12 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">
@@ -97,12 +101,18 @@ include "footer.php";
             </tr>
         </thead>
         <tbody>
+        <?php
+        $search = $_GET["search"];
+        $sql = mysqli_query($koneksi,"SELECT * FROM admin WHERE id like '%".$search."%' OR email like '%".$search."%' OR username like '%".$search."%'");
+        while ( $r = mysqli_fetch_array( $sql ) ){?>
             <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>50,000</td>
-                <td>63</td> 
+                <td><?php echo $r["id"];?> </td>
+                <td><?php echo $r["email"];?></td>
+                <td><?php echo $r["username"];?></td>
+                <td><?php echo $r["password"];?></td>
             </tr>
+        <?php
+        }?>
         </table>
     </div>
   </div>

@@ -119,7 +119,9 @@ body {
 <?php
 session_start();
 if(isset($_SESSION["id"])) {
-  header("Location:index.php");
+  header("Location: /user");
+}else if(isset($_SESSION["id_admin"])){
+  header("Location: /admin");
 }else{
   
 }

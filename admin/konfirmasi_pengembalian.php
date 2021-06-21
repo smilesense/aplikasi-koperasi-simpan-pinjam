@@ -78,8 +78,12 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">
@@ -141,7 +145,16 @@ include "footer.php";
                 $sql1 = mysqli_query($koneksi,"SELECT * FROM konfirmasi_pengembalian WHERE id_pinjaman = '$id_pinjaman' AND status = 'Menunggu Konfirmasi' ");
                 $s = mysqli_fetch_array( $sql1 );
                 $nominal = $s["nominal"];
+                
+                $sql2 = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_pinjaman = '$id_pinjaman' ");
+                $t = mysqli_fetch_array( $sql2 );
+                $durasi = $t["lama_pinjaman"];
+                $nominal1 = $t["nominal"];
+
+                $nominals = ($nominal-(($nominal1*2.5)/100)*$durasi);
+
                 $update_nominal_pinjaman = mysqli_query($koneksi,"UPDATE pinjaman SET total_pinjaman = (total_pinjaman-('$nominal')) WHERE id_pinjaman = '$id_pinjaman' ");
+                $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal+('$nominals'))  WHERE id = '1' AND keterangan = 'Saldo' ");
                 if($update_nominal_pinjaman){
                     $update  = mysqli_query($koneksi,"UPDATE konfirmasi_pengembalian SET status = 'Terkonfirmasi' WHERE id_pinjaman = '$id_pinjaman' ");
                     $cek_sisa = mysqli_query($koneksi,"SELECT total_pinjaman FROM pinjaman WHERE id_pinjaman = '$id_pinjaman'");

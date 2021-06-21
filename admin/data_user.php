@@ -8,6 +8,7 @@
     include "../css.php";
     ?>
   <title>Koperasi</title>
+    
   <style>
             #body-row {
             margin-left:0;
@@ -78,16 +79,20 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">
     <h1 class="display-4" align="center">Data User</h1><br>
     <div class="container bg-info" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
+    <table id="example" class="table table-striped table-bordered text-white" style="width:100%; padding:1rem;">
     <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+    <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
         <thead>
             <tr>
                 <th>ID User</th>
@@ -96,25 +101,25 @@ include "footer.php";
                 <th>Email User</th>
                 <th>Username User</th>
                 <th>Rekening User</th>
-                <th>Saldo Simpanan</th>
-                <th>Saldo Pinjaman</th>
-                <th>Saldo Iuran Wajib</th>
                 <th>Tindakan</th>
             </tr>
         </thead>
         <tbody>
+        <?php
+        $search = $_GET["search"];
+        $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id like '%".$search."%' OR nama_lengkap like '%".$search."%' OR simpanan_sukarela like '%".$search."%'");
+        while ( $r = mysqli_fetch_array( $sql ) ){?>
             <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>50,000</td>
-                <td>63</td>
-                <td>50,000</td>
-                <td>63</td>
-                <td>63</td>
-                <td>63</td>
-                <td>63</td>
-                <td><a href="#" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</a></td> 
+                <td><?php echo $r["id"];?></td>
+                <td><?php echo $r["nama_lengkap"];?></td>
+                <td><?php echo $r["nik"];?></td>
+                <td><?php echo $r["email"];?></td>
+                <td><?php echo $r["username"];?></td>
+                <td><?php echo $r["no_rekening"];?></td>
+                <!-- <td><a href="data_user.php?delete_id=<?php echo $r['id']?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-alt fa-fw mr-1"></i>Hapus</a></td> -->
             </tr>
+        <?php
+        }?>
         </table>
     </div>
   </div>

@@ -124,7 +124,7 @@ if(isset($_SESSION["id"])) {
                                 ID User                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $_SESSION["id"]?>     
                         </td>
                     </tr>
@@ -135,7 +135,7 @@ if(isset($_SESSION["id"])) {
                                 Name                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $_SESSION["name"]?>     
                         </td>
                     </tr>
@@ -146,7 +146,7 @@ if(isset($_SESSION["id"])) {
                                 Username                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $profile["username"]?> 
                         </td>
                     </tr>
@@ -157,7 +157,7 @@ if(isset($_SESSION["id"])) {
                                 NIK                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $profile["nik"]?> 
                         </td>
                     </tr>
@@ -168,7 +168,7 @@ if(isset($_SESSION["id"])) {
                                 Role                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $role ?>
                         </td>
                     </tr>
@@ -179,7 +179,7 @@ if(isset($_SESSION["id"])) {
                                 Email                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $profile["email"]?>  
                         </td>
                     </tr>
@@ -190,7 +190,7 @@ if(isset($_SESSION["id"])) {
                                 Nomor Rekening                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php 
                                 if ($profile["no_rekening"] == 0){
                                     echo "-";

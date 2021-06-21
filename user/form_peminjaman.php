@@ -102,7 +102,7 @@ if(isset($_SESSION["id"])) {
         </div>
         <div class="col-12">
             <label for="durasi" class="form-label">Durasi Pinjaman (bulan)</label>
-            <select class="form-control" id="durasi" name="durasi" value="" onchange="return cek_return()" placeholder="Durasi Pinjaman"required>
+            <select class="form-control" id="durasi" name="durasi" onchange="return cek_return()" placeholder="Durasi Pinjaman"required>
                 <option value="">Silakan Pilih Durasi Pinjaman</option>
                 <option value="3">3 Bulan</option>
                 <option value="6">6 Bulan</option>
@@ -156,24 +156,36 @@ if(isset($_SESSION["id"])) {
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
+            $nominal = $_POST["nominal"];      
             $bunga = ($_POST["total"]-$nominal);
             $confirm_password = $_POST["confirm_password"];
             $tanggal_return = $_POST["tanggal_return"];
             $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
             $res_password = mysqli_num_rows($cek_password);
+            $r = mysqli_fetch_array( $cek_password );
+            $norek = $r["no_rekening"];
             if ($res_password == 0){
                 echo "Password yang Anda Masukkan Salah";
             }else{
-                $r = mysqli_fetch_array( $cek_password );
-                $nama_user = $r["nama_lengkap"];
-                $total = ($nominal)+($bunga);
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nama_lengkap, nominal, bunga, total_pinjaman, jatuh_tempo, status) VALUES ('$id','$nama_user' ,'$nominal', '$bunga' , '$total', '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
+                if ($norek == '' || $norek == 0){
+                    echo "Anda belum mengisi nomor rekening, silakan isi pada menu profile";
+                }else{
+                    $cek_saldo_koperasi  = mysqli_query($koneksi,"SELECT * FROM inventaris WHERE id = '1' AND keterangan = 'Saldo' ");
+                    $s = mysqli_fetch_array( $cek_saldo_koperasi );
+                    $saldo_koperasi = $s["nominal"];
+                    if ($saldo_koperasi < $nominal){
+                        echo "maaf, saldo koperasi saat ini kurang dari nominal yang anda pinjam. Silakan masukkan nominal yang lebih kecil<br>Sisa saldo Koperasi : $saldo_koperasi";
+                    }else{
+                        $nama_user = $r["nama_lengkap"];
+                        $total = ($nominal)+($bunga);
+                        $durasi = $_POST["durasi"];
+                        $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nama_lengkap, nominal, bunga, total_pinjaman, lama_pinjaman, jatuh_tempo, no_rekening, status) VALUES ('$id','$nama_user' ,'$nominal', '$bunga' , '$total','$durasi', '$tanggal_return', '$norek', 'Menunggu Persetujuan')");
+                        if ($sql){
+                            echo "Berhasil Berhasil Mengajukan Pinjaman";
+                        }else {
+                            echo "error";
+                        }
+                }   }
             }  
         }
         ?>

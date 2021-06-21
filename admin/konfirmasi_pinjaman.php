@@ -78,8 +78,12 @@
 <?php
 session_start();
 include "../connect_db.php";
-include "navbar.php";
-include "footer.php";
+if (isset($_SESSION["id_admin"])){
+    include "navbar.php";
+    include "footer.php";
+}else{
+    header("Location:/");
+}
 ?>
 
     <div class="col p-4">
@@ -87,6 +91,7 @@ include "footer.php";
     <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
     <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
     <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
+    <h5><?php echo $_SESSION["notif"]?></h5>
     <form action="" method="GET">
     <input type="search" name="search" class="form-control form-control-sm" value="<?php echo $_GET["search"]?>" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
     </form>
@@ -99,6 +104,7 @@ include "footer.php";
                 <th>Bunga</th>
                 <th>Jatuh Tempo</th>
                 <th>Status</th>
+                <th>No Rekening</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -119,6 +125,7 @@ include "footer.php";
                 <td><?php echo $r["bunga"];?></td>
                 <td><?php echo $r["jatuh_tempo"];?></td>
                 <td><?php echo $r["status"];?></td>
+                <td><?php echo $r["no_rekening"];?></td>
                 <td>
                 <?php
                 if($r["status"] == "Menunggu Persetujuan"){
@@ -133,10 +140,24 @@ include "footer.php";
             <?php
                 }
             if(isset($_GET["confirm_pinjaman"])){
-                $id_tabungan = $_GET["confirm_pinjaman"];
+                $id_pinjaman = $_GET["confirm_pinjaman"];
                 $id_user = $_GET["id_user"];
-                $nominal = $_GET["nominal"]; 
-                $update  = mysqli_query($koneksi,"UPDATE pinjaman SET status = 'Belum Lunas' WHERE id_pinjaman = '$id_tabungan' ");
+                $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_pinjaman = '$id_pinjaman' ");
+                $r = mysqli_fetch_array( $sql );
+                $shu = $r["bunga"];
+                $nominal = $r["nominal"];
+
+                $cek_saldo_koperasi  = mysqli_query($koneksi,"SELECT * FROM inventaris WHERE id = '1' AND keterangan = 'Saldo' ");
+                $s = mysqli_fetch_array( $cek_saldo_koperasi );
+                $saldo_koperasi = $s["nominal"];
+                if ($saldo_koperasi < $nominal){
+                    $_SESSION["notif"] = "saldo koperasi tidak cukup<br>Sisa saldo Koperasi : $saldo_koperasi";
+                }else{
+                    $_SESSION["notif"] = "";
+                    $update  = mysqli_query($koneksi,"UPDATE pinjaman SET status = 'Belum Lunas' WHERE id_pinjaman = '$id_pinjaman' ");
+                    $update_shu = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal+($shu)) WHERE id = '2' AND keterangan = 'SHU'");
+                    $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal-('$nominal')) WHERE id = '1' AND keterangan = 'Saldo' ");
+                }
                 ?>
                         <script type='text/javascript'> 
                         document.location = '/admin/konfirmasi_pinjaman.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';

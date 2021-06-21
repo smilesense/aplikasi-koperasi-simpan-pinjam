@@ -118,6 +118,17 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
                     <div class="col-sm-4">
+                        <div class="card border-primary mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+                            <div class="card-header bg-primary text-white"><h5>Iuran Wajib Saya</h5></div>
+                                <div class="card-body text-primary">
+                                    <h5 class="card-title">Rp.<?php echo $r["iuran_wajib"];?></h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-primary">
+                                <a href="/user/list_iuran.php" class="btn btn-outline-primary" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
                         <div class="card border-success mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-success text-white"><h5>SHU Saya</h5></div>
                                 <div class="card-body text-success">

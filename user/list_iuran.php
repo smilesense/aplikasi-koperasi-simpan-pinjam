@@ -78,80 +78,91 @@
 <?php
 session_start();
 include "../connect_db.php";
-if (isset($_SESSION["id_admin"])){
+if(isset($_SESSION["id"])) {
     include "navbar.php";
     include "footer.php";
 }else{
     header("Location:/");
 }
 ?>
-
     <div class="col p-4">
-    <h1 class="display-4" align="center">Konfirmasi Iuran Wajib</h1><br>
-    <div class="container bg-primary" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
-    <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-        <thead>
-            <tr>
-                <th>ID Simpanan</th>
-                <th>ID User</th>
-                <th>Nominal</th>
-                <th>Kode Unik</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>11</td>
-                <td>100,000</td>
-                <td>61</td>
-                <td>Menunggu Konfirmasi</td>
-                <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>12</td>
-                <td>50,000</td>
-                <td>63</td>
-                <td>Menunggu Konfirmasi</td>
-                <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-            </tr>
-        </table>
-    </div>
-  </div>
-  <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-</script>
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
-            $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
-            $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
-            $res_password = mysqli_num_rows($cek_password);
-            if ($res_password == 0){
-                echo "Password yang Anda Masukkan Salah";
-            }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
-            }  
-        }
-        ?>
-    </div>
+    <h1 class="display-4" align="center">Data Iuran Wajib Saya</h1><br>
+    <div class="container bg-secondary" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    	<div class="row" 
+        style=
+        "    	.row{
+		    margin-top:40px;
+		    padding: 0 10px;
+		}
+		.clickable{
+		    cursor: pointer;   
+		}
+
+		.panel-heading div {
+			margin-top: -18px;
+			font-size: 15px;
+		}
+		.panel-heading div span{
+			margin-left:5px;
+		}
+		.panel-body{
+			display: none;
+		}
+        ">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Iuran Wajib Saya</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+						</div>
+					</div>
+					<div class="panel-body">
+                    <form id="search" action="" method="POST">
+                        <input type="search" name="search" onchange="return cari();" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Cari Data">
+                    </form>
+                    <script type="text/javascript">
+                        $(document).ready(
+                            function cari() {
+                                document.getElementById["search"].submit();
+                            }
+                        );
+                    </script>
+					</div>
+					<table class="table table-hover" id="dev-table">
+						<thead>
+							<tr>
+								<th>Id Iuran</th>
+								<th>Nominal Iuran</th>
+                                <th>Bulan Iuran</th>
+                                <th>Tindakan</th>
+							</tr>
+						</thead>
+						<tbody>
+                        <?php
+                            $id = $_SESSION["id"];
+                            $search = $_POST["search"];
+                            $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
+                            while ( $r = mysqli_fetch_array( $sql ) ) {
+                        ?>
+                            <tr>
+                            <td></td>
+                            <td><?php echo $r["iuran_wajib"];?></td>
+                            <td></td>
+                            <td><a href="#" class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td>
+                            </tr>
+                        <?php
+                        }?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
     </div><!-- Main Col END -->
 </div><!-- body-row END --> 
-
 <script>
 // Hide submenus
 $('#body-row .collapse').collapse('hide'); 

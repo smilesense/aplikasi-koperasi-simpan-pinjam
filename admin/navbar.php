@@ -1,9 +1,13 @@
+<html>
+<head>
+    <link rel="icon" href="https://unsplash.com/photos/bpJ8qeyo1-w" type="image/x-icon"></head>
+<body>
 <!-- Bootstrap NavBar -->
-<nav class="navbar navbar-expand-md navbar-secondary bg-secondary">
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/admin/index.php">
         <img src="https://www.jatikom.com/wp-content/uploads/2016/11/logo-koperasi.png" width="30" height="30" class="d-inline-block align-top" alt="">
         <span class="menu-collapsed text-white">Dashboard Admin</span>
     </a>
@@ -17,8 +21,8 @@
             </li>
             <!-- This menu is hidden in bigger devices with d-sm-none. 
            The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
-           <li class="nav-item dropdown d-sm-block d-md-none">
-                <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+           <li class="nav-item nav-dark dropdown d-sm-block d-md-none" style="color:black; border:1px white; ">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                 <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
                     <a class="dropdown-item" href="/admin/index.php"><i class="fas fa-home fa-fw mr-2" aria-hidden="true"></i>Beranda</a>
                     <a class="dropdown-item" href="/admin/data_admin.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Admin</a>
@@ -126,3 +130,5 @@
         </ul><!-- List Group END-->
     </div><!-- sidebar-container END -->
     <!-- MAIN -->
+</body>
+</html>

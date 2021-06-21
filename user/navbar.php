@@ -1,9 +1,10 @@
+<link rel="icon" href="../assets/logokop.jpg" type="image/x-icon"></head>
 <!-- Bootstrap NavBar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/user/index.php">
         <img src="https://www.jatikom.com/wp-content/uploads/2016/11/logo-koperasi.png" width="30" height="30" class="d-inline-block align-top" alt="">
         <span class="menu-collapsed">Koperasi Sejahtera Bersama</span>
     </a>
@@ -25,10 +26,14 @@
                 <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
                     <a class="dropdown-item" href="/user/index.php"><i class="fas fa-home fa-fw mr-2" aria-hidden="true"></i>Beranda</a>
                     <a class="dropdown-item" href="/user/form_simpanan.php"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Simpan Uang</a>
-                    <a class="dropdown-item" href="/user/form_peminjaman.php"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Pinjam Uang</a>
+                    <a class="dropdown-item" href="/user/form_peminjaman.php"><i class="fas fa-money-check fa-fw mr-2" aria-hidden="true"></i>Pinjam Uang</a>
                     <a class="dropdown-item" href="/user/form_iuran.php"><i class="fas fa-money-check-alt fa-fw mr-2" aria-hidden="true"></i>Iuran Wajib</a>
-                    <a class="dropdown-item" href=""><i class="fa fa-tags fa-fw mr-2" aria-hidden="true"></i>Pembagian SHU</a>
-                    <a class="dropdown-item" href="/user/profile.php"><i class="fa fa-user fa-fw mr-2" aria-hidden="true"></i>Profil</a>
+                    <a class="dropdown-item" href="/user/profile.php"><i class="fa fa-user fa-fw mr-2" aria-hidden="true"></i>Profil Pengguna</a>
+                    <a class="dropdown-item" href="/user/list_simpanan.php"><i class="fa fa-wallet fa-fw mr-2" aria-hidden="true"></i>Simpanan Saya</a>
+                    <a class="dropdown-item" href="/user/list_pinjaman.php"><i class="fa fa-tags fa-fw mr-2" aria-hidden="true"></i>Pinjaman Saya</a>
+                    <a class="dropdown-item" href="/user/list_iuran.php"><i class="fa fa-user fa-clipboard-check mr-2" aria-hidden="true"></i>Iuran Wajib Saya</a>
+                    <a class="dropdown-item" href="/user/list_shu.php"><i class="fa fa-user fa-coins mr-2" aria-hidden="true"></i>SHU Saya</a>
+                    <a class="dropdown-item" href="/user/list_tariktunai.php"><i class="fa fa-money-bill-wave fa-fw mr-2" aria-hidden="true"></i>Tarik Tunai Saya</a>
                     <a class="dropdown-item" href="/user/tentang.php"><i class="fa fa-info-circle fa-fw mr-2" aria-hidden="true"></i>Tentang</a>
                 </div>
             </li><!-- Smaller devices menu END -->
@@ -90,6 +95,9 @@
                 </a>
                 <a href="/user/list_pinjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Pinjaman Saya</span>
+                </a>
+                <a href="/user/list_iuran.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Iuran Wajib Saya</span>
                 </a>
                 <a href="/user/list_shu.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">SHU Saya</span>

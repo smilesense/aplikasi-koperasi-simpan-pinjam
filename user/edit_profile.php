@@ -124,7 +124,7 @@ if(isset($_SESSION["id"])) {
                                 ID User                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $_SESSION["id"]?>     
                         </td>
                     </tr>
@@ -135,7 +135,7 @@ if(isset($_SESSION["id"])) {
                                 Name                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $_SESSION["name"]?> 
                             </div>  
                         </td>
@@ -147,7 +147,7 @@ if(isset($_SESSION["id"])) {
                                 Username                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <div class="form-label-group">
                                 <input type="text" id="username" name="username" value="<?php echo $profile["username"]?>" class="form-control" required autofocus>
                                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
@@ -161,7 +161,7 @@ if(isset($_SESSION["id"])) {
                                 NIK                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <div class="form-label-group">
                                 <input type="text" id="nik" name="nik" value="<?php echo $profile["nik"]?>" class="form-control" required autofocus>
                                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
@@ -175,7 +175,7 @@ if(isset($_SESSION["id"])) {
                                 Role                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <b><?php echo $role ?>
                         </td>
                     </tr>
@@ -186,7 +186,7 @@ if(isset($_SESSION["id"])) {
                                 Email                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <div class="form-label-group">
                                 <input type="text" id="email" name="email" value="<?php echo $profile["email"]?>" class="form-control" required autofocus>
                                 <div class="invalid-feedback">Kolom ini tidak boleh kosong.</div>
@@ -200,7 +200,7 @@ if(isset($_SESSION["id"])) {
                                 Nomor Rekening                                                
                             </strong>
                         </td>
-                        <td class="text-white">
+                        <td>
                             <div class="form-label-group">
                                 <input type="number" id="norek" name="norek" value="<?php if ($profile["no_rekening"] == 0){
                                 
@@ -260,7 +260,6 @@ if(isset($_SESSION["id"])) {
                                 if($res_username == 0 && $res_nik == 0 && $res_email == 0){
                                     mysqli_query($koneksi,"UPDATE user SET nik = '$nik1', email = '$email1' , username = '$username1', no_rekening = '$nomor_rekening'  WHERE id = '$id_user' ");
                                     mysqli_query($koneksi,"DROP VIEW $view_name");
-                                    $_SESSION["name"] = $name1;
                                     ?>
                                     <script type='text/javascript'>
                                     alert("berhasil"); 

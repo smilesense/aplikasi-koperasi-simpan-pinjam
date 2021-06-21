@@ -74,6 +74,7 @@
         padding-left: 10px;
         }
     </style>
+    
 </head>
 <body>
 <?php
@@ -82,18 +83,26 @@ include "../connect_db.php";
 if (isset($_SESSION["id_admin"])){
     include "navbar.php";
     include "footer.php";
-    $id_user = $_SESSION["id"];
     $sql = mysqli_query($koneksi,"SELECT COUNT(*) FROM user");
     $anggota = mysqli_fetch_array( $sql );
-    $sql = mysqli_query($koneksi,"SELECT SUM(nominal) FROM tabungan");
+    $sql = mysqli_query($koneksi,"SELECT SUM(iuran_wajib) FROM user");
+    $iuran_wajib = mysqli_fetch_array( $sql );
+    $sql = mysqli_query($koneksi,"SELECT SUM(simpanan_sukarela) FROM user");
     $saldo_simpanan = mysqli_fetch_array( $sql );
-    $sql = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman");
+    $sql = mysqli_query($koneksi,"SELECT SUM(total_pinjaman)  FROM pinjaman WHERE status = 'Belum Lunas'");
     $pinjaman = mysqli_fetch_array( $sql );
+    $sql = mysqli_query($koneksi,"SELECT nominal FROM inventaris WHERE id = '1' AND keterangan = 'Saldo'");
+    $saldo = mysqli_fetch_array( $sql );
+    $sql = mysqli_query($koneksi,"SELECT nominal FROM inventaris WHERE id = '2' AND keterangan = 'SHU'");
+    $shu = mysqli_fetch_array( $sql );
+
+    // $get_saldo = mysqli_query($koneksi,"SELECT SUM(iuran_wajib+simpanan_sukarela) FROM user");
+    // $res_saldo = mysqli_fetch_array( $get_saldo );
+    // $saldo_koperasi =  $res_saldo[0];
+    // $update_saldo  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = '$saldo_koperasi'  WHERE id = '1' AND keterangan = 'Saldo' ");
 }else{
     header("Location:/");
 }
-
-
 ?>
     <div class="col p-4">
         <h1 class="display-4" align="center">Selamat Datang di Dashboard Admin<br> Koperasi Sejahtera Bersama</h1><br>
@@ -113,7 +122,7 @@ if (isset($_SESSION["id_admin"])){
                         <div class="card border-danger mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-danger border-danger text-white"><h5>Iuran Wajib</h5></div>
                                 <div class="card-body text-danger">
-                                    <h5 class="card-title">Rp. 1,000,000</h5>
+                                    <h5 class="card-title">Rp. <?php echo $iuran_wajib[0]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-danger">
                                 <a href="/admin/data_iuran.php" class="btn btn-outline-danger" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
@@ -146,10 +155,21 @@ if (isset($_SESSION["id_admin"])){
                         <div class="card border-primary mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-primary border-primary text-white"><h5>SHU</h5></div>
                                 <div class="card-body text-primary">
-                                    <h5 class="card-title">Rp. 100,000,000,000</h5>
+                                    <h5 class="card-title">Rp. <?php echo $shu["nominal"]?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-primary">
                                 <a href="/admin/data_shu.php" class="btn btn-outline-primary" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card border-warning mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+                            <div class="card-header bg-warning border-warning text-white"><h5>Saldo Koperasi</h5></div>
+                                <div class="card-body text-warning">
+                                    <h5 class="card-title">Rp. <?php echo $saldo["nominal"]?></h5>
+                                </div>
+                            <div class="card-footer bg-transparent border-warning" style="height:65px;">
+                            <br>
                             </div>
                         </div>  
                     </div>
