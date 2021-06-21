@@ -28,7 +28,7 @@ CREATE TABLE `admin` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,8 +37,33 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'bihubbilchoiraidifta@gmail.com','admin','admin');
+INSERT INTO `admin` VALUES (1,'bihubbilchoiraidifta@gmail.com','admin','admin'),(2,'azriel@gmail.com','admin','admin');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inventaris`
+--
+
+DROP TABLE IF EXISTS `inventaris`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inventaris` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `keterangan` varchar(10) NOT NULL,
+  `nominal` int(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inventaris`
+--
+
+LOCK TABLES `inventaris` WRITE;
+/*!40000 ALTER TABLE `inventaris` DISABLE KEYS */;
+INSERT INTO `inventaris` VALUES (1,'Saldo',1000000),(2,'SHU',112500);
+/*!40000 ALTER TABLE `inventaris` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -49,13 +74,15 @@ DROP TABLE IF EXISTS `konfirmasi_pengembalian`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `konfirmasi_pengembalian` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_pinjaman` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
   `nominal` int(11) NOT NULL,
   `kode_unik` int(11) NOT NULL,
-  `status` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +91,7 @@ CREATE TABLE `konfirmasi_pengembalian` (
 
 LOCK TABLES `konfirmasi_pengembalian` WRITE;
 /*!40000 ALTER TABLE `konfirmasi_pengembalian` DISABLE KEYS */;
-INSERT INTO `konfirmasi_pengembalian` VALUES (1,8,'Azriel Akbar ',800000,800107,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',201000,201963,'Terkonfirmasi'),(1,8,'Azriel Akbar ',60000,60549,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',779000,779579,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',578000,578626,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',50000,50392,'Terkonfirmasi'),(2,1,'Bihubbil Choir Aidifta',50000,50686,'Terkonfirmasi'),(3,1,'Bihubbil Choir Aidifta',200000,201047,'Terkonfirmasi'),(3,1,'Bihubbil Choir Aidifta',535000,535269,'Terkonfirmasi'),(4,8,'Azriel Akbar ',860000,860401,'Terkonfirmasi');
+INSERT INTO `konfirmasi_pengembalian` VALUES (1,1,8,'Azriel Akbar ',500000,538295,'Terkonfirmasi'),(2,1,8,'Azriel Akbar ',37500,38554,'Terkonfirmasi'),(3,2,1,'Bihubbil Choir Aidifta',100000,100870,'Terkonfirmasi'),(4,2,1,'Bihubbil Choir Aidifta',437500,438399,'Terkonfirmasi'),(5,3,1,'Bihubbil Choir Aidifta',537500,538347,'Terkonfirmasi');
 /*!40000 ALTER TABLE `konfirmasi_pengembalian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,10 +109,12 @@ CREATE TABLE `pinjaman` (
   `nominal` int(20) NOT NULL,
   `bunga` int(50) NOT NULL,
   `total_pinjaman` int(50) NOT NULL,
+  `lama_pinjaman` int(10) NOT NULL,
   `jatuh_tempo` varchar(20) NOT NULL,
+  `no_rekening` bigint(50) NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id_pinjaman`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,30 +123,8 @@ CREATE TABLE `pinjaman` (
 
 LOCK TABLES `pinjaman` WRITE;
 /*!40000 ALTER TABLE `pinjaman` DISABLE KEYS */;
-INSERT INTO `pinjaman` VALUES (2,1,'Bihubbil Choir Aidifta',800000,180000,-25000,'3/16/2022','Lunas'),(3,1,'Bihubbil Choir Aidifta',600000,135000,0,'3/16/2022','Lunas'),(4,8,'Azriel Akbar ',800000,60000,0,'17/9/2021','Lunas');
+INSERT INTO `pinjaman` VALUES (1,8,'Azriel Akbar ',500000,37500,0,3,'19/9/2021',10212048,'Lunas'),(2,1,'Bihubbil Choir Aidifta',500000,37500,0,3,'9/20/2021',9085330081927,'Lunas'),(3,1,'Bihubbil Choir Aidifta',500000,37500,0,3,'9/20/2021',9085330081927,'Lunas');
 /*!40000 ALTER TABLE `pinjaman` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `saldo_koperasi`
---
-
-DROP TABLE IF EXISTS `saldo_koperasi`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `saldo_koperasi` (
-  `saldo` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `saldo_koperasi`
---
-
-LOCK TABLES `saldo_koperasi` WRITE;
-/*!40000 ALTER TABLE `saldo_koperasi` DISABLE KEYS */;
-INSERT INTO `saldo_koperasi` VALUES (124500022);
-/*!40000 ALTER TABLE `saldo_koperasi` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,7 +142,7 @@ CREATE TABLE `simpanan` (
   `kode_unik` int(20) NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id_tabungan`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +151,7 @@ CREATE TABLE `simpanan` (
 
 LOCK TABLES `simpanan` WRITE;
 /*!40000 ALTER TABLE `simpanan` DISABLE KEYS */;
-INSERT INTO `simpanan` VALUES (34,1,'Bihubbil Choir Aidifta',700000,700790,'Terkonfirmasi'),(35,1,'Bihubbil Choir Aidifta',800000,800849,'Terkonfirmasi'),(36,8,'Azriel Akbar ',700000,700182,'Terkonfirmasi');
+INSERT INTO `simpanan` VALUES (1,8,'Azriel Akbar ',1000000,1000823,'Terkonfirmasi');
 /*!40000 ALTER TABLE `simpanan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,7 +226,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Bihubbil Choir Aidifta','190411100121','bihubbilchoiraidifta@gmail.com','bihubbil','smile',9085330081927,0,2900000),(2,'keppin','192','keppin@gmail.com','keppin123','keppin123',0,0,0),(3,'Merry Stoner','213','edu@minisites.me','Merry Stoner','123',0,0,0),(8,'Azriel Akbar ','190411100192','azriel@gmail.com','azriel','azriel123',10212048,0,5000000),(9,'kappin','1904111','kappin@gmail.com','kappin','kappin123',6745328686,0,0);
+INSERT INTO `user` VALUES (1,'Bihubbil Choir Aidifta','190411100121','bihubbilchoiraidifta@gmail.com','bihubbil','smile',9085330081927,0,0),(2,'keppin','192','keppin@gmail.com','keppin123','keppin123',0,0,0),(3,'Merry Stoner','213','edu@minisites.me','Merry Stoner','123',0,0,0),(8,'Azriel Akbar ','190411100192','azriel@gmail.com','azriel','azriel123',10212048,0,1000000),(9,'kappin','1904111','kappin@gmail.com','kappin','kappin123',6745328686,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-19 17:27:39
+-- Dump completed on 2021-06-21 17:23:11
