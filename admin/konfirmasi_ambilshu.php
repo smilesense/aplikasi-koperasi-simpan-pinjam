@@ -87,8 +87,8 @@ if (isset($_SESSION["id_admin"])){
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Konfirmasi Tarik Tunai</h1><br>
-    <div class="container bg-dark" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <h1 class="display-4" align="center">Konfirmasi Ambil SHU</h1><br>
+    <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
         <div class="table-responsive"> 
             <table id="example" class="table table-striped table-bordered text-white" style="width:100%">
             <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
@@ -104,10 +104,10 @@ if (isset($_SESSION["id_admin"])){
             </script>
                 <thead>
                     <tr>
-                        <th>ID Tarik Tunai</th>
+                        <th>ID SHU</th>
                         <th>ID User</th>
                         <th>Nama User</th>
-                        <th>Nominal Tarik Tunai</th>
+                        <th>Nominal SHU</th>
                         <th>Status</th>
                         <th>No Rekening</th>
                         <th>Tindakan</th>
@@ -122,7 +122,7 @@ if (isset($_SESSION["id_admin"])){
                         while ( $r = mysqli_fetch_array( $sql ) ) {
                 ?>
                     <tr>
-                        <td><?php echo $r["id_tariktunai"];?></td>
+                        <td><?php echo $r["id"];?></td>
                         <td><?php echo $r["id_user"];?></td>
                         <td><?php echo $r["nama_lengkap"];?></td>
                         <td><?php echo $r["nominal"];?></td>
@@ -158,7 +158,6 @@ if (isset($_SESSION["id_admin"])){
                         $nominal = $s["nominal"];
                         $id_user = $s["id_user"];
                         $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = '$id_user' ");
-                        $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal-('$nominal'))  WHERE id = '1' AND keterangan = 'Saldo' ");
                         ?>
                                 <script type='text/javascript'> 
                                 document.location = '/admin/konfirmasi_tariktunai.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';

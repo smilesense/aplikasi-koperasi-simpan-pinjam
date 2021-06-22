@@ -89,36 +89,76 @@ if (isset($_SESSION["id_admin"])){
     <div class="col p-4">
     <h1 class="display-4" align="center">Data SHU</h1><br>
     <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
-    <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-        <thead>
-            <tr>
-                <th>ID User</th>
-                <th>Nama User</th>
-                <th>NIK User</th>
-                <th>Rekening User</th>
-                <th>Total SHU</th>
-                <th>Tindakan</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $search = $_GET["search"];
-        $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id like '%".$search."%' OR nama_lengkap like '%".$search."%' OR nik like '%".$search."%' OR no_rekening like '%".$search."%'");
-        while ( $r = mysqli_fetch_array( $sql ) ){?>
-            <tr>
-                <td><?php echo $r["id"];?></td>
-                <td><?php echo $r["nama_lengkap"];?></td>
-                <td><?php echo $r["nik"];?></td>
-                <td><?php echo $r["no_rekening"];?></td>
-                <td>111</td>
-        <?php
-        }?>
-                <td rowspan="6" style="vertical-align:middle;"><a href="#" class="btn btn-info btn-xs"><i class="fas fa-trash-alt fa-fw mr-1"></i>Bagi SHU</a></td> 
-            </tr>
-        </tbody>
-        </table>
+        <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
+            <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
+            <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+                <thead>
+                    <tr>
+                        <th>ID User</th>
+                        <th>Nama User</th>
+                        <th>NIK User</th>
+                        <th>Rekening User</th>
+                        <th>Total SHU</th>
+                        <th>Tindakan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                $search = $_GET["search"];
+                $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id like '%".$search."%' OR nama_lengkap like '%".$search."%' OR nik like '%".$search."%' OR no_rekening like '%".$search."%'");
+                while ( $r = mysqli_fetch_array( $sql ) ){?>
+                    <tr>
+                        <td><?php echo $r["id"];?></td>
+                        <td><?php echo $r["nama_lengkap"];?></td>
+                        <td><?php echo $r["nik"];?></td>
+                        <td><?php echo $r["no_rekening"];?></td>
+
+                        <?php
+                            $id = $r["id"];
+                            $sql1 = mysqli_query($koneksi,"SELECT nominal FROM inventaris WHERE id = '2' AND keterangan = 'SHU' ");
+                            $get_total_shu = mysqli_fetch_array( $sql1 );
+                            $total_shu = $get_total_shu["nominal"];
+                            $shu_pinjaman = $total_shu*30/100;
+                            $shu_simpanan = $total_shu*40/100;
+
+                            ///simpanan
+                            $sql1 = mysqli_query($koneksi,"SELECT SUM(iuran_wajib+simpanan_sukarela) FROM user ");
+                            $get_total_simpanan = mysqli_fetch_array( $sql1 );
+                            $total_simpanan = $get_total_simpanan[0];
+
+                            $sql1 = mysqli_query($koneksi,"SELECT SUM(iuran_wajib+simpanan_sukarela) FROM user WHERE id = '$id' ");
+                            $get_simpanan_user = mysqli_fetch_array( $sql1 );
+                            $simpanan_user = $get_simpanan_user[0]; 
+
+                            ///pinjaman
+                            $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman ");
+                            $get_total_pinjaman = mysqli_fetch_array( $sql1 );
+                            $total_pinjaman = $get_total_pinjaman[0];
+
+                            $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman WHERE id_user = '$id' ");
+                            $get_pinjaman_user = mysqli_fetch_array( $sql1 );
+                            $pinjaman_user = $get_pinjaman_user[0];
+
+                            $shu_simpanan_user = ($simpanan_user/$total_simpanan)*(($shu_simpanan/$total_shu)*$total_shu);
+                            $shu_pinjaman_user = ($pinjaman_user/$total_pinjaman)*(($shu_pinjaman/$total_shu)*$total_shu);
+                            $shu_user = $shu_simpanan_user+$shu_pinjaman_user;
+
+                            $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET shu = '$shu_user' WHERE id = '$id' ");
+
+                            $sql1 = mysqli_query($koneksi,"SELECT shu FROM user WHERE id = '$id' ");
+                            $get_shu_user = mysqli_fetch_array( $sql1 );
+                            $shu_users = $get_shu_user["shu"];
+                        ?>
+                        <td><?php echo $shu_users;?></td>
+                        <td style="vertical-align:middle;"><a href="#" class="btn btn-info btn-xs"><i class="fas fa-share-square fa-fw mr-1"></i>Bagi SHU</a></td> 
+                    </tr>
+                <?php
+                }?>
+                        
+                </tbody>
+                </table>
+        </div>
     </div>
   </div>
   <script>

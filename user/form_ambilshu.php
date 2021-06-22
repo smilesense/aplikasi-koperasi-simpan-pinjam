@@ -78,7 +78,7 @@
 <?php
 session_start();
 include "../connect_db.php";
-if (isset($_SESSION["id_admin"])){
+if(isset($_SESSION["id"])) {
     include "navbar.php";
     include "footer.php";
 }else{
@@ -87,67 +87,77 @@ if (isset($_SESSION["id_admin"])){
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Konfirmasi Iuran Wajib</h1><br>
-    <div class="container bg-primary" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
-        <div class="table-responsive"> 
-            <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
-            <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-            <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-                <thead>
-                    <tr>
-                        <th>ID Simpanan</th>
-                        <th>ID User</th>
-                        <th>Nominal</th>
-                        <th>Kode Unik</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>11</td>
-                        <td>100,000</td>
-                        <td>61</td>
-                        <td>Menunggu Konfirmasi</td>
-                        <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12</td>
-                        <td>50,000</td>
-                        <td>63</td>
-                        <td>Menunggu Konfirmasi</td>
-                        <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-                    </tr>
-            </table>
+    <h1 class="display-4" align="center">Form Ambil SHU</h1><br>
+    <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <form class="row g-3" action="" method="POST">
+    <?php
+    $id_user = $_SESSION["id"];
+    $sql1 = mysqli_query($koneksi,"SELECT shu FROM user WHERE id = $id_user");
+    $saldo_simpanan = mysqli_fetch_array( $sql1 );
+    ?>
+    <h3 id="saldo_awal" style="Padding-left:18px; color:white;">Saldo SHU : <?php echo $shu["shu"];?></h3>
+        <div class="col-md-12">
+            <label for="name" class="form-label text-white">Nama Lengkap</label>
+            <input type="text" class="form-control" id="name" value="<?php echo $_SESSION["name"];?>" required readonly>
+            <br>
         </div>
-    </div>
-  </div>
-  <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-</script>
+        <div class="col-md-12">
+            <label for="nominal" class="form-label text-white">Nominal Ambil SHU</label>
+            <input type="number" class="form-control" onchange="return get_sisa_saldo()" id="nominal" name="nominal" value="" min="100000" max="10000000" step="100000" onchange="return get_kodeunik()" placeholder="Masukkan Nominal"required>
+            <br>
+        </div>
+        <div class="col-md-12 text-white">
+        <label for="sisa_saldo">Sisa Saldo SHU : </label>
+            <input type="text" class="form-control" id="sisa_saldo" name="sisa_saldo" value="<?php echo $shu["shu"]; ?>" readonly>
+            <input type="hidden" class="form-control" id="sisa_saldo_awal" name="sisa_saldo_awal" value="<?php echo $shu["shu"];?>" disabled>
+            <br>
+        </div>
+        <script type="text/javascript">
+            function get_sisa_saldo(){
+                nominal_tarik = document.getElementById("nominal").value;
+                saldo_awal = document.getElementById("sisa_saldo_awal").value;
+                saldo_akhir = saldo_awal-nominal_tarik;
+                document.getElementById("sisa_saldo").value = saldo_akhir;
+                if (saldo_akhir < 0) {
+                    alert("saldo tidak mencukupi");
+                    document.getElementById("nominal").value = saldo_awal;
+                    document.getElementById("sisa_saldo").value = 0;
+                }
+            }
+        </script>
+        <div class="col-md-12">
+            <label for="confirm_password" class="text-white">Konfirmasi Password:</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Masukkan Password Anda">
+            <br>
+        </div>
+        <div class="col-12">
+            <br>
+            <button type="submit" class="btn btn-info text-white" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-money-check-alt fa-fw mr-1"></i>Ambil SHU</button>
+        </div>
+        </form>
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
             $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
             $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
+            $id = $_SESSION["id"];
             $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
             $res_password = mysqli_num_rows($cek_password);
             if ($res_password == 0){
                 echo "Password yang Anda Masukkan Salah";
             }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
+                $r = mysqli_fetch_array( $cek_password );
+                $nama_user = $r["nama_lengkap"];
+                $sql = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = $id");
                 if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
+                    ?>
+                    <script type='text/javascript'> 
+                    document.location = '/user/form_tariktunai.php';
+                    alert("Berhasil Mengajukan Penarikan Simpanan, Menunggu Konfirmasi");
+                    </script>;<?php
                 }else {
                     echo "error";
                 }
-            }  
+            } 
         }
         ?>
     </div>

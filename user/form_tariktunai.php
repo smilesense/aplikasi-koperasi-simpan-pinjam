@@ -88,7 +88,7 @@ if(isset($_SESSION["id"])) {
 
     <div class="col p-4">
     <h1 class="display-4" align="center">Form Tarik Tunai</h1><br>
-    <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <div class="container bg-info" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     <form class="row g-3" action="" method="POST">
     <?php
     $id_user = $_SESSION["id"];
@@ -147,7 +147,8 @@ if(isset($_SESSION["id"])) {
             }else{
                 $r = mysqli_fetch_array( $cek_password );
                 $nama_user = $r["nama_lengkap"];
-                $sql = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = $id");
+                // $sql = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = $id");
+                $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_tariktunai(id_user, nama_lengkap, nominal, status) VALUES ('$id','$nama_user','$nominal','Menunggu Konfirmasi')");
                 if ($sql){
                     ?>
                     <script type='text/javascript'> 

@@ -88,33 +88,35 @@ if (isset($_SESSION["id_admin"])){
 
     <div class="col p-4">
     <h1 class="display-4" align="center">Data Simpanan</h1><br>
-    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-dark" style="width:100%;">
-    <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <form action="" method="GET">
-    <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-    </form>
-        <thead>
-            <tr>
-                <th>ID User</th>
-                <th>Nama Lengkap User</th>
-                <th>Simpanan</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $search = $_GET["search"];
-        $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id like '%".$search."%' OR nama_lengkap like '%".$search."%' OR simpanan_sukarela like '%".$search."%'");
-        while ( $r = mysqli_fetch_array( $sql ) ){?>
-            <tr>
-                <td><?php echo $r["id"];?></td>
-                <td><?php echo $r["nama_lengkap"];?></td>
-                <td><?php echo $r["simpanan_sukarela"];?></td>
-            </tr>
-        <?php
-        }?>
-        </tbody>    
-        </table>
+    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+        <div class="table-responsive"> 
+            <table id="example" class="table table-striped table-bordered text-dark" style="width:100%;">
+            <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
+            <form action="" method="GET">
+            <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+            </form>
+                <thead>
+                    <tr>
+                        <th>ID User</th>
+                        <th>Nama Lengkap User</th>
+                        <th>Simpanan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                $search = $_GET["search"];
+                $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE id like '%".$search."%' OR nama_lengkap like '%".$search."%' OR simpanan_sukarela like '%".$search."%'");
+                while ( $r = mysqli_fetch_array( $sql ) ){?>
+                    <tr>
+                        <td><?php echo $r["id"];?></td>
+                        <td><?php echo $r["nama_lengkap"];?></td>
+                        <td><?php echo $r["simpanan_sukarela"];?></td>
+                    </tr>
+                <?php
+                }?>
+                </tbody>    
+            </table>
+        </div>
     </div>
   </div>
   <script>

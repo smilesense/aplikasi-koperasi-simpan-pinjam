@@ -131,32 +131,34 @@ if(isset($_SESSION["id"])) {
                         );
                     </script>
 					</div>
-					<table class="table table-hover" id="dev-table">
-						<thead>
-							<tr>
-								<th>Id Iuran</th>
-								<th>Nominal Iuran</th>
-                                <th>Bulan Iuran</th>
-                                <th>Tindakan</th>
-							</tr>
-						</thead>
-						<tbody>
-                        <?php
-                            $id = $_SESSION["id"];
-                            $search = $_POST["search"];
-                            $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
-                            while ( $r = mysqli_fetch_array( $sql ) ) {
-                        ?>
-                            <tr>
-                            <td></td>
-                            <td><?php echo $r["iuran_wajib"];?></td>
-                            <td></td>
-                            <td><a href="#" class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td>
-                            </tr>
-                        <?php
-                        }?>
-						</tbody>
-					</table>
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="dev-table">
+                                <thead>
+                                    <tr>
+                                        <th>Id Iuran</th>
+                                        <th>Nominal Iuran</th>
+                                        <th>Bulan Iuran</th>
+                                        <th>Tindakan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $id = $_SESSION["id"];
+                                    $search = $_POST["search"];
+                                    $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
+                                    while ( $r = mysqli_fetch_array( $sql ) ) {
+                                ?>
+                                    <tr>
+                                    <td></td>
+                                    <td><?php echo $r["iuran_wajib"];?></td>
+                                    <td></td>
+                                    <td><a href="#" class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td>
+                                    </tr>
+                                <?php
+                                }?>
+                                </tbody>
+                            </table>
+                        </div>
 				</div>
 			</div>
 		</div>

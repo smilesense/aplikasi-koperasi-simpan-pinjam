@@ -131,48 +131,50 @@ if(isset($_SESSION["id"])) {
                         );
                     </script>
 					</div>
-					<table class="table table-hover" id="dev-table">
-						<thead>
-							<tr>
-								<th>Id Pinjaman</th>
-								<th>Nominal Pinjaman</th>
-								<th>Jatuh Tempo Pinjaman</th>
-								<th>Status Pinjaman</th>
-                                <th>Tindakan</th>
-							</tr>
-						</thead>
-						<tbody>
-                        <?php
-                            $id = $_SESSION["id"];
-                            $search = $_POST["search"];
-                            $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_user = $id AND (total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%' OR status like '%".$search."%' OR id_pinjaman like '%".$search."%') ");
-                            while ( $r = mysqli_fetch_array( $sql ) ) {
-                        ?>
-                            <tr>
-                            <td><?php echo $r['id_pinjaman']?></td>
-                            <td><?php echo $r['total_pinjaman'];?></td>
-                            <td><?php echo $r['jatuh_tempo']?></td>
-                            <td><?php echo $r['status']?></td>
-                            <td>
-                            <?php
-                                if($r["status"] == "Belum Lunas"){
-                                    echo '<a href="/user/form_pengembalian.php?bayar_pinjaman=';
-                                    echo $r["id_pinjaman"]; if(isset($_GET["search"])){echo "&search="; 
-                                    echo $_GET["search"];}
-                                    echo '"class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td>';
-                                }else if ($r["status"] == "Menunggu Persetujuan") {
-                                    echo '<a href="/user/list_pinjaman.php?batalkan_pinjaman=';
-                                    echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
-                                    echo $_GET["search"];}
-                                    echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-times mr-2"></i>Batalkan</a></td>';
-                                }
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="dev-table">
+                                <thead>
+                                    <tr>
+                                        <th>Id Pinjaman</th>
+                                        <th>Nominal Pinjaman</th>
+                                        <th>Jatuh Tempo Pinjaman</th>
+                                        <th>Status Pinjaman</th>
+                                        <th>Tindakan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $id = $_SESSION["id"];
+                                    $search = $_POST["search"];
+                                    $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_user = $id AND (total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%' OR status like '%".$search."%' OR id_pinjaman like '%".$search."%') ");
+                                    while ( $r = mysqli_fetch_array( $sql ) ) {
                                 ?>
-                            </td>
-                            </tr>
-                        <?php
-                        }?>
-						</tbody>
-					</table>
+                                    <tr>
+                                    <td><?php echo $r['id_pinjaman']?></td>
+                                    <td><?php echo $r['total_pinjaman'];?></td>
+                                    <td><?php echo $r['jatuh_tempo']?></td>
+                                    <td><?php echo $r['status']?></td>
+                                    <td>
+                                    <?php
+                                        if($r["status"] == "Belum Lunas"){
+                                            echo '<a href="/user/form_pengembalian.php?bayar_pinjaman=';
+                                            echo $r["id_pinjaman"]; if(isset($_GET["search"])){echo "&search="; 
+                                            echo $_GET["search"];}
+                                            echo '"class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td>';
+                                        }else if ($r["status"] == "Menunggu Persetujuan") {
+                                            echo '<a href="/user/list_pinjaman.php?batalkan_pinjaman=';
+                                            echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
+                                            echo $_GET["search"];}
+                                            echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-times mr-2"></i>Batalkan</a></td>';
+                                        }
+                                        ?>
+                                    </td>
+                                    </tr>
+                                <?php
+                                }?>
+                                </tbody>
+                            </table>
+                        </div>
 				</div>
 			</div>
 		</div>

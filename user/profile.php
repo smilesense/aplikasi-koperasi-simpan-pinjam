@@ -113,7 +113,7 @@ if(isset($_SESSION["id"])) {
         </div>
         <div class="col-md-7">
             <div class="table-responsive">
-            <table class="table table-user-information">
+                <table class="table table-user-information">
                 <tbody>
                     <br>
                     <br>
@@ -207,7 +207,7 @@ if(isset($_SESSION["id"])) {
                         </td>
                     </tr>                     
                 </tbody>
-            </table>
+                </table>
             </div>
         </div>
     </div>

@@ -88,35 +88,37 @@ if (isset($_SESSION["id_admin"])){
 
     <div class="col p-4">
     <h1 class="display-4" align="center">Data Pinjaman</h1><br>
-    <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
-    <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <form action="" method="GET">
-    <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-    </form>
-        <thead>
-            <tr>
-                <th>ID User</th>
-                <th>Nama Lengkap User</th>
-                <th>Pinjaman</th>
-                <th>Jatuh Tempo</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $search = $_GET["search"];
-        $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE status = 'Belum Lunas' AND (id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%')");
-        while ( $r = mysqli_fetch_array( $sql ) ){?>
-            <tr>
-                <td><?php echo $r["id_user"];?></td>
-                <td><?php echo $r["nama_lengkap"];?></td>
-                <td><?php echo $r["total_pinjaman"];?></td>
-                <td><?php echo $r["jatuh_tempo"];?></td>
-            </tr>
-        <?php
-        }?>
-        </tbody>    
-    </table>
+    <div class="container bg-success" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+        <div class="table-responsive"> 
+            <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
+            <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
+            <form action="" method="GET">
+            <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+            </form>
+                <thead>
+                    <tr>
+                        <th>ID User</th>
+                        <th>Nama Lengkap User</th>
+                        <th>Pinjaman</th>
+                        <th>Jatuh Tempo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                $search = $_GET["search"];
+                $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE status = 'Belum Lunas' AND (id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%')");
+                while ( $r = mysqli_fetch_array( $sql ) ){?>
+                    <tr>
+                        <td><?php echo $r["id_user"];?></td>
+                        <td><?php echo $r["nama_lengkap"];?></td>
+                        <td><?php echo $r["total_pinjaman"];?></td>
+                        <td><?php echo $r["jatuh_tempo"];?></td>
+                    </tr>
+                <?php
+                }?>
+                </tbody>    
+            </table>
+        </div>
     </div>
   </div>
   <script>

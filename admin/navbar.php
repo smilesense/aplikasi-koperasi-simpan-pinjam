@@ -27,9 +27,16 @@
                     <a class="dropdown-item" href="/admin/index.php"><i class="fas fa-home fa-fw mr-2" aria-hidden="true"></i>Beranda</a>
                     <a class="dropdown-item" href="/admin/data_admin.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Admin</a>
                     <a class="dropdown-item" href="/admin/data_user.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data User</a>
+                    <a class="dropdown-item" href="/admin/data_simpanan.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Simpanan</a>
+                    <a class="dropdown-item" href="/admin/data_pinjaman.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Pinjaman</a>
+                    <a class="dropdown-item" href="/admin/data_iuran.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data Iuran Wajib</a>
+                    <a class="dropdown-item" href="/admin/data_shu.php"><i class="fa fa-address-book fa-fw mr-2" aria-hidden="true"></i>Data SHU</a>
                     <a class="dropdown-item" href="/admin/konfirmasi_simpanan.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Simpanan</a>
                     <a class="dropdown-item" href="/admin/konfirmasi_pinjaman.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Pinjaman</a>
                     <a class="dropdown-item" href="/admin/konfirmasi_iuran.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Iuran Wajib</a>
+                    <a class="dropdown-item" href="/admin/konfirmasi_ambilshu.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Ambil SHU</a>
+                    <a class="dropdown-item" href="/admin/konfirmasi_tariktunai.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Tarik Tunai</a>
+                    <a class="dropdown-item" href="/admin/konfirmasi_pengembalian.php"><i class="fas fa-check-circle fa-fw mr-2"></i>Konfirmasi Pengembalian</a>
                 </div>
             </li><!-- Smaller devices menu END -->
         </ul>
@@ -99,6 +106,9 @@
                 </a>
                 <a href="konfirmasi_iuran.php" class="list-group-item list-group-item-action bg-secondary text-white">
                     <span class="menu-collapsed">Konfirmasi Iuran Wajib</span>
+                </a>
+                <a href="konfirmasi_ambilshu.php" class="list-group-item list-group-item-action bg-secondary text-white">
+                    <span class="menu-collapsed">Konfirmasi Ambil SHU</span>
                 </a>
                 <a href="konfirmasi_tariktunai.php" class="list-group-item list-group-item-action bg-secondary text-white">
                     <span class="menu-collapsed">Konfirmasi Tarik Tunai</span>

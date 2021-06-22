@@ -88,77 +88,79 @@ if (isset($_SESSION["id_admin"])){
 
     <div class="col p-4">
     <h1 class="display-4" align="center">Konfirmasi Simpanan</h1><br>
-    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);"> 
-    <table id="example" class="table table-striped table-bordered text-dark" style="width:100%">
-    <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-    <form id="search" action="" method="GET">
-        <input type="search" name="search" class="form-control form-control-sm" value="<?php echo $_GET["search"]?>" onchange=" cari()" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
-    </form>
-    <script type="text/javascript">
-        $(document).ready(
-            function cari() {
-                document.getElementById["search"].submit();
-            }
-        );
-    </script>
-        <thead>
-            <tr>
-                <th>ID Simpanan</th>
-                <th>ID User</th>
-                <th>Nama User</th>
-                <th>Nominal</th>
-                <th>Kode Unik</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-            if(isset($_GET["search"])){
-                $search = $_GET["search"];
-            }
-                $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_tabungan like '%".$search."%' OR id_user like '%".$search."%' OR nominal like '%".$search."%' OR kode_unik like '%".$search."%' OR status like '%".$search."%' ");
-                while ( $r = mysqli_fetch_array( $sql ) ) {
-        ?>
-            <tr>
-                <td><?php echo $r["id_tabungan"];?></td>
-                <td><?php echo $r["id_user"];?></td>
-                <td><?php echo $r["nama_lengkap"];?></td>
-                <td><?php echo $r["nominal"];?></td>
-                <td><?php echo $r["kode_unik"];?></td>
-                <td><?php echo $r["status"];?></td>
-                <td>
+    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+        <div class="table-responsive"> 
+            <table id="example" class="table table-striped table-bordered text-dark" style="width:100%">
+            <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
+            <form id="search" action="" method="GET">
+                <input type="search" name="search" class="form-control form-control-sm" value="<?php echo $_GET["search"]?>" onchange=" cari()" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+            </form>
+            <script type="text/javascript">
+                $(document).ready(
+                    function cari() {
+                        document.getElementById["search"].submit();
+                    }
+                );
+            </script>
+                <thead>
+                    <tr>
+                        <th>ID Simpanan</th>
+                        <th>ID User</th>
+                        <th>Nama User</th>
+                        <th>Nominal</th>
+                        <th>Kode Unik</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <?php
-                if($r["status"] == "Menunggu Konfirmasi"){
-                    echo '<a href="/admin/konfirmasi_simpanan.php?confirm_tabungan=';
-                    echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
-                    echo $_GET["search"];}
-                    echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>';
-                }else{
-                    
-                }
+                    if(isset($_GET["search"])){
+                        $search = $_GET["search"];
+                    }
+                        $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_tabungan like '%".$search."%' OR id_user like '%".$search."%' OR nominal like '%".$search."%' OR kode_unik like '%".$search."%' OR status like '%".$search."%' ");
+                        while ( $r = mysqli_fetch_array( $sql ) ) {
                 ?>
-            <?php
-                }
-            if(isset($_GET["confirm_tabungan"])){
-                $id_tabungan = $_GET["confirm_tabungan"];
-                $update  = mysqli_query($koneksi,"UPDATE simpanan SET status = 'Terkonfirmasi' WHERE id_tabungan = '$id_tabungan' ");
-                $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_tabungan = '$id_tabungan' ");
-                $s = mysqli_fetch_array( $sql);
-                $nominal = $s["nominal"];
-                $id_user = $s["id_user"];
-                $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela+('$nominal')) WHERE id = '$id_user' ");
-                $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal+('$nominal')) WHERE id = '1' AND keterangan = 'Saldo' ");
-                ?>
-                        <script type='text/javascript'> 
-                        document.location = '/admin/konfirmasi_simpanan.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';
-                        </script>;
-                <?php
-            }
-            ?>
-            </tr>
-        </tbody>
-        </table>
+                    <tr>
+                        <td><?php echo $r["id_tabungan"];?></td>
+                        <td><?php echo $r["id_user"];?></td>
+                        <td><?php echo $r["nama_lengkap"];?></td>
+                        <td><?php echo $r["nominal"];?></td>
+                        <td><?php echo $r["kode_unik"];?></td>
+                        <td><?php echo $r["status"];?></td>
+                        <td>
+                        <?php
+                        if($r["status"] == "Menunggu Konfirmasi"){
+                            echo '<a href="/admin/konfirmasi_simpanan.php?confirm_tabungan=';
+                            echo $r["id_tabungan"]; if(isset($_GET["search"])){echo "&search="; 
+                            echo $_GET["search"];}
+                            echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>';
+                        }else{
+                            
+                        }
+                        ?>
+                    <?php
+                        }
+                    if(isset($_GET["confirm_tabungan"])){
+                        $id_tabungan = $_GET["confirm_tabungan"];
+                        $update  = mysqli_query($koneksi,"UPDATE simpanan SET status = 'Terkonfirmasi' WHERE id_tabungan = '$id_tabungan' ");
+                        $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_tabungan = '$id_tabungan' ");
+                        $s = mysqli_fetch_array( $sql);
+                        $nominal = $s["nominal"];
+                        $id_user = $s["id_user"];
+                        $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela+('$nominal')) WHERE id = '$id_user' ");
+                        $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal+('$nominal')) WHERE id = '1' AND keterangan = 'Saldo' ");
+                        ?>
+                                <script type='text/javascript'> 
+                                document.location = '/admin/konfirmasi_simpanan.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';
+                                </script>;
+                        <?php
+                    }
+                    ?>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
   </div>
   <script>

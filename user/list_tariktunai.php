@@ -131,30 +131,32 @@ if(isset($_SESSION["id"])) {
                         );
                     </script>
 					</div>
-					<table class="table table-hover" id="dev-table">
-						<thead>
-							<tr>
-								<th>Id Tarik Tunai</th>
-								<th>Nominal Tarik Tunai</th>
-                                <th>Status Tarik Tunai</th>
-							</tr>
-						</thead>
-						<tbody>
-                        <?php
-                            $id = $_SESSION["id"];
-                            $search = $_POST["search"];
-                            $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
-                            while ( $r = mysqli_fetch_array( $sql ) ) {
-                        ?>
-                            <tr>
-                            <td><?php echo $r['']?></td>
-                            <td><?php echo $r[''];?></td>
-                            <td><?php echo $r[''];?></td>
-                            </tr>
-                        <?php
-                        }?>
-						</tbody>
-					</table>
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="dev-table">
+                                <thead>
+                                    <tr>
+                                        <th>Id Tarik Tunai</th>
+                                        <th>Nominal Tarik Tunai</th>
+                                        <th>Status Tarik Tunai</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $id = $_SESSION["id"];
+                                    $search = $_POST["search"];
+                                    $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tariktunai WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tariktunai like '%".$search."%' OR status like '%".$search."%') ");
+                                    while ( $r = mysqli_fetch_array( $sql ) ) {
+                                ?>
+                                    <tr>
+                                    <td><?php echo $r['id_tariktunai']?></td>
+                                    <td><?php echo $r['nominal'];?></td>
+                                    <td><?php echo $r['status'];?></td>
+                                    </tr>
+                                <?php
+                                }?>
+                                </tbody>
+                            </table>
+                        </div>
 				</div>
 			</div>
 		</div>

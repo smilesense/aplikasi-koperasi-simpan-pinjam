@@ -87,6 +87,8 @@ if(isset($_SESSION["id"])) {
     $nominal_pinjaman = mysqli_fetch_array( $sql );
     $sql1 = mysqli_query($koneksi,"SELECT simpanan_sukarela FROM user WHERE id = $id_user");
     $saldo_simpanan = mysqli_fetch_array( $sql1 );
+    $sql1 = mysqli_query($koneksi,"SELECT shu FROM user WHERE id = $id_user");
+    $shu = mysqli_fetch_array( $sql1 );
 }else{
     header("Location:/");
 }
@@ -98,11 +100,11 @@ if(isset($_SESSION["id"])) {
                         <div class="card border-info mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-info text-white"><h5>Simpanan Saya</h5></div>
                                 <div class="card-body text-info">
-                                    <h5 class="card-title">Rp. <?php echo $saldo_simpanan["simpanan_sukarela"]?></h5>
+                                    <h5 class="card-title">Rp. <?php echo $saldo_simpanan["simpanan_sukarela"];?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-info">
                                 <a href="/user/list_simpanan.php" class="btn btn-outline-info" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
-                                <a href="/user/form_tariktunai.php" class="btn btn-outline-info" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Tarik Tunai</a>
+                                <a href="/user/form_tariktunai.php" class="btn btn-outline-info" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-wallet fa-fw mr-1"></i>Tarik Tunai</a>
                             </div>
                         </div>
                     </div>
@@ -110,7 +112,7 @@ if(isset($_SESSION["id"])) {
                         <div class="card border-danger mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-danger border-danger text-white"><h5>Pinjaman Saya</h5></div>
                                 <div class="card-body text-danger">
-                                    <h5 class="card-title">Rp. <?php echo $nominal_pinjaman[0]?></h5>
+                                    <h5 class="card-title">Rp. <?php echo $nominal_pinjaman[0];?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-danger">
                                 <a href="/user/list_pinjaman.php" class="btn btn-outline-danger" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
@@ -132,10 +134,11 @@ if(isset($_SESSION["id"])) {
                         <div class="card border-success mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-success text-white"><h5>SHU Saya</h5></div>
                                 <div class="card-body text-success">
-                                    <h5 class="card-title">Rp. 1,000,000</h5>
+                                    <h5 class="card-title">Rp. <?php echo $shu["shu"];?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-success">
                                 <a href="/user/list_shu.php" class="btn btn-outline-success" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>
+                                <a href="/user/form_ambilshu.php" class="btn btn-outline-success" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-money-bill-wave-alt fa-fw mr-1"></i>Ambil SHU</a>
                             </div>
                         </div>
                     </div>
