@@ -6,7 +6,7 @@
     </button>
     <a class="navbar-brand" href="/user/index.php">
         <img src="https://www.jatikom.com/wp-content/uploads/2016/11/logo-koperasi.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span class="menu-collapsed">Koperasi Sejahtera Bersama</span>
+        <span class="menu-collapsed">KSP Sejahtera Bersama</span>
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">

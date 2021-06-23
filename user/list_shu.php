@@ -144,13 +144,13 @@ if(isset($_SESSION["id"])) {
                                 <?php
                                     $id = $_SESSION["id"];
                                     $search = $_POST["search"];
-                                    $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
+                                    $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tarikshu WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tarikshu like '%".$search."%' OR status like '%".$search."%') ");
                                     while ( $r = mysqli_fetch_array( $sql ) ) {
                                 ?>
                                     <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?php echo $r['id_tarikshu']?></td>
+                                    <td><?php echo $r['nominal'];?></td>
+                                    <td><?php echo $r['status'];?></td>
                                     </tr>
                                 <?php
                                 }?>

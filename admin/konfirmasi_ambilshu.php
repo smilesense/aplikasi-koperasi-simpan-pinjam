@@ -118,11 +118,11 @@ if (isset($_SESSION["id_admin"])){
                     if(isset($_GET["search"])){
                         $search = $_GET["search"];
                     }
-                        $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tariktunai WHERE id_tariktunai like '%".$search."%' OR id_user like '%".$search."%' OR nominal like '%".$search."%' OR nama_lengkap like '%".$search."%' OR status like '%".$search."%' ");
+                        $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tarikshu WHERE id_tarikshu like '%".$search."%' OR id_user like '%".$search."%' OR nominal like '%".$search."%' OR nama_lengkap like '%".$search."%' OR status like '%".$search."%' ");
                         while ( $r = mysqli_fetch_array( $sql ) ) {
                 ?>
                     <tr>
-                        <td><?php echo $r["id"];?></td>
+                        <td><?php echo $r["id_tarikshu"];?></td>
                         <td><?php echo $r["id_user"];?></td>
                         <td><?php echo $r["nama_lengkap"];?></td>
                         <td><?php echo $r["nominal"];?></td>
@@ -139,8 +139,8 @@ if (isset($_SESSION["id_admin"])){
                         <td>
                         <?php
                         if($r["status"] == "Menunggu Konfirmasi"){
-                            echo '<a href="/admin/konfirmasi_tariktunai.php?confirm_tariktunai=';
-                            echo $r["id_tariktunai"]; if(isset($_GET["search"])){echo "&search="; 
+                            echo '<a href="/admin/konfirmasi_ambilshu.php?confirm_tarikshu=';
+                            echo $r["id_tarikshu"]; if(isset($_GET["search"])){echo "&search="; 
                             echo $_GET["search"];}
                             echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>';
                         }else{
@@ -150,17 +150,17 @@ if (isset($_SESSION["id_admin"])){
                         </td>
                     <?php
                         }
-                    if(isset($_GET["confirm_tariktunai"])){
-                        $id_tariktunai = $_GET["confirm_tariktunai"];
-                        $update  = mysqli_query($koneksi,"UPDATE konfirmasi_tariktunai SET status = 'Terkonfirmasi' WHERE id_tariktunai = '$id_tariktunai' ");
-                        $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tariktunai WHERE id_tariktunai = '$id_tariktunai' ");
+                    if(isset($_GET["confirm_tarikshu"])){
+                        $id_tarikshu = $_GET["confirm_tarikshu"];
+                        $update  = mysqli_query($koneksi,"UPDATE konfirmasi_tarikshu SET status = 'Terkonfirmasi' WHERE id_tarikshu = '$id_tarikshu' ");
+                        $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tarikshu WHERE id_tariktunai = '$id_tarikshu' ");
                         $s = mysqli_fetch_array( $sql);
                         $nominal = $s["nominal"];
                         $id_user = $s["id_user"];
-                        $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = '$id_user' ");
+                        $update_saldo_shu = mysqli_query($koneksi,"UPDATE user SET shu = (shu-('$nominal')) WHERE id = '$id_user' ");
                         ?>
                                 <script type='text/javascript'> 
-                                document.location = '/admin/konfirmasi_tariktunai.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';
+                                document.location = '/admin/konfirmasi_ambilshu.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';
                                 </script>;
                         <?php
                     }

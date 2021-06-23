@@ -112,14 +112,6 @@ if (isset($_SESSION["id_admin"])){
                         <td>Menunggu Konfirmasi</td>
                         <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12</td>
-                        <td>50,000</td>
-                        <td>63</td>
-                        <td>Menunggu Konfirmasi</td>
-                        <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
-                    </tr>
             </table>
         </div>
     </div>

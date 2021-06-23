@@ -92,15 +92,16 @@ if (isset($_SESSION["id_admin"])){
         <div class="table-responsive">
                 <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
             <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
+            <a href="/admin/bagi_shu.php?bagi_shu=99201928" class="btn btn-info btn-xs"><i class="fas fa-share-square fa-fw mr-1"></i>Bagi SHU</a>
             <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
                 <thead>
                     <tr>
                         <th>ID User</th>
                         <th>Nama User</th>
                         <th>NIK User</th>
-                        <th>Rekening User</th>
+                        <!-- <th>Rekening User</th> -->
                         <th>Total SHU</th>
-                        <th>Tindakan</th>
+                        <!-- <th>Tindakan</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -112,46 +113,41 @@ if (isset($_SESSION["id_admin"])){
                         <td><?php echo $r["id"];?></td>
                         <td><?php echo $r["nama_lengkap"];?></td>
                         <td><?php echo $r["nik"];?></td>
-                        <td><?php echo $r["no_rekening"];?></td>
+                        <!-- <td><?php echo $r["no_rekening"];?></td> -->
 
                         <?php
                             $id = $r["id"];
+                            $nama = $r["nama_lengkap"];
                             $sql1 = mysqli_query($koneksi,"SELECT nominal FROM inventaris WHERE id = '2' AND keterangan = 'SHU' ");
                             $get_total_shu = mysqli_fetch_array( $sql1 );
                             $total_shu = $get_total_shu["nominal"];
-                            $shu_pinjaman = $total_shu*30/100;
-                            $shu_simpanan = $total_shu*40/100;
-
+                            $shu_pinjaman = $total_shu*35/100;
+                            $shu_simpanan = $total_shu*60/100;
+        
                             ///simpanan
                             $sql1 = mysqli_query($koneksi,"SELECT SUM(iuran_wajib+simpanan_sukarela) FROM user ");
                             $get_total_simpanan = mysqli_fetch_array( $sql1 );
                             $total_simpanan = $get_total_simpanan[0];
-
+        
                             $sql1 = mysqli_query($koneksi,"SELECT SUM(iuran_wajib+simpanan_sukarela) FROM user WHERE id = '$id' ");
                             $get_simpanan_user = mysqli_fetch_array( $sql1 );
                             $simpanan_user = $get_simpanan_user[0]; 
-
+        
                             ///pinjaman
                             $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman ");
                             $get_total_pinjaman = mysqli_fetch_array( $sql1 );
                             $total_pinjaman = $get_total_pinjaman[0];
-
+        
                             $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman WHERE id_user = '$id' ");
                             $get_pinjaman_user = mysqli_fetch_array( $sql1 );
                             $pinjaman_user = $get_pinjaman_user[0];
-
+        
                             $shu_simpanan_user = ($simpanan_user/$total_simpanan)*(($shu_simpanan/$total_shu)*$total_shu);
                             $shu_pinjaman_user = ($pinjaman_user/$total_pinjaman)*(($shu_pinjaman/$total_shu)*$total_shu);
                             $shu_user = $shu_simpanan_user+$shu_pinjaman_user;
-
-                            $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET shu = '$shu_user' WHERE id = '$id' ");
-
-                            $sql1 = mysqli_query($koneksi,"SELECT shu FROM user WHERE id = '$id' ");
-                            $get_shu_user = mysqli_fetch_array( $sql1 );
-                            $shu_users = $get_shu_user["shu"];
                         ?>
-                        <td><?php echo $shu_users;?></td>
-                        <td style="vertical-align:middle;"><a href="#" class="btn btn-info btn-xs"><i class="fas fa-share-square fa-fw mr-1"></i>Bagi SHU</a></td> 
+                        <td><?php echo $shu_user;?></td>
+                        <!-- <td style="vertical-align:middle;"><a href="#" class="btn btn-info btn-xs"><i class="fas fa-share-square fa-fw mr-1"></i>Bagi SHU</a></td>  -->
                     </tr>
                 <?php
                 }?>
@@ -166,30 +162,7 @@ if (isset($_SESSION["id_admin"])){
         $('#example').DataTable();
     } );
 </script>
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
-            $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
-            $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
-            $res_password = mysqli_num_rows($cek_password);
-            if ($res_password == 0){
-                echo "Password yang Anda Masukkan Salah";
-            }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
-            }  
-        }
-        ?>
-    </div>
-    </div><!-- Main Col END -->
-</div><!-- body-row END --> 
+
 
 <script>
 // Hide submenus

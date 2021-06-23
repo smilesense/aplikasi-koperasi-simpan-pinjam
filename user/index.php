@@ -94,7 +94,7 @@ if(isset($_SESSION["id"])) {
 }
 ?>
     <div class="col p-4">
-        <h1 class="display-4" align="center">Selamat Datang di Koperasi Sejahtera Bersama</h1><br>
+        <h1 class="display-4" align="center">Selamat Datang di Koperasi Simpan Pinjam <br> Sejahtera Bersama</h1><br>
             <div class="row">
                     <div class="col-sm-4">
                         <div class="card border-info mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">

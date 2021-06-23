@@ -102,6 +102,7 @@ if (isset($_SESSION["id_admin"])){
                         <th>Email User</th>
                         <th>Username User</th>
                         <th>Rekening User</th>
+                        <th>Saldo SHU</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -117,6 +118,7 @@ if (isset($_SESSION["id_admin"])){
                         <td><?php echo $r["email"];?></td>
                         <td><?php echo $r["username"];?></td>
                         <td><?php echo $r["no_rekening"];?></td>
+                        <td><?php echo $r["shu"];?></td>
                         <td><a href="data_user.php?delete_id=<?php echo $r['id']?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-alt fa-fw mr-1"></i>Hapus</a></td>
                     </tr>
                 <?php

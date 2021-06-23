@@ -93,9 +93,9 @@ if(isset($_SESSION["id"])) {
     <?php
     $id_user = $_SESSION["id"];
     $sql1 = mysqli_query($koneksi,"SELECT shu FROM user WHERE id = $id_user");
-    $saldo_simpanan = mysqli_fetch_array( $sql1 );
+    $saldo_shu = mysqli_fetch_array( $sql1 );
     ?>
-    <h3 id="saldo_awal" style="Padding-left:18px; color:white;">Saldo SHU : <?php echo $shu["shu"];?></h3>
+    <h3 id="saldo_awal" style="Padding-left:18px; color:white;">Saldo SHU : <?php echo $saldo_shu["shu"]; ?></h3>
         <div class="col-md-12">
             <label for="name" class="form-label text-white">Nama Lengkap</label>
             <input type="text" class="form-control" id="name" value="<?php echo $_SESSION["name"];?>" required readonly>
@@ -103,13 +103,13 @@ if(isset($_SESSION["id"])) {
         </div>
         <div class="col-md-12">
             <label for="nominal" class="form-label text-white">Nominal Ambil SHU</label>
-            <input type="number" class="form-control" onchange="return get_sisa_saldo()" id="nominal" name="nominal" value="" min="100000" max="10000000" step="100000" onchange="return get_kodeunik()" placeholder="Masukkan Nominal"required>
+            <input type="number" class="form-control" onchange="return get_sisa_saldo()" id="nominal" name="nominal" value="" min="1000" max="10000000" onchange="return get_kodeunik()" placeholder="Masukkan Nominal"required>
             <br>
         </div>
         <div class="col-md-12 text-white">
-        <label for="sisa_saldo">Sisa Saldo SHU : </label>
-            <input type="text" class="form-control" id="sisa_saldo" name="sisa_saldo" value="<?php echo $shu["shu"]; ?>" readonly>
-            <input type="hidden" class="form-control" id="sisa_saldo_awal" name="sisa_saldo_awal" value="<?php echo $shu["shu"];?>" disabled>
+        <label for="sisa_saldo">Sisa Saldo SHU :</label>
+            <input type="text" class="form-control" id="sisa_saldo" name="sisa_saldo" value="<?php echo $saldo_shu["shu"]; ?>" readonly>
+            <input type="hidden" class="form-control" id="sisa_saldo_awal" name="sisa_saldo_awal" value="<?php echo $saldo_shu["shu"]; ?>" disabled>
             <br>
         </div>
         <script type="text/javascript">
@@ -147,11 +147,11 @@ if(isset($_SESSION["id"])) {
             }else{
                 $r = mysqli_fetch_array( $cek_password );
                 $nama_user = $r["nama_lengkap"];
-                $sql = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = $id");
+                $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_tarikshu(id_user, nama_lengkap, nominal, status) VALUES ('$id','$nama_user','$nominal','Menunggu Konfirmasi')");
                 if ($sql){
                     ?>
                     <script type='text/javascript'> 
-                    document.location = '/user/form_tariktunai.php';
+                    document.location = '/user/form_ambilshu.php';
                     alert("Berhasil Mengajukan Penarikan Simpanan, Menunggu Konfirmasi");
                     </script>;<?php
                 }else {
