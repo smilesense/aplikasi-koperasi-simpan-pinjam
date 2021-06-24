@@ -99,7 +99,7 @@ if (isset($_SESSION["id_admin"])){
                         <th>ID User</th>
                         <th>Nama User</th>
                         <th>NIK User</th>
-                        <!-- <th>Rekening User</th> -->
+                        <th>Rekening User</th>
                         <th>Total SHU</th>
                         <!-- <th>Tindakan</th> -->
                     </tr>
@@ -113,7 +113,7 @@ if (isset($_SESSION["id_admin"])){
                         <td><?php echo $r["id"];?></td>
                         <td><?php echo $r["nama_lengkap"];?></td>
                         <td><?php echo $r["nik"];?></td>
-                        <!-- <td><?php echo $r["no_rekening"];?></td> -->
+                        <td><?php echo $r["no_rekening"];?></td>
 
                         <?php
                             $id = $r["id"];

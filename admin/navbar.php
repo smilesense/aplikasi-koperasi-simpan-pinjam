@@ -88,6 +88,9 @@
                 <a href="/admin/data_shu.php" class="list-group-item list-group-item-action bg-secondary text-white">
                     <span class="menu-collapsed">Data SHU</span>
                 </a>
+                <a href="/admin/data_tariktunai.php" class="list-group-item list-group-item-action bg-secondary text-white">
+                    <span class="menu-collapsed">Data Tarik Tunai</span>
+                </a>
             </div>
             <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-secondary list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">

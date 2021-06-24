@@ -87,38 +87,38 @@ if (isset($_SESSION["id_admin"])){
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Data Iuran Wajib</h1><br>
-    <div class="container bg-dark" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <h1 class="display-4" align="center">Data Tarik Tunai</h1><br>
+    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
         <div class="table-responsive"> 
-            <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
+            <table id="example" class="table table-striped table-bordered text-dark" style="width:100%;">
             <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
             <form action="" method="GET">
             <input type="search" name="search" value="<?php echo $_GET["search"]?>" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
             </form>
                 <thead>
                     <tr>
-                        <th>ID Iuran</th>
                         <th>ID User</th>
                         <th>Nama Lengkap User</th>
-                        <th>Nominal Iuran Wajib</th>
+                        <th>Nominal Tarik Tunai</th>
+                        <th>Tanggal</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                 $search = $_GET["search"];
-                $sql = mysqli_query($koneksi,"SELECT * FROM data_iuran WHERE id_iuran like '%".$search."%' OR id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR nominal like '%".$search."%' OR status like '%".$search."%'");
+                $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tariktunai WHERE id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR nominal like '%".$search."%' OR status like '%".$search."%'");
                 while ( $r = mysqli_fetch_array( $sql ) ){?>
                     <tr>
-                        <td><?php echo $r["id_iuran"];?></td>
                         <td><?php echo $r["id_user"];?></td>
                         <td><?php echo $r["nama_lengkap"];?></td>
                         <td><?php echo $r["nominal"];?></td>
-                        <td><?php echo $r["status"];?></td>
+                        <td><?php echo $r['tanggal_tariktunai'];?></td>
+                        <td><?php echo $r['status'];?></td>
                     </tr>
                 <?php
                 }?>
-                </tbody>
+                </tbody>    
             </table>
         </div>
     </div>
@@ -127,7 +127,7 @@ if (isset($_SESSION["id_admin"])){
     $(document).ready(function() {
         $('#example').DataTable();
     } );
-</script>
+</script> 
 
 <script>
 // Hide submenus

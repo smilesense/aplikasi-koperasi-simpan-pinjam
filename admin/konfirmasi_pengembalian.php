@@ -109,6 +109,7 @@ if (isset($_SESSION["id_admin"])){
                 <th>Nominal Pengembalian</th>
                 <th>Kode Unik</th>
                 <th>Status</th>
+                <th>Tanggal</th>
                 <th>Tindakan</th>
             </tr>
         </thead>
@@ -127,6 +128,7 @@ if (isset($_SESSION["id_admin"])){
                 <td><?php echo $r["nominal"];?></td>
                 <td><?php echo $r["kode_unik"];?></td>
                 <td><?php echo $r["status"];?></td>
+                <td><?php echo $r['tanggal_pengembalian'];?></td>
                 <td>
                 <?php
                 if($r["status"] == "Menunggu Konfirmasi"){

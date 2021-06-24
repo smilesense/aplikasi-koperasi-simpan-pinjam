@@ -27,7 +27,6 @@
                     <a class="dropdown-item" href="/user/index.php"><i class="fas fa-home fa-fw mr-2" aria-hidden="true"></i>Beranda</a>
                     <a class="dropdown-item" href="/user/form_simpanan.php"><i class="fas fa-money-bill fa-fw mr-2" aria-hidden="true"></i>Simpan Uang</a>
                     <a class="dropdown-item" href="/user/form_peminjaman.php"><i class="fas fa-money-check fa-fw mr-2" aria-hidden="true"></i>Pinjam Uang</a>
-                    <a class="dropdown-item" href="/user/form_iuran.php"><i class="fas fa-money-check-alt fa-fw mr-2" aria-hidden="true"></i>Iuran Wajib</a>
                     <a class="dropdown-item" href="/user/profile.php"><i class="fa fa-user fa-fw mr-2" aria-hidden="true"></i>Profil Pengguna</a>
                     <a class="dropdown-item" href="/user/list_simpanan.php"><i class="fa fa-wallet fa-fw mr-2" aria-hidden="true"></i>Simpanan Saya</a>
                     <a class="dropdown-item" href="/user/list_pinjaman.php"><i class="fa fa-tags fa-fw mr-2" aria-hidden="true"></i>Pinjaman Saya</a>
@@ -73,9 +72,6 @@
                 </a>
                 <a href="/user/form_peminjaman.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Pinjam Uang</span>
-                </a>
-                <a href="form_iuran.php" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Iuran Wajib</span>
                 </a>
             </div>
             <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">

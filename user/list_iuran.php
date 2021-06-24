@@ -87,7 +87,7 @@ if(isset($_SESSION["id"])) {
 ?>
     <div class="col p-4">
     <h1 class="display-4" align="center">Data Iuran Wajib Saya</h1><br>
-    <div class="container bg-secondary" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <div class="container bg-secondary text-white" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     	<div class="row" 
         style=
         "    	.row{
@@ -113,6 +113,7 @@ if(isset($_SESSION["id"])) {
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">Iuran Wajib Saya</h3>
+                        <h3 class="panel-title">Rekening Koperasi : 123456789</h3>
 						<div class="pull-right">
 							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
 								<i class="glyphicon glyphicon-filter"></i>
@@ -132,12 +133,14 @@ if(isset($_SESSION["id"])) {
                     </script>
 					</div>
                         <div class="table-responsive">
-                            <table class="table table-hover" id="dev-table">
+                            <table class="table table-hover text-white" id="dev-table">
                                 <thead>
                                     <tr>
                                         <th>Id Iuran</th>
-                                        <th>Nominal Iuran</th>
                                         <th>Bulan Iuran</th>
+                                        <th>Nominal Iuran</th>
+                                        <th>Kode Unik Pembayaran</th>
+                                        <th>Status</th>
                                         <th>Tindakan</th>
                                     </tr>
                                 </thead>
@@ -145,14 +148,20 @@ if(isset($_SESSION["id"])) {
                                 <?php
                                     $id = $_SESSION["id"];
                                     $search = $_POST["search"];
-                                    $sql = mysqli_query($koneksi,"SELECT * FROM simpanan WHERE id_user = $id AND (nominal like '%".$search."%' OR id_tabungan like '%".$search."%' OR status like '%".$search."%') ");
+                                    $sql = mysqli_query($koneksi,"SELECT * FROM data_iuran WHERE id_user = $id AND (nominal like '%".$search."%' OR id_iuran like '%".$search."%' OR status like '%".$search."%') ");
                                     while ( $r = mysqli_fetch_array( $sql ) ) {
                                 ?>
                                     <tr>
-                                    <td></td>
-                                    <td><?php echo $r["iuran_wajib"];?></td>
-                                    <td></td>
-                                    <td><a href="#" class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td>
+                                    <td><?php echo $r["id_iuran"];?></td>
+                                    <td><?php echo $r["bulan_iuran"];?></td>
+                                    <td><?php echo $r["nominal"];?></td>
+                                    <td><?php echo $r["kode_unik"];?></td>
+                                    <td><?php echo $r["status"];?></td>
+                                    <?php 
+                                    if($r["status"] == "Belum Dibayar"){?>
+                                        <td><a href="/user/bayar_iuran.php?id_iuran=<?php echo $r["id_iuran"];?>" class="btn btn-primary btn-xs"><i class="fas fa-money-bill-wave fa-fw mr-2"></i>Bayar</a></td><?php
+                                    }?>
+                                    
                                     </tr>
                                 <?php
                                 }?>

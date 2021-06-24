@@ -99,20 +99,22 @@ if (isset($_SESSION["id_admin"])){
                     <tr>
                         <th>ID User</th>
                         <th>Nama Lengkap User</th>
-                        <th>Pinjaman</th>
+                        <th>Nominal Pinjaman</th>
                         <th>Jatuh Tempo</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                 $search = $_GET["search"];
-                $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE status = 'Belum Lunas' AND (id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%')");
+                $sql = mysqli_query($koneksi,"SELECT * FROM pinjaman WHERE id_user like '%".$search."%' OR nama_lengkap like '%".$search."%' OR total_pinjaman like '%".$search."%' OR jatuh_tempo like '%".$search."%'");
                 while ( $r = mysqli_fetch_array( $sql ) ){?>
                     <tr>
                         <td><?php echo $r["id_user"];?></td>
                         <td><?php echo $r["nama_lengkap"];?></td>
                         <td><?php echo $r["total_pinjaman"];?></td>
                         <td><?php echo $r["jatuh_tempo"];?></td>
+                        <td><?php echo $r["status"];?></td>
                     </tr>
                 <?php
                 }?>

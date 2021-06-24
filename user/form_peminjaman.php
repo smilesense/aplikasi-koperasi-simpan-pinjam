@@ -87,7 +87,7 @@ if(isset($_SESSION["id"])) {
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Form Peminjaman</h1><br>
+    <h1 class="display-4" align="center">Form Pinjaman</h1><br>
     <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     <form class="row g-3" action="" method="POST">
         <div class="col-md-12">

@@ -178,7 +178,73 @@ if (isset($_SESSION["id_admin"])){
             </div>
     </div><!-- Main Col END -->
 </div><!-- body-row END --> 
+<?php
+    $sql = mysqli_query($koneksi,"SELECT nominal FROM inventaris WHERE id = '3' AND keterangan = 'Bulan Iuran'");
+    if($sql){
+        $get_bulan_iuran_now = mysqli_fetch_array( $sql );
+        $bulan_iuran_now = $get_bulan_iuran_now["nominal"];
+        $tahun_iuran_now = date("Y");
+        $bulan_now = date("n");
+        if($bulan_now == 1 AND $bulan_iuran_now == 0){
+            $sql1 = mysqli_query($koneksi,"SELECT * FROM user");
+            while ( $r = mysqli_fetch_array( $sql1 ) ) {
+                $id = $r["id"];
+                $nama = $r["nama_lengkap"];
+                $bulan_iuran_now = 1;
+                $kode_unik = mt_rand(7, 999)+100000;
+                $sql2 = mysqli_query($koneksi,"INSERT INTO data_iuran(id_user, nama_lengkap, nominal, kode_unik, status, bulan_iuran, tahun_iuran, tanggal_dibayar) VALUES('$id','$nama','100000','$kode_unik','Belum Dibayar','$bulan_iuran_now', '$tahun_iuran_now', '')");
 
+            }
+            $bulan_iuran_now = 1;
+            $sql = mysqli_query($koneksi,"UPDATE inventaris SET nominal = '$bulan_iuran_now' WHERE id = '3' AND keterangan = 'Bulan Iuran'");
+        }else if($bulan_now == 12 AND $bulan_iuran_now == 12){
+            $sql1 = mysqli_query($koneksi,"SELECT * FROM data_iuran WHERE bulan_iuran = '12' AND tahun_iuran = '$tahun_iuran_now' ");
+            if (mysqli_num_rows($sql1) >=  1){
+
+            }else {
+            $sql1 = mysqli_query($koneksi,"SELECT * FROM user");
+            while ( $r = mysqli_fetch_array( $sql1 ) ) {
+                $id = $r["id"];
+                $nama = $r["nama_lengkap"];
+                $bulan_iuran_now = 12;
+                $kode_unik = mt_rand(7, 999)+100000;
+                $sql2 = mysqli_query($koneksi,"INSERT INTO data_iuran(id_user, nama_lengkap, nominal, kode_unik, status, bulan_iuran, tahun_iuran, tanggal_dibayar) VALUES('$id','$nama','100000','$kode_unik','Belum Dibayar','$bulan_iuran_now', '$tahun_iuran_now', '')");
+
+            }
+            $sql = mysqli_query($koneksi,"UPDATE inventaris SET nominal = '$bulan_iuran_now' WHERE id = '3' AND keterangan = 'Bulan Iuran'");
+            }
+        }else if($bulan_now == 1 AND $bulan_iuran_now == 12){
+            $sql1 = mysqli_query($koneksi,"SELECT * FROM user");
+            while ( $r = mysqli_fetch_array( $sql1 ) ) {
+                $id = $r["id"];
+                $nama = $r["nama_lengkap"];
+                $bulan_iuran_now = 1;
+                $kode_unik = mt_rand(7, 999)+100000;
+                $sql2 = mysqli_query($koneksi,"INSERT INTO data_iuran(id_user, nama_lengkap, nominal, kode_unik, status, bulan_iuran, tahun_iuran, tanggal_dibayar) VALUES('$id','$nama','100000','$kode_unik','Belum Dibayar','$bulan_iuran_now', '$tahun_iuran_now', '')");
+
+            }
+            $sql = mysqli_query($koneksi,"UPDATE inventaris SET nominal = '$bulan_iuran_now' WHERE id = '3' AND keterangan = 'Bulan Iuran'");
+
+        }else if($bulan_now >= $bulan_iuran_now){
+            if ($bulan_iuran_now == 0){
+                $bulan_iuran_now = 1;
+            }
+            $sql1 = mysqli_query($koneksi,"SELECT * FROM user");
+            while ( $r = mysqli_fetch_array( $sql1 ) ) {
+                $id = $r["id"];
+                $nama = $r["nama_lengkap"];
+                $kode_unik = mt_rand(7, 999)+100000;
+                $sql2 = mysqli_query($koneksi,"INSERT INTO data_iuran(id_user, nama_lengkap, nominal, kode_unik, status, bulan_iuran, tahun_iuran, tanggal_dibayar) VALUES('$id','$nama','100000','$kode_unik','Belum Dibayar','$bulan_iuran_now', '$tahun_iuran_now', '')");
+
+            }
+            $bulan_iuran_now += 1;
+            $sql = mysqli_query($koneksi,"UPDATE inventaris SET nominal = '$bulan_iuran_now' WHERE id = '3' AND keterangan = 'Bulan Iuran'");
+
+        }
+
+    }
+    echo mt_rand(7, 999);
+?>
 <script>
 // Hide submenus
 $('#body-row .collapse').collapse('hide'); 

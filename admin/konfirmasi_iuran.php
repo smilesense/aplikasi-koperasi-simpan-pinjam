@@ -87,16 +87,26 @@ if (isset($_SESSION["id_admin"])){
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Konfirmasi Iuran Wajib</h1><br>
-    <div class="container bg-primary" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
+    <h1 class="display-4" align="center">Konfirmasi Simpanan</h1><br>
+    <div class="container bg-warning" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
         <div class="table-responsive"> 
-            <table id="example" class="table table-striped table-bordered text-white" style="width:100%;">
+            <table id="example" class="table table-striped table-bordered text-dark" style="width:100%">
             <!-- <h3 class="panel-title">Konfirmasi Simpanan</h3> -->
-            <input type="search" class="form-control form-control-sm" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+            <form id="search" action="" method="GET">
+                <input type="search" name="search" class="form-control form-control-sm" value="<?php echo $_GET["search"]?>" onchange=" cari()" placeholder="Cari Data" style="width:20%; float:right;"></input><br><br>
+            </form>
+            <script type="text/javascript">
+                $(document).ready(
+                    function cari() {
+                        document.getElementById["search"].submit();
+                    }
+                );
+            </script>
                 <thead>
                     <tr>
                         <th>ID Simpanan</th>
                         <th>ID User</th>
+                        <th>Nama User</th>
                         <th>Nominal</th>
                         <th>Kode Unik</th>
                         <th>Status</th>
@@ -104,14 +114,51 @@ if (isset($_SESSION["id_admin"])){
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                    if(isset($_GET["search"])){
+                        $search = $_GET["search"];
+                    }
+                        $sql = mysqli_query($koneksi,"SELECT * FROM data_iuran WHERE status != 'Belum Dibayar' AND (id_iuran like '%".$search."%' OR id_user like '%".$search."%' OR nominal like '%".$search."%' OR kode_unik like '%".$search."%' OR status like '%".$search."%') ");
+                        while ( $r = mysqli_fetch_array( $sql ) ) {
+                ?>
                     <tr>
-                        <td>1</td>
-                        <td>11</td>
-                        <td>100,000</td>
-                        <td>61</td>
-                        <td>Menunggu Konfirmasi</td>
-                        <td><a href="#" class="btn btn-success btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>
+                        <td><?php echo $r["id_iuran"];?></td>
+                        <td><?php echo $r["id_user"];?></td>
+                        <td><?php echo $r["nama_lengkap"];?></td>
+                        <td><?php echo $r["nominal"];?></td>
+                        <td><?php echo $r["kode_unik"];?></td>
+                        <td><?php echo $r["status"];?></td>
+                        <td>
+                        <?php
+                        if($r["status"] == "Menunggu Konfirmasi"){
+                            echo '<a href="/admin/konfirmasi_iuran.php?confirm_iuran=';
+                            echo $r["id_iuran"]; if(isset($_GET["search"])){echo "&search="; 
+                            echo $_GET["search"];}
+                            echo '"class="btn btn-primary btn-xs"><i class="fas fa-check-circle fa-fw mr-1"></i>Konfirmasi</a></td>';
+                        }else{
+                            
+                        }
+                        ?>
+                    <?php
+                        }
+                    if(isset($_GET["confirm_iuran"])){
+                        $id_iuran = $_GET["confirm_iuran"];
+                        $update  = mysqli_query($koneksi,"UPDATE data_iuran SET status = 'Terkonfirmasi' WHERE id_iuran = '$id_iuran' ");
+                        $sql = mysqli_query($koneksi,"SELECT * FROM data_iuran WHERE id_iuran = '$id_iuran' ");
+                        $s = mysqli_fetch_array( $sql);
+                        $nominal = $s["nominal"];
+                        $id_user = $s["id_user"];
+                        $update_saldo_simpanan = mysqli_query($koneksi,"UPDATE user SET iuran_wajib = (iuran_wajib+('$nominal')) WHERE id = '$id_user' ");
+                        $update_saldo_koperasi  = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal+('$nominal')) WHERE id = '1' AND keterangan = 'Saldo' ");
+                        ?>
+                                <script type='text/javascript'> 
+                                document.location = '/admin/konfirmasi_iuran.php<?php if(isset($_GET["search"])){echo "?search="; echo $_GET["search"];} ?>';
+                                </script>;
+                        <?php
+                    }
+                    ?>
                     </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -121,27 +168,6 @@ if (isset($_SESSION["id_admin"])){
         $('#example').DataTable();
     } );
 </script>
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_SESSION["id"];
-            $nominal = $_POST["nominal"];
-            $bunga = ($_POST["total"]-$nominal);
-            $confirm_password = $_POST["confirm_password"];
-            $tanggal_return = $_POST["tanggal_return"];
-            $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
-            $res_password = mysqli_num_rows($cek_password);
-            if ($res_password == 0){
-                echo "Password yang Anda Masukkan Salah";
-            }else{
-                $sql = mysqli_query($koneksi,"INSERT INTO pinjaman(id_user, nominal, bunga, jatuh_tempo, status) VALUES ('$id','$nominal', '$bunga' , '$tanggal_return','Menunggu Persetujuan')");
-                if ($sql){
-                    echo "Berhasil Berhasil Mengajukan Pinjaman";
-                }else {
-                    echo "error";
-                }
-            }  
-        }
-        ?>
     </div>
     </div><!-- Main Col END -->
 </div><!-- body-row END --> 

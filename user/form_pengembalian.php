@@ -159,7 +159,7 @@ if(isset($_SESSION["id"])) {
             }else{
                 $r = mysqli_fetch_array( $cek_password );
                 $nama_user = $r["nama_lengkap"];
-                $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_pengembalian(id_pinjaman, id_user, nama_lengkap, nominal, kode_unik, status) VALUES ('$id_pinjaman','$id','$nama_user','$nominal','$kodeunik','Menunggu Konfirmasi')");
+                $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_pengembalian(id_pinjaman, id_user, nama_lengkap, nominal, kode_unik, status, tanggal_pengembalian) VALUES ('$id_pinjaman','$id','$nama_user','$nominal','$kodeunik','Menunggu Konfirmasi', NOW())");
                 if ($sql){
                     ?>
                     <script type='text/javascript'> 

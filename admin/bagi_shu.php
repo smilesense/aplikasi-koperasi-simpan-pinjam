@@ -6,7 +6,6 @@ if (isset($_SESSION["id_admin"])){
         <?php
             $search = $_GET["search"];
             $sql = mysqli_query($koneksi,"SELECT * FROM user ");
-            $jumlah_shu = 0;
             while ( $r = mysqli_fetch_array( $sql ) ){?>
                 <?php
                     $id = $r["id"];
@@ -14,7 +13,7 @@ if (isset($_SESSION["id_admin"])){
                     $sql1 = mysqli_query($koneksi,"SELECT nominal FROM inventaris WHERE id = '2' AND keterangan = 'SHU' ");
                     $get_total_shu = mysqli_fetch_array( $sql1 );
                     $total_shu = $get_total_shu["nominal"];
-                    $shu_pinjaman = $total_shu*35/100;
+                    $shu_pinjaman = $total_shu*40/100;
                     $shu_simpanan = $total_shu*60/100;
 
                     ///simpanan
@@ -31,24 +30,31 @@ if (isset($_SESSION["id_admin"])){
                     $get_total_pinjaman = mysqli_fetch_array( $sql1 );
                     $total_pinjaman = $get_total_pinjaman[0];
 
-                    $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman WHERE id_user = '$id' ");
+                    $sql1 = mysqli_query($koneksi,"SELECT SUM(nominal) FROM pinjaman WHERE id_user = '$id' AND status = 'Lunas' ");
                     $get_pinjaman_user = mysqli_fetch_array( $sql1 );
                     $pinjaman_user = $get_pinjaman_user[0];
+                    if($sql1){
+                        $sql2 = mysqli_query($koneksi,"UPDATE pinjaman SET status = 'Lunas_' WHERE id_user = '$id'");
+                    }
+                    
 
                     $shu_simpanan_user = ($simpanan_user/$total_simpanan)*(($shu_simpanan/$total_shu)*$total_shu);
                     $shu_pinjaman_user = ($pinjaman_user/$total_pinjaman)*(($shu_pinjaman/$total_shu)*$total_shu);
                     $shu_user = $shu_simpanan_user+$shu_pinjaman_user;
 
-                    $riwayat_pembagian_shu = mysqli_query($koneksi,"INSERT INTO riwayat_pembagian_shu(id_user, nama_lengkap, nominal) VALUES('$id', '$nama', '$shu_user')");
+                    $riwayat_pembagian_shu = mysqli_query($koneksi,"INSERT INTO riwayat_pembagian_shu(id_user, nama_lengkap, nominal, tanggal_dibagikan) VALUES('$id', '$nama', '$shu_user', NOW())");
                     if($riwayat_pembagian_shu){
                         $update_saldo_shu = mysqli_query($koneksi,"UPDATE user SET shu = (shu+('$shu_user')) WHERE id = '$id' ");
                     };
 
-                    $jumlah_shu = $jumlah_shu+$shu_user;
-                ?>
-                <?php
-                    $update_saldo_shu_koperasi = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal-('$jumlah_shu')) WHERE id = '2' AND keterangan = 'SHU' ");
-                }?><?php
+                    $jumlah_shu+= $shu_user;
+            
+                };
+            $update_saldo_shu_koperasi = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal-('$jumlah_shu')) WHERE id = '2' AND keterangan = 'SHU' ");
+            $update_saldo_koperasi = mysqli_query($koneksi,"UPDATE inventaris SET nominal = (nominal-('$jumlah_shu')) WHERE id = '1' AND keterangan = 'Saldo' ");
+            if($update_saldo_shu_koperasi){
+                header("Location: /admin/data_shu.php");
+            }
     }else{
         header("Location:/");
     }

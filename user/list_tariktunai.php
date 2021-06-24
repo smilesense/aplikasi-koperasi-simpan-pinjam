@@ -138,6 +138,7 @@ if(isset($_SESSION["id"])) {
                                         <th>Id Tarik Tunai</th>
                                         <th>Nominal Tarik Tunai</th>
                                         <th>Status Tarik Tunai</th>
+                                        <th>Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -151,6 +152,7 @@ if(isset($_SESSION["id"])) {
                                     <td><?php echo $r['id_tariktunai']?></td>
                                     <td><?php echo $r['nominal'];?></td>
                                     <td><?php echo $r['status'];?></td>
+                                    <td><?php echo $r['tanggal_tariktunai'];?></td>
                                     </tr>
                                 <?php
                                 }?>

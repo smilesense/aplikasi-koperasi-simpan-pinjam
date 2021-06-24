@@ -89,6 +89,8 @@ if(isset($_SESSION["id"])) {
     $saldo_simpanan = mysqli_fetch_array( $sql1 );
     $sql1 = mysqli_query($koneksi,"SELECT shu FROM user WHERE id = $id_user");
     $shu = mysqli_fetch_array( $sql1 );
+    $sql1 = mysqli_query($koneksi,"SELECT iuran_wajib FROM user WHERE id = $id_user");
+    $iuran = mysqli_fetch_array( $sql1 );
 }else{
     header("Location:/");
 }
@@ -123,7 +125,7 @@ if(isset($_SESSION["id"])) {
                         <div class="card border-primary mb-4" style="box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
                             <div class="card-header bg-primary text-white"><h5>Iuran Wajib Saya</h5></div>
                                 <div class="card-body text-primary">
-                                    <h5 class="card-title">Rp.<?php echo $r["iuran_wajib"];?></h5>
+                                    <h5 class="card-title">Rp.<?php echo $iuran["iuran_wajib"];?></h5>
                                 </div>
                             <div class="card-footer bg-transparent border-primary">
                                 <a href="/user/list_iuran.php" class="btn btn-outline-primary" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);"><i class="fas fa-info-circle fa-fw mr-1"></i>Lihat Detail</a>

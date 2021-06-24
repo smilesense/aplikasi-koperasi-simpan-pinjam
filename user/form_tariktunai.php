@@ -142,21 +142,27 @@ if(isset($_SESSION["id"])) {
             $id = $_SESSION["id"];
             $cek_password = mysqli_query($koneksi,"SELECT * FROM user WHERE id = '$id' AND password = '$confirm_password' ");
             $res_password = mysqli_num_rows($cek_password);
+            $r = mysqli_fetch_array( $cek_password );
+            $norek = $r["no_rekening"];
             if ($res_password == 0){
                 echo "Password yang Anda Masukkan Salah";
             }else{
-                $r = mysqli_fetch_array( $cek_password );
-                $nama_user = $r["nama_lengkap"];
-                // $sql = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = $id");
-                $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_tariktunai(id_user, nama_lengkap, nominal, status) VALUES ('$id','$nama_user','$nominal','Menunggu Konfirmasi')");
-                if ($sql){
-                    ?>
-                    <script type='text/javascript'> 
-                    document.location = '/user/form_tariktunai.php';
-                    alert("Berhasil Mengajukan Penarikan Simpanan, Menunggu Konfirmasi");
-                    </script>;<?php
-                }else {
-                    echo "error";
+                if ($norek == '' || $norek == 0){
+                    echo "Anda belum mengisi nomor rekening, silakan isi pada menu profile";
+                }else{
+                    $r = mysqli_fetch_array( $cek_password );
+                    $nama_user = $r["nama_lengkap"];
+                    // $sql = mysqli_query($koneksi,"UPDATE user SET simpanan_sukarela = (simpanan_sukarela-('$nominal')) WHERE id = $id");
+                    $sql = mysqli_query($koneksi,"INSERT INTO konfirmasi_tariktunai(id_user, nama_lengkap, nominal, status, tanggal_tariktunai) VALUES ('$id','$nama_user','$nominal','Menunggu Konfirmasi', NOW())");
+                    if ($sql){
+                        ?>
+                        <script type='text/javascript'> 
+                        document.location = '/user/form_tariktunai.php';
+                        alert("Berhasil Mengajukan Penarikan Simpanan, Menunggu Konfirmasi");
+                        </script>;<?php
+                    }else {
+                        echo "error";
+                    }
                 }
             } 
         }

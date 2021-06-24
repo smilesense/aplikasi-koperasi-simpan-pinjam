@@ -91,6 +91,9 @@ if(isset($_SESSION["id"])) {
     <div class="container bg-danger" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
     <form class="row g-3" action="" method="POST">
         <div class="col-md-12">
+        <h3 class="panel-title text-white">Rekening Koperasi : 123456789</h3><br>
+        </div>
+        <div class="col-md-12">
             <label for="name" class="form-label text-white">Nama Lengkap</label>
             <input type="text" class="form-control" id="name" value="<?php echo $_SESSION["name"];?>" required readonly>
             <br>

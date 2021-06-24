@@ -110,6 +110,7 @@ if (isset($_SESSION["id_admin"])){
                         <th>Nominal SHU</th>
                         <th>Status</th>
                         <th>No Rekening</th>
+                        <th>Tanggal</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -136,6 +137,7 @@ if (isset($_SESSION["id_admin"])){
                             echo $no_rekening;
                         ?>
                         </td>
+                        <td><?php echo $r['tanggal_shu'];?></td>
                         <td>
                         <?php
                         if($r["status"] == "Menunggu Konfirmasi"){
@@ -153,7 +155,7 @@ if (isset($_SESSION["id_admin"])){
                     if(isset($_GET["confirm_tarikshu"])){
                         $id_tarikshu = $_GET["confirm_tarikshu"];
                         $update  = mysqli_query($koneksi,"UPDATE konfirmasi_tarikshu SET status = 'Terkonfirmasi' WHERE id_tarikshu = '$id_tarikshu' ");
-                        $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tarikshu WHERE id_tariktunai = '$id_tarikshu' ");
+                        $sql = mysqli_query($koneksi,"SELECT * FROM konfirmasi_tarikshu WHERE id_tarikshu = '$id_tarikshu' ");
                         $s = mysqli_fetch_array( $sql);
                         $nominal = $s["nominal"];
                         $id_user = $s["id_user"];

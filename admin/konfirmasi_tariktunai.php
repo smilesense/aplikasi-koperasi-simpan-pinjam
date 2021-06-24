@@ -87,7 +87,7 @@ if (isset($_SESSION["id_admin"])){
 ?>
 
     <div class="col p-4">
-    <h1 class="display-4" align="center">Konfirmasi Tarik Simpanan</h1><br>
+    <h1 class="display-4" align="center">Konfirmasi Tarik Tunai</h1><br>
     <div class="container bg-dark" style="border-radius:5px; padding:1rem; box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);">
         <div class="table-responsive"> 
             <table id="example" class="table table-striped table-bordered text-white" style="width:100%">
@@ -110,6 +110,7 @@ if (isset($_SESSION["id_admin"])){
                         <th>Nominal Tarik Tunai</th>
                         <th>Status</th>
                         <th>No Rekening</th>
+                        <th>Tanggal</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -136,6 +137,7 @@ if (isset($_SESSION["id_admin"])){
                             echo $no_rekening;
                         ?>
                         </td>
+                        <td><?php echo $r['tanggal_tariktunai'];?></td>
                         <td>
                         <?php
                         if($r["status"] == "Menunggu Konfirmasi"){
